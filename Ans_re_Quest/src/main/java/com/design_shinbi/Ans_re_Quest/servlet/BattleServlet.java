@@ -1,6 +1,9 @@
 package com.design_shinbi.Ans_re_Quest.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,50 +11,80 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.design_shinbi.Ans_re_Quest.Battle;
+import com.design_shinbi.Ans_re_Quest.model.Battle;
+import com.design_shinbi.Ans_re_Quest.model.dao.EnemyDAO;
+import com.design_shinbi.Ans_re_Quest.model.dao.PlayerDAO;
+import com.design_shinbi.Ans_re_Quest.model.dao.QuizDAO;
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.QuizEntity;
+import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 
 /**
  * Servlet implementation class Battle
  */
-@WebServlet("/Battle")
+@WebServlet("/battle")
 public class BattleServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    public BattleServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-	
+    private Battle battle;
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // リクエストからプレーヤーとモンスターの情報を取得
-    	HttpSession session = request.getSession();
-    	String jsp = null;
-    	
-    	
-    	
-		PlayerEntity player = (PlayerEntity) request.getSession().getAttribute("player");
-        EnemyEntity monster = (EnemyEntity) request.getSession().getAttribute("enemy");
+    public void init() throws ServletException {
+        super.init();
+        try {
+        	Connection connection = DbUtil.connect(); 
+            QuizDAO quizDAO = new QuizDAO(connection);
+            PlayerDAO playerDAO = new PlayerDAO(connection);
+            EnemyDAO enemyDAO = new EnemyDAO(connection);		
+            PlayerEntity player = playerDAO.getPlayerById(1);
+            EnemyEntity enemy = enemyDAO.getEnemyById(1);
+            List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
+            
+            
+            
+            battle = new Battle(player, enemy,quizEntities);
+            battle.startBattle();
+        } catch (SQLException | ClassNotFoundException e) {
+            // エラーハンドリング
+        	throw new ServletException(e);
+        }
+    }
 
-        // バトルを作成して、戦闘を実行
-        Battle battle = new Battle(player, monster);
-        battle.startBattle();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // ビューに表示するデータを設定
+        request.setAttribute("questionText", battle.getCurrentQuestion().getText());
+        request.setAttribute("choice1", battle.getCurrentQuestion().getChoice1());
+        request.setAttribute("choice2", battle.getCurrentQuestion().getChoice2());
+        request.setAttribute("choice3", battle.getCurrentQuestion().getChoice3());
+        request.setAttribute("choice4", battle.getCurrentQuestion().getChoice4());
+        request.setAttribute("playerHP", battle.getPlayerHP());
+        request.setAttribute("enemyHP", battle.getEnemyHP());
+        request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
+        request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
 
-        // 戦闘結果をリクエストに保存
-        request.setAttribute("battleResult", battle.getResult());
-
-        // ビューにリダイレクト
-        RequestDispatcher dispatcher = request.getRequestDispatcher("battleResult.jsp");
+        // Battle.jspにフォワード
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/battle.jsp");
         dispatcher.forward(request, response);
     }
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // フォームからの回答を取得
+        String choice = request.getParameter("choice");
+        battle.answerQuizEntity(choice);
+
+        // バトルの結果に応じてリダイレクト
+        if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
+        	
+            request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
+            request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+        	
+        	
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            // doGet()を呼び出して再度Battle.jspにフォワード
+            doGet(request, response);
+        }
+    }
 }
+

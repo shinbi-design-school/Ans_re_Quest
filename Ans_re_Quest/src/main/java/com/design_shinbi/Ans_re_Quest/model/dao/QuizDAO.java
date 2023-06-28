@@ -26,10 +26,10 @@ public class QuizDAO {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String text = resultSet.getString("text");
-                String choice1 = resultSet.getString("choiceA");
-                String choice2 = resultSet.getString("choiceB");
-                String choice3 = resultSet.getString("choiceC");
-                String choice4 = resultSet.getString("choiceD");
+                String choice1 = resultSet.getString("choice1");
+                String choice2 = resultSet.getString("choice2");
+                String choice3 = resultSet.getString("choice3");
+                String choice4 = resultSet.getString("choice4");
                 String correctAnswer = resultSet.getString("correctAnswer");
 
                 QuizEntity question = new QuizEntity(id, text, choice1, choice2, choice3, choice4, correctAnswer);
