@@ -4,8 +4,10 @@ public class PlayerEntity {
     private int id;
     private String name;
     private int hp;
+    private int maxHp = 30;
 
-    public PlayerEntity(int hp) {
+
+	public PlayerEntity(int hp) {
 //        this.id = id;
 //        this.name = name;
         this.hp = hp;
@@ -26,6 +28,9 @@ public class PlayerEntity {
     public void setHp(int hp) {
         this.hp = hp;
     }
-  
+    
+    public int getMaxHp() {
+		return maxHp;
+	}
     // その他、必要なメソッドを追加する
 }

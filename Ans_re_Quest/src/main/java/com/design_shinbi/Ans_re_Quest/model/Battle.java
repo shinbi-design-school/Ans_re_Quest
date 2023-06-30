@@ -77,5 +77,13 @@ public class Battle {
         return null;
     }
     // GetterとSetterなど、必要なメソッドを追加する
+
+	public void startNextBattle(EnemyEntity currentEnemy) {
+        // 次の戦闘の初期化処理を行う
+        enemy = currentEnemy;
+        currentQuizIndex = 0;
+        player.setHp(player.getMaxHp());
+
+	}
 }
 
