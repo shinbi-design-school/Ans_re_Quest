@@ -4,11 +4,13 @@ public class EnemyEntity {
     private int id;
     private String name;
     private int hp;
+    private int maxHp;
 
     public EnemyEntity(int hp) {
 //        this.id = id;
 //        this.name = name;
         this.hp = hp;
+        this.maxHp = hp;
     }
 
     public int getId() {
@@ -22,6 +24,11 @@ public class EnemyEntity {
     public int getHp() {
         return hp;
     }
+    
+    public int getMaxHp() {
+        return maxHp;
+    }
+
 
     public void setHp(int hp) {
         this.hp = hp;

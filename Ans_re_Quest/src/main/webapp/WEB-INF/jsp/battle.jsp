@@ -15,8 +15,11 @@
         <button type="submit" name="choice" value="<%= request.getAttribute("choice3") %>"><%= request.getAttribute("choice3") %></button><br>
         <button type="submit" name="choice" value="<%= request.getAttribute("choice4") %>"><%= request.getAttribute("choice4") %></button><br>
     </form>
-    <p>プレイヤーのHP: <%= request.getAttribute("playerHP") %></p>
-    <p>敵のHP: <%= request.getAttribute("enemyHP") %></p>
+    <p><%= request.getAttribute("towerName") %></p> 
+    <p>階層: <%= request.getAttribute("currentFlore") %></p>
+    
+    <p>プレイヤーのHP: <%= request.getAttribute("playerHP") %> / <%= request.getAttribute("playerMaxHP") %></p>
+    <p>敵のHP: <%= request.getAttribute("enemyHP") %>/<%= request.getAttribute("enemyMaxHP") %></p>
     <% if (!(Boolean) request.getAttribute("isPlayerAlive")) { %>
         <p>プレイヤーは敗北しました。</p>
     <% } else if (!(Boolean) request.getAttribute("isEnemyAlive")) { %>

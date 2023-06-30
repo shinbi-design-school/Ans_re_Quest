@@ -57,9 +57,17 @@ public class Battle {
     public int getPlayerHP() {
         return player.getHp();
     }
+    
+    public int getPlayerMaxHP() {
+        return player.getMaxHp();
+    }
 
     public int getEnemyHP() {
         return enemy.getHp();
+    }
+    
+    public int getEnemyMaxHP() {
+        return enemy.getMaxHp();
     }
 
     public boolean isPlayerAlive() {

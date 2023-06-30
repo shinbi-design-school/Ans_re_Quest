@@ -4,13 +4,14 @@ public class PlayerEntity {
     private int id;
     private String name;
     private int hp;
-    private int maxHp = 30;
+    private int maxHp;
 
 
 	public PlayerEntity(int hp) {
 //        this.id = id;
 //        this.name = name;
         this.hp = hp;
+        this.maxHp = hp;
     }
 
     public int getId() {

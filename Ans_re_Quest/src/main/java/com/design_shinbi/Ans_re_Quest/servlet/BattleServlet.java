@@ -29,6 +29,8 @@ public class BattleServlet extends HttpServlet {
 	private Battle battle;
 	private List<EnemyEntity> enemies;
 	private int currentEnemyIndex;
+	private int currentFlore;
+	
 
 	@Override
 	public void init() throws ServletException {
@@ -62,9 +64,19 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("choice3", battle.getCurrentQuestion().getChoice3());
 		request.setAttribute("choice4", battle.getCurrentQuestion().getChoice4());
 		request.setAttribute("playerHP", battle.getPlayerHP());
+		request.setAttribute("playerMaxHP", battle.getPlayerMaxHP());
+
 		request.setAttribute("enemyHP", battle.getEnemyHP());
+		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
+
 		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+		
+		request.setAttribute("towerName", "エニグマの塔");
+
+		currentFlore = currentEnemyIndex + 1;
+		request.setAttribute("currentFlore", currentFlore);
+
 
 		// Battle.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/battle.jsp");
