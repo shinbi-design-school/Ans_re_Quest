@@ -28,7 +28,7 @@ public class EnemyDAO {
                     String name = resultSet.getString("name");
                     int hp = resultSet.getInt("hp");
 
-                    enemy = new EnemyEntity(hp);
+                    enemy = new EnemyEntity(id,name,hp);
                 }
             }
         }
@@ -47,7 +47,7 @@ public class EnemyDAO {
                 String name = resultSet.getString("name");
                 int hp = resultSet.getInt("hp");
 
-                EnemyEntity enemy = new EnemyEntity(hp);
+                EnemyEntity enemy = new EnemyEntity(id,name,hp);
                 enemies.add(enemy);
             }
         }

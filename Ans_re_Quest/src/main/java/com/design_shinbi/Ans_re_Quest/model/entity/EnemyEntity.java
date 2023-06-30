@@ -6,9 +6,9 @@ public class EnemyEntity {
     private int hp;
     private int maxHp;
 
-    public EnemyEntity(int hp) {
-//        this.id = id;
-//        this.name = name;
+    public EnemyEntity(int id, String name,int hp) {
+        this.id = id;
+        this.name = name;
         this.hp = hp;
         this.maxHp = hp;
     }

@@ -21,6 +21,7 @@
 	%>
 
 	<p>プレイヤーは敗北しました。</p>
+	<a href="battle">最初に戻る。</a>
 	<%
 	} else if (!isEnemyAlive) {
 		System.out.println("4");

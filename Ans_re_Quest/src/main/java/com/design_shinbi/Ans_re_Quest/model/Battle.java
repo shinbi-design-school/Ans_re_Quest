@@ -11,6 +11,7 @@ public class Battle {
     private PlayerEntity player;
     private EnemyEntity enemy;
     private int currentQuizIndex;
+    private int totalQuizCount;
 
     public Battle(PlayerEntity player,EnemyEntity enemy,List<QuizEntity> quizEntities) {
         // 初期化などのコード
@@ -50,7 +51,9 @@ public class Battle {
         }
     }
 
-    public Object getResult() {
+
+
+	public Object getResult() {
     	return null;
     }
 
@@ -62,6 +65,10 @@ public class Battle {
         return player.getMaxHp();
     }
 
+    public String getEnemyName() {
+        return enemy.getName();
+    }
+    
     public int getEnemyHP() {
         return enemy.getHp();
     }
@@ -77,6 +84,19 @@ public class Battle {
     public boolean isEnemyAlive() {
         return enemy.getHp() > 0;
     }
+    
+	public int getCurrentQuizIndex() {
+		return currentQuizIndex;
+	}
+	
+    public void setCurrentQuizIndex(int currentQuizIndex) {
+		this.currentQuizIndex = currentQuizIndex;
+	}
+    
+    public int getTotalQuizCount() {
+    	return quizEntities.size();
+    }
+
 
     public QuizEntity getCurrentQuestion() {
         if (currentQuizIndex >= 0 && currentQuizIndex < quizEntities.size()) {
@@ -92,6 +112,19 @@ public class Battle {
         currentQuizIndex = 0;
         player.setHp(player.getMaxHp());
 
+	}
+	public void resetBattle(List<EnemyEntity> enemies) {
+	    // 最初の戦闘の初期化処理を行う
+		enemy = enemies.get(currentQuizIndex);
+	    currentQuizIndex = 0;
+	    player.setHp(player.getMaxHp()); // プレイヤーのHPをリセット
+	    
+	    // その他の初期化処理を実装する
+	    // 例: 最初の敵の設定、初期問題の設定など
+	}
+
+	public void resetEnemyHP() {
+		enemy.setHp(enemy.getMaxHp());
 	}
 }
 

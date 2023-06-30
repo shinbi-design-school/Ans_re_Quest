@@ -29,7 +29,7 @@ public class BattleServlet extends HttpServlet {
 	private Battle battle;
 	private List<EnemyEntity> enemies;
 	private int currentEnemyIndex;
-	private int currentFlore;
+	private int currentFloor;
 	
 
 	@Override
@@ -44,6 +44,7 @@ public class BattleServlet extends HttpServlet {
 			EnemyEntity enemy = enemyDAO.getEnemyById(1);
 			enemies = enemyDAO.getAllEnemies();
 			List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
+			currentFloor = 0;
 			currentEnemyIndex = 0;
 			EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
 			
@@ -65,17 +66,18 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("choice4", battle.getCurrentQuestion().getChoice4());
 		request.setAttribute("playerHP", battle.getPlayerHP());
 		request.setAttribute("playerMaxHP", battle.getPlayerMaxHP());
+		request.setAttribute("currentQuizNo", battle.getCurrentQuizIndex()+1);
+		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
 
+		request.setAttribute("enemyName", battle.getEnemyName());
 		request.setAttribute("enemyHP", battle.getEnemyHP());
 		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
+		request.setAttribute("towerName", "エニグマの塔");
 
 		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
-		
-		request.setAttribute("towerName", "エニグマの塔");
 
-		currentFlore = currentEnemyIndex + 1;
-		request.setAttribute("currentFlore", currentFlore);
+		request.setAttribute("currentFloor", currentFloor);
 
 
 		// Battle.jspにフォワード
@@ -86,23 +88,38 @@ public class BattleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// フォームからの回答を取得
+		request.setCharacterEncoding("UTF-8");
 		String choice = request.getParameter("choice");
+		System.out.println(choice);
+		System.out.println(battle.getCurrentQuestion().getCorrectAnswer());
 		battle.answerQuizEntity(choice);
 
 		// バトルの結果に応じてリダイレクト
 		if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
 			request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 			request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
-			
+			request.setAttribute("currentQuizIndex", battle.getCurrentQuizIndex());
 			if (!battle.isEnemyAlive()) {
 				// 敵が倒された場合の処理
 				// 次の戦闘の初期化を行う（例: battle.startNextBattle()）
+				currentFloor++;
 				currentEnemyIndex++;
 				if (currentEnemyIndex < enemies.size()) {
 					EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
+					battle.resetEnemyHP();
 					battle.startNextBattle(currentEnemy);
-				}
+				} else {
+					currentEnemyIndex = 0;
+					EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
+					battle.startNextBattle(currentEnemy);
+				}	
+				
 			}
+	        if (!battle.isPlayerAlive()) {
+	            // プレイヤーが敗北した場合の処理
+	            // 最初の戦闘に戻るために初期化を行う
+	            battle.resetBattle(enemies);
+	        }
 
 
 
