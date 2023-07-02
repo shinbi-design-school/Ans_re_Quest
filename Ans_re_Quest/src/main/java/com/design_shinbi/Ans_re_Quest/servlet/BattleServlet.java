@@ -31,6 +31,7 @@ public class BattleServlet extends HttpServlet {
 	private int currentEnemyIndex;
 	private int currentFloor;
 	//上2つはいつかBattle.java
+	//home git
 
 	@Override
 	public void init() throws ServletException {
@@ -54,6 +55,8 @@ public class BattleServlet extends HttpServlet {
 			// エラーハンドリング
 			throw new ServletException(e);
 		}
+	System.out.println("home"); //home git
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -81,6 +84,8 @@ public class BattleServlet extends HttpServlet {
 
 		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+		System.out.println("home"); //home git
+
 		
 
 
@@ -132,6 +137,7 @@ public class BattleServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			// doGet()を呼び出して再度Battle.jspにフォワード
+			System.out.println("home"); //home git
 			doGet(request, response);
 		}
 	}
