@@ -30,7 +30,7 @@ public class BattleServlet extends HttpServlet {
 	private List<EnemyEntity> enemies;
 	private int currentEnemyIndex;
 	private int currentFloor;
-	
+	//上2つはいつかBattle.java
 
 	@Override
 	public void init() throws ServletException {
@@ -40,15 +40,15 @@ public class BattleServlet extends HttpServlet {
 			QuizDAO quizDAO = new QuizDAO(connection);
 			PlayerDAO playerDAO = new PlayerDAO(connection);
 			EnemyDAO enemyDAO = new EnemyDAO(connection);
-			PlayerEntity player = playerDAO.getPlayerById(1);
-			EnemyEntity enemy = enemyDAO.getEnemyById(1);
+			PlayerEntity player = playerDAO.getPlayerById(1);//<-Login()
 			enemies = enemyDAO.getAllEnemies();
 			List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
-			currentFloor = 0;
-			currentEnemyIndex = 0;
 			EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
 			
-			battle = new Battle(player, enemy, quizEntities);
+			currentFloor = 1;
+			currentEnemyIndex = 0;
+			
+			battle = new Battle(player, currentEnemy, quizEntities);
 			battle.startBattle();
 		} catch (SQLException | ClassNotFoundException e) {
 			// エラーハンドリング
@@ -64,20 +64,24 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("choice2", battle.getCurrentQuestion().getChoice2());
 		request.setAttribute("choice3", battle.getCurrentQuestion().getChoice3());
 		request.setAttribute("choice4", battle.getCurrentQuestion().getChoice4());
-		request.setAttribute("playerHP", battle.getPlayerHP());
-		request.setAttribute("playerMaxHP", battle.getPlayerMaxHP());
+
 		request.setAttribute("currentQuizNo", battle.getCurrentQuizIndex()+1);
 		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
 
+		request.setAttribute("playerHP", battle.getPlayerHP());
+		request.setAttribute("playerMaxHP", battle.getPlayerMaxHP());
+		
 		request.setAttribute("enemyName", battle.getEnemyName());
 		request.setAttribute("enemyHP", battle.getEnemyHP());
 		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
-		request.setAttribute("towerName", "エニグマの塔");
+		
+		request.setAttribute("towerName", "衒学の塔");
+		
+		request.setAttribute("currentFloor", currentFloor);
 
 		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
-
-		request.setAttribute("currentFloor", currentFloor);
+		
 
 
 		// Battle.jspにフォワード
@@ -90,8 +94,8 @@ public class BattleServlet extends HttpServlet {
 		// フォームからの回答を取得
 		request.setCharacterEncoding("UTF-8");
 		String choice = request.getParameter("choice");
-		System.out.println(choice);
-		System.out.println(battle.getCurrentQuestion().getCorrectAnswer());
+		System.out.println(choice);//後で消す確認用出力
+		System.out.println(battle.getCurrentQuestion().getCorrectAnswer());//後で消す確認用出力
 		battle.answerQuizEntity(choice);
 
 		// バトルの結果に応じてリダイレクト
@@ -102,11 +106,11 @@ public class BattleServlet extends HttpServlet {
 			if (!battle.isEnemyAlive()) {
 				// 敵が倒された場合の処理
 				// 次の戦闘の初期化を行う（例: battle.startNextBattle()）
+				battle.resetEnemyHP();
 				currentFloor++;
 				currentEnemyIndex++;
 				if (currentEnemyIndex < enemies.size()) {
 					EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
-					battle.resetEnemyHP();
 					battle.startNextBattle(currentEnemy);
 				} else {
 					currentEnemyIndex = 0;
@@ -118,7 +122,8 @@ public class BattleServlet extends HttpServlet {
 	        if (!battle.isPlayerAlive()) {
 	            // プレイヤーが敗北した場合の処理
 	            // 最初の戦闘に戻るために初期化を行う
-	            battle.resetBattle(enemies);
+	        	EnemyEntity firstEnemy = enemies.get(0);
+	            battle.resetBattle(firstEnemy);
 	        }
 
 

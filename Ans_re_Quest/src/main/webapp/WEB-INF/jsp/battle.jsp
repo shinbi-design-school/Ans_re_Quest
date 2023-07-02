@@ -18,13 +18,8 @@
     </form>
     <p><%= request.getAttribute("towerName") %></p> 
     <p>階層: <%= request.getAttribute("currentFloor") %></p>
-    
     <p>プレイヤーのHP: <%= request.getAttribute("playerHP") %> / <%= request.getAttribute("playerMaxHP") %></p>
     <p>敵：<%= request.getAttribute("enemyName") %>のHP: <%= request.getAttribute("enemyHP") %> / <%= request.getAttribute("enemyMaxHP") %></p>
-    <% if (!(Boolean) request.getAttribute("isPlayerAlive")) { %>
-        <p>プレイヤーは敗北しました。</p>
-    <% } else if (!(Boolean) request.getAttribute("isEnemyAlive")) { %>
-        <p>敵を倒しました！</p>
-    <% } %>
+
 </body>
 </html>

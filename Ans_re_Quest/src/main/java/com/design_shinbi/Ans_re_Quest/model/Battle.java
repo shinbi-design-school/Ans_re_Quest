@@ -12,7 +12,9 @@ public class Battle {
     private EnemyEntity enemy;
     private int currentQuizIndex;
     private int totalQuizCount;
-
+	private int currentEnemyIndex;
+	private int currentFloor;
+	
     public Battle(PlayerEntity player,EnemyEntity enemy,List<QuizEntity> quizEntities) {
         // 初期化などのコード
     	
@@ -113,9 +115,9 @@ public class Battle {
         player.setHp(player.getMaxHp());
 
 	}
-	public void resetBattle(List<EnemyEntity> enemies) {
+	public void resetBattle(EnemyEntity firstEnemy) {
 	    // 最初の戦闘の初期化処理を行う
-		enemy = enemies.get(currentQuizIndex);
+		enemy = firstEnemy;
 	    currentQuizIndex = 0;
 	    player.setHp(player.getMaxHp()); // プレイヤーのHPをリセット
 	    
