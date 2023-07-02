@@ -32,7 +32,7 @@ public class BattleServlet extends HttpServlet {
 	private int currentFloor;
 	//上2つはいつかBattle.java
 	//home git
-
+	//note git
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -45,7 +45,7 @@ public class BattleServlet extends HttpServlet {
 			enemies = enemyDAO.getAllEnemies();
 			List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
 			EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
-			
+			System.out.println("note");//note git
 			currentFloor = 1;
 			currentEnemyIndex = 0;
 			
@@ -138,6 +138,7 @@ public class BattleServlet extends HttpServlet {
 		} else {
 			// doGet()を呼び出して再度Battle.jspにフォワード
 			System.out.println("home"); //home git
+			System.out.println("note"); //note git
 			doGet(request, response);
 		}
 	}
