@@ -1,4 +1,14 @@
 @charset "UTF-8";
+body{
+	background-color: navy;
+}
+a{
+	color: navy;
+	text-decoration: none;
+}
+a:visited{
+	color: navy;
+}
 #flex{
 	display: flex;
 	flex-wrap: wrap;
@@ -7,6 +17,77 @@
 	justify-content: center;
 	margin: auto;
 	
+}
+#box{
+	width: 350px;
+	height: 90px;
+	padding: 5px;
+	margin: auto;
+}
+#enemy{
+	text-align: right;
+}
+img#enemy{
+	float: right;
+	transform: scale(-1,1);
+}
+#player{
+	float: left;
+}
+#question{
+	text-align: center;
+}
+
+#totalMenu{
+	color: red;
+	background-image: url(../imgs/background2.jpg);
+	background-size: cover;
+	width: 800px;
+	height: 600px;
+	border: ridge 3px;
+	margin: auto;
+	text-align: center;
+	position: relative;
+}
+
+.bottom{
+	background-color: white;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 750px;
+	height: 40px;
+	margin: 10px;
+	border: solid 1px white;
+	border-radius: 50px 3px;
+	position: absolute;
+	bottom: 0;
+}
+
+.menu{
+	text-align: center;
+	border: solid 1px navy;
+	margin: auto;
+	padding: 5px;
+	}
+
+#bgi{
+	background-image: url("../imgs/background.jpg");
+	background-size: cover;
+}
+
+footer{
+	text-align: center;
+	font-style: italic;
+	color: snow;
+}
+#flex{
+	display: flex;
+	flex-wrap: wrap;
+	width: 800px;
+	height: 280px;
+	justify-content: center;
+	margin: auto;
 }
 #box{
 	width: 350px;
@@ -35,4 +116,5 @@ img#enemy{
 
 footer{
 	text-align: center;
+>>>>>>> branch 'feature' of git@github.com:shinbi-design-school/Ans_re_Quest.git
 }

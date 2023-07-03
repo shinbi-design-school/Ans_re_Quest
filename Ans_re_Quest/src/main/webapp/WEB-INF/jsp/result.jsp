@@ -24,6 +24,5 @@
 	<%
 	}
 	%>
-	<a href="battle">戻れ</a>
 </body>
 </html>

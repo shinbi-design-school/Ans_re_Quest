@@ -8,12 +8,13 @@
     <title>Battle Page</title>
 </head>
 <body>
+<div id="totalMenu">
 <div id="bgi">
     <h1>クイズバトル</h1>
     <img alt="enemy" src="imgs/face.png" id="enemy">
     <p id="enemy">敵のHP: <progress id="file" max="30" value="<%= request.getAttribute("enemyHP") %>"></progress><%= request.getAttribute("enemyHP") %></p>
-    <img alt="PLface" src="imgs/face.png">
-    <p>プレイヤーのHP:  <input type="range" id="inputSlider" min="0" max="30" value="<%= request.getAttribute("playerHP") %>" /><%= request.getAttribute("playerHP") %></p>
+    <img alt="PLface" src="imgs/face.png" id="player">
+    <p id="player">プレイヤーのHP:  <input type="range" id="inputSlider" min="0" max="30" value="<%= request.getAttribute("playerHP") %>" /><%= request.getAttribute("playerHP") %></p>
     <div id="question">
     <p>問題: <%= request.getAttribute("questionText") %></p>
     <form method="post" action="battle" id="flex">
@@ -28,6 +29,7 @@
     <% } else if (!(Boolean) request.getAttribute("isEnemyAlive")) { %>
         <p>敵を倒しました！</p>
     <% } %>
+</div>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>
