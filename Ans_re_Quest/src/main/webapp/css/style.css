@@ -1,0 +1,38 @@
+@charset "UTF-8";
+#flex{
+	display: flex;
+	flex-wrap: wrap;
+	width: 800px;
+	height: 280px;
+	justify-content: center;
+	margin: auto;
+	
+}
+#box{
+	width: 350px;
+	height: 90px;
+	padding: 5px;
+	margin: auto;
+}
+#enemy{
+	text-align: right;
+}
+img#enemy{
+	float: right;
+	transform: scale(-1,1);
+}
+#PLface{
+	float: left;
+}
+#question{
+	text-align: center;
+}
+
+#bgi{
+	background-image: url("../imgs/background.jpg");
+	background-size: cover;
+}
+
+footer{
+	text-align: center;
+}

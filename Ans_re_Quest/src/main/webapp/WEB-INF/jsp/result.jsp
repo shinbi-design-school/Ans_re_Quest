@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.design_shinbi.Ans_re_Quest.Battle"%>
+<%@ page import="com.design_shinbi.Ans_re_Quest.model.Battle"%>
 <!DOCTYPE html>
 
 <html>
@@ -24,5 +24,6 @@
 	<%
 	}
 	%>
+	<a href="battle">戻れ</a>
 </body>
 </html>

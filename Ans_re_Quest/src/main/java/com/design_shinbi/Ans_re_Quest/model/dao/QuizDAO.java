@@ -19,7 +19,7 @@ public class QuizDAO {
     public List<QuizEntity> getAllQuestions() throws SQLException {
         List<QuizEntity> questions = new ArrayList<>();
 
-        String query = "SELECT * FROM questions";
+        String query = "SELECT * FROM questions_test";
         try (PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
 

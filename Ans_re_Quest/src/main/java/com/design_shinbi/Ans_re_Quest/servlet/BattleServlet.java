@@ -69,6 +69,7 @@ public class BattleServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // フォームからの回答を取得
+    	request.setCharacterEncoding("UTF-8");
         String choice = request.getParameter("choice");
         battle.answerQuizEntity(choice);
 
