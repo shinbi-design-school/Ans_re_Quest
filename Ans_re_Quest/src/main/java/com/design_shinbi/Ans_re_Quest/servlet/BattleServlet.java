@@ -28,8 +28,6 @@ import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 public class BattleServlet extends HttpServlet {
 	private Battle battle;
 	private List<EnemyEntity> enemies;
-	private int currentEnemyIndex;
-	private int currentFloor;
 	//上2つはいつかBattle.java
 	//home git
 	//note git
@@ -39,23 +37,24 @@ public class BattleServlet extends HttpServlet {
 		try {
 			Connection connection = DbUtil.connect();
 			QuizDAO quizDAO = new QuizDAO(connection);
-			PlayerDAO playerDAO = new PlayerDAO(connection);
-			EnemyDAO enemyDAO = new EnemyDAO(connection);
-			PlayerEntity player = playerDAO.getPlayerById(1);//<-Login()
-			enemies = enemyDAO.getAllEnemies();
 			List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
-			EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
-			System.out.println("note");//note git
-			currentFloor = 1;
-			currentEnemyIndex = 0;
+		
+			PlayerDAO playerDAO = new PlayerDAO(connection);
+			PlayerEntity player = playerDAO.getPlayerById(1);//<-Login()
+
+			EnemyDAO enemyDAO = new EnemyDAO(connection);
+			enemies = enemyDAO.getAllEnemies();
 			
-			battle = new Battle(player, currentEnemy, quizEntities);
+			
+			battle = new Battle(player, enemies, quizEntities);
 			battle.startBattle();
+			
+			EnemyEntity currentEnemy = battle.getCurrentEnemy();
+
 		} catch (SQLException | ClassNotFoundException e) {
 			// エラーハンドリング
 			throw new ServletException(e);
 		}
-	System.out.println("home"); //home git
 
 	}
 
@@ -78,69 +77,29 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("enemyHP", battle.getEnemyHP());
 		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
 		
-		request.setAttribute("towerName", "衒学の塔");//形骸、欺瞞、上塗
+		request.setAttribute("towerName", "衒学の塔");//形骸、欺瞞、上塗	
 		
-		request.setAttribute("currentFloor", currentFloor);
+		request.setAttribute("currentFloor", battle.getCurrentFloor());
 
 		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
 		System.out.println("home"); //home git
-
-		
 
 
 		// Battle.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/battle.jsp");
 		dispatcher.forward(request, response);
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// フォームからの回答を取得
-		request.setCharacterEncoding("UTF-8");
-		String choice = request.getParameter("choice");
-		System.out.println(choice);//後で消す確認用出力
-		System.out.println(battle.getCurrentQuestion().getCorrectAnswer());//後で消す確認用出力
-		battle.answerQuizEntity(choice);
+	        throws ServletException, IOException {
+	    // フォームからの回答を取得
+	    request.setCharacterEncoding("UTF-8");
+	    String choice = request.getParameter("choice");
+	    battle.answerQuizEntity(choice);
 
-		// バトルの結果に応じてリダイレクト
-		if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
-			request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
-			request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
-			request.setAttribute("currentQuizIndex", battle.getCurrentQuizIndex());
-			if (!battle.isEnemyAlive()) {
-				// 敵が倒された場合の処理
-				// 次の戦闘の初期化を行う（例: battle.startNextBattle()）
-				battle.resetEnemyHP();
-				currentFloor++;
-				currentEnemyIndex++;
-				if (currentEnemyIndex < enemies.size()) {
-					EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
-					battle.startNextBattle(currentEnemy);
-				} else {
-					currentEnemyIndex = 0;
-					EnemyEntity currentEnemy = enemies.get(currentEnemyIndex);
-					battle.startNextBattle(currentEnemy);
-				}	
-				
-			}
-	        if (!battle.isPlayerAlive()) {
-	            // プレイヤーが敗北した場合の処理
-	            // 最初の戦闘に戻るために初期化を行う
-	        	currentFloor = 1;
-	        	EnemyEntity firstEnemy = enemies.get(0);
-	            battle.resetBattle(firstEnemy);
-	        }
-
-
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			// doGet()を呼び出して再度Battle.jspにフォワード
-			System.out.println("home"); //home git
-			System.out.println("note"); //note git
-			doGet(request, response);
-		}
+	    // バトルの結果に応じてリダイレクト
+	    battle.handleBattleResult(request, response);
+	    doGet(request, response);
 	}
 }
