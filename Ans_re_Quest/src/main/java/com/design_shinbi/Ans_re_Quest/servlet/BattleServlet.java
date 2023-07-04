@@ -78,7 +78,7 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("enemyHP", battle.getEnemyHP());
 		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
 		
-		request.setAttribute("towerName", "衒学の塔");
+		request.setAttribute("towerName", "衒学の塔");//形骸、欺瞞、上塗
 		
 		request.setAttribute("currentFloor", currentFloor);
 
@@ -127,6 +127,7 @@ public class BattleServlet extends HttpServlet {
 	        if (!battle.isPlayerAlive()) {
 	            // プレイヤーが敗北した場合の処理
 	            // 最初の戦闘に戻るために初期化を行う
+	        	currentFloor = 1;
 	        	EnemyEntity firstEnemy = enemies.get(0);
 	            battle.resetBattle(firstEnemy);
 	        }
