@@ -78,7 +78,7 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("enemyHP", battle.getEnemyHP());
 		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
 		
-		request.setAttribute("towerName", "衒学の塔");//形骸、欺瞞、上塗	
+		request.setAttribute("towerName", "衒学の塔");
 		
 		request.setAttribute("currentFloor", battle.getCurrentFloor());
 
