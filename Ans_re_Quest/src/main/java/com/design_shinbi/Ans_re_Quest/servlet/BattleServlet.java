@@ -52,8 +52,8 @@ public class BattleServlet extends HttpServlet {
 			EnemyEntity currentEnemy = battle.getCurrentEnemy();
 
 		} catch (SQLException | ClassNotFoundException e) {
-			// エラーハンドリング
-			throw new ServletException(e);
+		    System.out.println(e);
+		    throw new ServletException(e);
 		}
 
 	}
@@ -62,6 +62,7 @@ public class BattleServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// ビューに表示するデータを設定
 		request.setAttribute("questionText", battle.getCurrentQuestion().getText());
+		battle.shuffleChoices();
 		request.setAttribute("choice1", battle.getCurrentQuestion().getChoice1());
 		request.setAttribute("choice2", battle.getCurrentQuestion().getChoice2());
 		request.setAttribute("choice3", battle.getCurrentQuestion().getChoice3());
@@ -83,7 +84,6 @@ public class BattleServlet extends HttpServlet {
 
 		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
-		System.out.println("home"); //home git
 
 
 		// Battle.jspにフォワード
@@ -99,7 +99,13 @@ public class BattleServlet extends HttpServlet {
 	    battle.answerQuizEntity(choice);
 
 	    // バトルの結果に応じてリダイレクト
-	    battle.handleBattleResult(request, response);
-	    doGet(request, response);
+	    if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
+	    	
+	    	battle.handleBattleResult(request, response);
+	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+	    	dispatcher.forward(request, response);
+	    } else {
+	    	doGet(request, response);
+	   }
 	}
 }

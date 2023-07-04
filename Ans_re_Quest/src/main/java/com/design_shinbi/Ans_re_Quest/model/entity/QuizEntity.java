@@ -12,10 +12,10 @@ public class QuizEntity {
     public QuizEntity(int id, String text, String choice1, String choice2, String choice3, String choice4, String correctAnswer) {
         this.id = id;
         this.text = text;
-        this.choice1 = choice4;
-        this.choice2 = choice3;
-        this.choice3 = choice2;
-        this.choice4 = choice1;
+        this.choice1 = choice1;
+        this.choice2 = choice2;
+        this.choice3 = choice3;
+        this.choice4 = choice4;
         this.correctAnswer = correctAnswer;
     }
 
@@ -27,7 +27,23 @@ public class QuizEntity {
         return text;
     }
 
-    public String getChoice1() {
+    public void setChoice1(String choice1) {
+		this.choice1 = choice1;
+	}
+
+	public void setChoice2(String choice2) {
+		this.choice2 = choice2;
+	}
+
+	public void setChoice3(String choice3) {
+		this.choice3 = choice3;
+	}
+
+	public void setChoice4(String choice4) {
+		this.choice4 = choice4;
+	}
+
+	public String getChoice1() {
         return choice1;
     }
 

@@ -1,9 +1,10 @@
 package com.design_shinbi.Ans_re_Quest.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ public class Battle {
     	
         this.player = player;
         this.enemies = enemies;
-        this.currentEnemy = enemies.get(0);
+        this.currentEnemy = enemies.get(currentEnemyIndex);
         this.quizEntities = quizEntities;
     }
 
@@ -125,10 +126,13 @@ public class Battle {
 
     public QuizEntity getCurrentQuestion() {
         if (currentQuizIndex >= 0 && currentQuizIndex < quizEntities.size()) {
-            return quizEntities.get(currentQuizIndex);
+            QuizEntity currentQuestion = quizEntities.get(currentQuizIndex);
+            
+            return currentQuestion;
         }
         return null;
     }
+
     
 	public int getCurrentEnemyIndex() {
 		return currentEnemyIndex;
@@ -149,7 +153,7 @@ public class Battle {
 
 	public void startNextBattle(EnemyEntity currentEnemy) {
         // 次の戦闘の初期化処理を行う
-        currentEnemy = currentEnemy;
+        this.currentEnemy = currentEnemy;
         currentQuizIndex = 0;
         player.setHp(player.getMaxHp());
         resetEnemyHP();
@@ -161,7 +165,7 @@ public class Battle {
 	    currentQuizIndex = 0;
 	    currentFloor = 1;
 	    player.setHp(player.getMaxHp()); // プレイヤーのHPをリセット
-	    
+	    currentEnemy.setHp(currentEnemy.getMaxHp());
 	    
 	    //階層リセット
 	    // その他の初期化処理を実装する
@@ -174,7 +178,8 @@ public class Battle {
 	
 	public void handleBattleResult(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    // バトルの結果に応じた処理を実装する
-	    if (!isPlayerAlive() || !isEnemyAlive()) {
+
+	    
 	        request.setAttribute("isPlayerAlive", isPlayerAlive());
 	        request.setAttribute("isEnemyAlive", isEnemyAlive());
 	        request.setAttribute("currentQuizIndex", getCurrentQuizIndex());
@@ -201,10 +206,26 @@ public class Battle {
 	            resetBattle(firstEnemy);
 	        }
 
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
-	        dispatcher.forward(request, response);
-	    }
+
+
+	    
 	}
+
+	public void shuffleChoices() {
+	    QuizEntity currentQuestion = getCurrentQuestion();
+	        List<String> choices = new ArrayList<>();
+	        choices.add(currentQuestion.getChoice1());
+	        choices.add(currentQuestion.getChoice2());
+	        choices.add(currentQuestion.getChoice3());
+	        choices.add(currentQuestion.getChoice4());
+	        Collections.shuffle(choices);
+
+	        currentQuestion.setChoice1(choices.get(0));
+	        currentQuestion.setChoice2(choices.get(1));
+	        currentQuestion.setChoice3(choices.get(2));
+	        currentQuestion.setChoice4(choices.get(3));
+	    }
+
 
 }
 

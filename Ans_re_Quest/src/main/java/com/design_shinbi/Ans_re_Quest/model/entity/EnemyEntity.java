@@ -29,7 +29,6 @@ public class EnemyEntity {
         return maxHp;
     }
 
-
     public void setHp(int hp) {
         this.hp = hp;
     }
