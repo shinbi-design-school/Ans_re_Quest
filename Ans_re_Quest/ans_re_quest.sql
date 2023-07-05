@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2023-07-05 03:41:24
+-- 生成日時: 2023-07-05 09:16:33
 -- サーバのバージョン： 10.4.28-MariaDB
 -- PHP のバージョン: 8.2.4
 
@@ -127,6 +127,7 @@ CREATE TABLE `questions` (
   `choice3` varchar(200) DEFAULT NULL,
   `choice4` varchar(200) DEFAULT NULL,
   `ai_answer` text DEFAULT NULL,
+  `limit_time` int(11) NOT NULL DEFAULT 15,
   `genre` varchar(11) NOT NULL DEFAULT 'normal',
   `difficulty` varchar(11) NOT NULL DEFAULT 'normal'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -135,17 +136,39 @@ CREATE TABLE `questions` (
 -- テーブルのデータのダンプ `questions`
 --
 
-INSERT INTO `questions` (`id`, `text`, `correctAnswer`, `choice1`, `choice2`, `choice3`, `choice4`, `ai_answer`, `genre`, `difficulty`) VALUES
-(1, 'moziretu', 'moziretu', '1', '2', '3', 'moziretu', '', 'normal', 'normal'),
-(2, '文字列', '文字列', '1', '2', '3', '文字列', '', 'normal', 'normal'),
-(3, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
-(4, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
-(5, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
-(6, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
-(7, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
-(8, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
-(9, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
-(10, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal');
+INSERT INTO `questions` (`id`, `text`, `correctAnswer`, `choice1`, `choice2`, `choice3`, `choice4`, `ai_answer`, `limit_time`, `genre`, `difficulty`) VALUES
+(1, 'moziretu　id=1', 'moziretu', '1', '2', '3', 'moziretu', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(2, '文字列', '文字列', '1', '2', '3', '文字列', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(3, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(4, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(5, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(6, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(7, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(8, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(9, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(10, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal');
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `towers`
+--
+
+CREATE TABLE `towers` (
+  `tower_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `flores` int(11) NOT NULL,
+  `event_flore` int(11) NOT NULL DEFAULT 3,
+  `genre` varchar(11) NOT NULL,
+  `difficulty` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- テーブルのデータのダンプ `towers`
+--
+
+INSERT INTO `towers` (`tower_id`, `name`, `flores`, `event_flore`, `genre`, `difficulty`) VALUES
+(1, '衒学の塔', 5, 3, 'normal', 'normal');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -191,6 +214,12 @@ ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- テーブルのインデックス `towers`
+--
+ALTER TABLE `towers`
+  ADD PRIMARY KEY (`tower_id`);
+
+--
 -- ダンプしたテーブルの AUTO_INCREMENT
 --
 
@@ -199,6 +228,12 @@ ALTER TABLE `questions`
 --
 ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- テーブルの AUTO_INCREMENT `towers`
+--
+ALTER TABLE `towers`
+  MODIFY `tower_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- ダンプしたテーブルの制約
