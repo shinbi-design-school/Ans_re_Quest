@@ -14,11 +14,14 @@ public class TowerEntity {
 		this.towerId = towerId;
 		this.name = name;
 		this.flores = flores;
+		this.eventFlore = eventFlore;
 		this.genre = genre;
 		this.difficulty = difficulty;
 	}
     
-    public int getTowerId() {
+
+
+	public int getTowerId() {
         return towerId;
     }
     
@@ -39,6 +42,10 @@ public class TowerEntity {
     public int getFlores() {
         return flores;
     }
+    
+    public int getEventFlore() {
+		return eventFlore;
+	}
     
     public void setFlores(int flores) {
         this.flores = flores;

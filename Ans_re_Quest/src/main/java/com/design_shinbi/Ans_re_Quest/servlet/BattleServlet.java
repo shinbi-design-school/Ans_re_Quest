@@ -30,9 +30,7 @@ import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 public class BattleServlet extends HttpServlet {
 	private Battle battle;
 	private List<EnemyEntity> enemies;
-	//上2つはいつかBattle.java
-	//home git
-	//note git
+	
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -107,14 +105,25 @@ public class BattleServlet extends HttpServlet {
 	    // フォームからの回答を取得
 	    request.setCharacterEncoding("UTF-8");
 	    String choice = request.getParameter("choice");
-	    battle.answerQuizEntity(choice);
+	    battle.answerQuiz(choice);
 
 	    // バトルの結果に応じてリダイレクト
 	    if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
-	    	
-	    	battle.handleBattleResult(request, response);
+//	    	if(battle.isEventFlore()) {
+//	    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/middleEvent.jsp");
+//		    	dispatcher.forward(request, response);
+//	    	} else {
+	        request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
+	        request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+
+	        battle.handleBattleResult();
+	        if(battle.isEventFlore()) {
+		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/middleEvent.jsp");
+		    	dispatcher.forward(request, response);
+	        } else {
 	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
 	    	dispatcher.forward(request, response);
+	    	}
 	    } else {
 	    	doGet(request, response);
 	   }

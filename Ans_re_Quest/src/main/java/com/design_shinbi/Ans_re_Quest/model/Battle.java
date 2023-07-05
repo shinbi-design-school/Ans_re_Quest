@@ -1,13 +1,8 @@
 package com.design_shinbi.Ans_re_Quest.model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
@@ -50,11 +45,12 @@ public class Battle {
     	currentEnemyIndex = 0;
     	currentFloor = 1;
     	totalQuizCount = 1;
+    	shuffleQuizEntities();
         // バトルの開始処理
         // 最初の問題を設定するなど
     }
 
-    public void answerQuizEntity(String choice) {
+    public void answerQuiz(String choice) {
         // 問題に対する回答処理
         QuizEntity currentQuestion = getCurrentQuestion();
         if (currentQuestion != null) {
@@ -74,7 +70,11 @@ public class Battle {
                 player.setHp(currentHP - 10); // 仮の減少値
             }
             // 次の問題へ進む
+            if (currentQuizIndex >= 0 && currentQuizIndex < quizEntities.size()-1) {
             currentQuizIndex++;
+            } else {
+            	currentQuizIndex = 0;
+            }
         }
     }
 
@@ -137,8 +137,12 @@ public class Battle {
             QuizEntity currentQuestion = quizEntities.get(currentQuizIndex);
             
             return currentQuestion;
+        } else {
+        	currentQuizIndex = 0;
+        	QuizEntity currentQuestion = quizEntities.get(currentQuizIndex);
+        	 return currentQuestion;
         }
-        return null;
+       
     }
 
     
@@ -162,7 +166,6 @@ public class Battle {
 	public void startNextBattle(EnemyEntity currentEnemy) {
         // 次の戦闘の初期化処理を行う
         this.currentEnemy = currentEnemy;
-        currentQuizIndex = 0;
         player.setHp(player.getMaxHp());
         resetEnemyHP();
 
@@ -184,13 +187,10 @@ public class Battle {
 		currentEnemy.setHp(currentEnemy.getMaxHp());
 	}
 	
-	public void handleBattleResult(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void handleBattleResult(){
 	    // バトルの結果に応じた処理を実装する
 
 	    
-	        request.setAttribute("isPlayerAlive", isPlayerAlive());
-	        request.setAttribute("isEnemyAlive", isEnemyAlive());
-	        request.setAttribute("currentQuizIndex", getCurrentQuizIndex());
 	        if (!isEnemyAlive()) {
 	            // 敵が倒された場合の処理
 	            // 次の戦闘の初期化を行う（例: startNextBattle()）
@@ -229,4 +229,19 @@ public class Battle {
 	        currentQuestion.setChoice3(choices.get(2));
 	        currentQuestion.setChoice4(choices.get(3));
 	    }
+	
+	public void shuffleQuizEntities() {
+	   Collections.shuffle(quizEntities);
+	}
+
+	public boolean isEventFlore() {
+			System.out.println("C=:"+currentFloor);
+			System.out.println("E=:"+tower.getEventFlore());
+			if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getEventFlore()))	){
+			return true;
+		} else {
+		return false;
+		}
+	}
+
 }
