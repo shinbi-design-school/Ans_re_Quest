@@ -23,10 +23,10 @@
         <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>"><%= request.getAttribute("choice3") %></button><br>
         <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>"><%= request.getAttribute("choice4") %></button><br>
     </form>
-    <p>AI使ったらパラメーターに使用の有無情報が伝わるように設定予定</p>
-    <p>Open AI Answer: <%= request.getAttribute("aiAnswer") %></p>
-    <p>50/50: <%= request.getAttribute("50/50Count") %>個</p>
-    <p>SKIP: <%= request.getAttribute("skipCount") %>個</p>
+    <p>AIやアイテムを使ったらパラメーターに使用の有無情報が伝わるように設定予定</p>
+    <p>Open AI Answer: <%= request.getAttribute("aiAnswer") %> parameter=isUsedAI</p>
+    <p>50/50: <%= request.getAttribute("50/50Count") %>個parameter=isUsed50/50</p> 
+    <p>SKIP: <%= request.getAttribute("skipCount") %>個parameter=isUsedSKIP</p>
     
 </div>
 </div>
