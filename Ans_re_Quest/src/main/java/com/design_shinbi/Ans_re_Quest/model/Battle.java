@@ -202,7 +202,7 @@ public class Battle {
 	            } else {
 	                setCurrentEnemyIndex(0);
 	                EnemyEntity currentEnemy = enemies.get(getCurrentEnemyIndex());
-	                startNextBattle(currentEnemy);
+	                startNextBattle(currentEnemy);//ホーム実装合修正
 	            }
 	        }
 
