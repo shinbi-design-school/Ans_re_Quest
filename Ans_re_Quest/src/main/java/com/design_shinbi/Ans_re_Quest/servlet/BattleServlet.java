@@ -77,9 +77,10 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
 		
 		request.setAttribute("towerName", "衒学の塔");
-		
 		request.setAttribute("currentFloor", battle.getCurrentFloor());
 
+
+		
 		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
 

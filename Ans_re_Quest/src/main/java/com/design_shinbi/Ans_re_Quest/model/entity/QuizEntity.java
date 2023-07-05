@@ -9,9 +9,9 @@ public class QuizEntity {
     private String choice4;
     private String correctAnswer;
     private String genre;
-    
+    private String difficulty;
 
-    public QuizEntity(int id, String text, String choice1, String choice2, String choice3, String choice4, String correctAnswer,String genre) {
+    public QuizEntity(int id, String text, String choice1, String choice2, String choice3, String choice4, String correctAnswer,String genre,String difficulty) {
         this.id = id;
         this.text = text;
         this.choice1 = choice1;
@@ -20,6 +20,7 @@ public class QuizEntity {
         this.choice4 = choice4;
         this.correctAnswer = correctAnswer;
         this.genre = genre;
+        this.difficulty = difficulty;
     }
 
     public int getId() {

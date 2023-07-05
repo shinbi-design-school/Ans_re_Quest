@@ -6,13 +6,15 @@ public class EnemyEntity {
     private int hp;
     private int maxHp;
     private String genre;
+    private String difficulty;
 
-    public EnemyEntity(int id, String name, int hp, String genre) {
+    public EnemyEntity(int id, String name, int hp, String genre, String difficulty) {
         this.id = id;
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
         this.genre = genre;
+        this.difficulty = difficulty;
     }
 
     public int getId() {

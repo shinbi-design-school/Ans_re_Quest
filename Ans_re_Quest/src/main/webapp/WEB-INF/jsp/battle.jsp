@@ -23,10 +23,11 @@
         <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>"><%= request.getAttribute("choice3") %></button><br>
         <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>"><%= request.getAttribute("choice4") %></button><br>
     </form>
-        <p><%= request.getAttribute("towerName") %></p> 
-    <p>階層: <%= request.getAttribute("currentFloor") %></p>
-    <p>プレイヤーのHP: <%= request.getAttribute("playerHP") %> / <%= request.getAttribute("playerMaxHP") %></p>
-    <p>敵：<%= request.getAttribute("enemyName") %>のHP: <%= request.getAttribute("enemyHP") %> / <%= request.getAttribute("enemyMaxHP") %></p>
+    <p>AI使ったらパラメーターに使用の有無情報が伝わるように設定予定</p>
+    <p>Open AI Answer: <%= request.getAttribute("aianswer") %></p>
+    <p>50/50: <%= request.getAttribute("50/50Count") %>個</p>
+    <p>SKIP: <%= request.getAttribute("skipCount") %>個</p>
+    
 </div>
 </div>
 <jsp:include page="footer.jsp"/>

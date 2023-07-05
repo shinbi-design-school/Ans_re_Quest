@@ -32,8 +32,9 @@ public class QuizDAO {
                 String choice4 = resultSet.getString("choice4");
                 String correctAnswer = resultSet.getString("correctAnswer");
                 String genre = resultSet.getString("genre");
+                String difficulty = resultSet.getString("difficulty");
 
-                QuizEntity question = new QuizEntity(id, text, choice1, choice2, choice3, choice4, correctAnswer,genre);
+                QuizEntity question = new QuizEntity(id, text, choice1, choice2, choice3, choice4, correctAnswer,genre,difficulty);
                 questions.add(question);
             }
         }

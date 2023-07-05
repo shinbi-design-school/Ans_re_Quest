@@ -28,8 +28,9 @@ public class EnemyDAO {
                     String name = resultSet.getString("name");
                     int hp = resultSet.getInt("hp");
                     String genre = resultSet.getString("genre");
+                    String difficulty = resultSet.getString("difficulty");
 
-                    enemy = new EnemyEntity(id,name,hp,genre);
+                    enemy = new EnemyEntity(id,name,hp,genre,difficulty);
                 }
             }
         }
@@ -48,8 +49,9 @@ public class EnemyDAO {
                 String name = resultSet.getString("name");
                 int hp = resultSet.getInt("hp");
                 String genre = resultSet.getString("genre");
+                String difficulty = resultSet.getString("difficulty");
 
-                EnemyEntity enemy = new EnemyEntity(id,name,hp,genre);
+                EnemyEntity enemy = new EnemyEntity(id,name,hp,genre,difficulty);
                 enemies.add(enemy);
             }
         }
