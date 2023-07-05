@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2023-07-02 11:21:41
+-- 生成日時: 2023-07-05 03:41:24
 -- サーバのバージョン： 10.4.28-MariaDB
 -- PHP のバージョン: 8.2.4
 
@@ -48,20 +48,22 @@ CREATE TABLE `enemies` (
   `mp` int(11) DEFAULT NULL,
   `attack` int(11) DEFAULT NULL,
   `defense` int(11) DEFAULT NULL,
-  `experience_reward` int(11) DEFAULT NULL
+  `experience_reward` int(11) DEFAULT NULL,
+  `genre` varchar(11) NOT NULL DEFAULT 'normal',
+  `difficulty` varchar(11) NOT NULL DEFAULT 'normal'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- テーブルのデータのダンプ `enemies`
 --
 
-INSERT INTO `enemies` (`enemy_id`, `name`, `hp`, `mp`, `attack`, `defense`, `experience_reward`) VALUES
-(1, 'いちたろう', 11, 11, NULL, NULL, NULL),
-(2, 'にたろう', 12, 12, NULL, NULL, NULL),
-(3, 'さんたろう', 13, 13, NULL, NULL, NULL),
-(4, 'よんたろう', 14, 14, NULL, NULL, NULL),
-(5, 'ごたろう', 15, 15, NULL, NULL, NULL),
-(6, 'ろくたろう', 16, 16, NULL, NULL, NULL);
+INSERT INTO `enemies` (`enemy_id`, `name`, `hp`, `mp`, `attack`, `defense`, `experience_reward`, `genre`, `difficulty`) VALUES
+(1, 'いちたろう', 11, 11, NULL, NULL, NULL, 'normal', 'normal'),
+(2, 'にたろう', 12, 12, NULL, NULL, NULL, 'normal', 'normal'),
+(3, 'さんたろう', 13, 13, NULL, NULL, NULL, 'normal', 'normal'),
+(4, 'よんたろう', 14, 14, NULL, NULL, NULL, 'normal', 'normal'),
+(5, 'ごたろう', 15, 15, NULL, NULL, NULL, 'normal', 'normal'),
+(6, 'ろくたろう', 16, 16, NULL, NULL, NULL, 'normal', 'normal');
 
 -- --------------------------------------------------------
 
@@ -87,15 +89,16 @@ CREATE TABLE `players` (
   `level` int(11) DEFAULT NULL,
   `experience` int(11) DEFAULT NULL,
   `hp` int(11) DEFAULT NULL,
-  `mp` int(11) DEFAULT NULL
+  `mp` int(11) DEFAULT NULL,
+  `achieve` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- テーブルのデータのダンプ `players`
 --
 
-INSERT INTO `players` (`player_id`, `name`, `level`, `experience`, `hp`, `mp`) VALUES
-(1, 'aaaa', 1, 1, 30, 30);
+INSERT INTO `players` (`player_id`, `name`, `level`, `experience`, `hp`, `mp`, `achieve`) VALUES
+(1, 'aaaa', 1, 1, 30, 30, 0);
 
 -- --------------------------------------------------------
 
@@ -123,24 +126,26 @@ CREATE TABLE `questions` (
   `choice2` varchar(200) DEFAULT NULL,
   `choice3` varchar(200) DEFAULT NULL,
   `choice4` varchar(200) DEFAULT NULL,
-  `ai_answer` text DEFAULT NULL
+  `ai_answer` text DEFAULT NULL,
+  `genre` varchar(11) NOT NULL DEFAULT 'normal',
+  `difficulty` varchar(11) NOT NULL DEFAULT 'normal'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- テーブルのデータのダンプ `questions`
 --
 
-INSERT INTO `questions` (`id`, `text`, `correctAnswer`, `choice1`, `choice2`, `choice3`, `choice4`, `ai_answer`) VALUES
-(1, 'moziretu', 'moziretu', '1', '2', '3', 'moziretu', ''),
-(2, '文字列', '文字列', '1', '2', '3', '文字列', ''),
-(3, '3', '3', '1', '2', '3', '4', ''),
-(4, '3', '3', '1', '2', '3', '4', ''),
-(5, '3', '3', '1', '2', '3', '4', ''),
-(6, '3', '3', '1', '2', '3', '4', ''),
-(7, '3', '3', '1', '2', '3', '4', ''),
-(8, '3', '3', '1', '2', '3', '4', ''),
-(9, '3', '3', '1', '2', '3', '4', ''),
-(10, '3', '3', '1', '2', '3', '4', '');
+INSERT INTO `questions` (`id`, `text`, `correctAnswer`, `choice1`, `choice2`, `choice3`, `choice4`, `ai_answer`, `genre`, `difficulty`) VALUES
+(1, 'moziretu', 'moziretu', '1', '2', '3', 'moziretu', '', 'normal', 'normal'),
+(2, '文字列', '文字列', '1', '2', '3', '文字列', '', 'normal', 'normal'),
+(3, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
+(4, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
+(5, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
+(6, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
+(7, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
+(8, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
+(9, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal'),
+(10, '3', '3', '1', '2', '3', '4', '', 'normal', 'normal');
 
 --
 -- ダンプしたテーブルのインデックス

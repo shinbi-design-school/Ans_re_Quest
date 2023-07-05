@@ -7,7 +7,11 @@ import java.sql.SQLException;
 public class DbUtil {
 	private static final String DB_DRIVER = "jdbc:mysql://localhost/ans_re_quest";
 	private static final String DB_USER = "root";
+<<<<<<< HEAD
 	private static final String DB_PASSWORD ="";
+=======
+	private static final String DB_PASSWORD ="akatukikawaii";
+>>>>>>> refs/remotes/origin/master
 	
 	public static Connection connect() throws ClassNotFoundException,SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
