@@ -49,8 +49,6 @@ public class BattleServlet extends HttpServlet {
 			battle = new Battle(player, enemies, quizEntities);
 			battle.startBattle();
 			
-			EnemyEntity currentEnemy = battle.getCurrentEnemy();
-
 		} catch (SQLException | ClassNotFoundException e) {
 		    System.out.println(e);
 		    throw new ServletException(e);

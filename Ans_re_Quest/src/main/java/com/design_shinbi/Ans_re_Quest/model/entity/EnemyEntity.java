@@ -5,12 +5,14 @@ public class EnemyEntity {
     private String name;
     private int hp;
     private int maxHp;
+    private String genre;
 
-    public EnemyEntity(int id, String name,int hp) {
+    public EnemyEntity(int id, String name, int hp, String genre) {
         this.id = id;
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
+        this.genre = genre;
     }
 
     public int getId() {
@@ -32,7 +34,14 @@ public class EnemyEntity {
     public void setHp(int hp) {
         this.hp = hp;
     }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
   
     // その他、必要なメソッドを追加する
 }
-

@@ -8,8 +8,10 @@ public class QuizEntity {
     private String choice3;
     private String choice4;
     private String correctAnswer;
+    private String genre;
+    
 
-    public QuizEntity(int id, String text, String choice1, String choice2, String choice3, String choice4, String correctAnswer) {
+    public QuizEntity(int id, String text, String choice1, String choice2, String choice3, String choice4, String correctAnswer,String genre) {
         this.id = id;
         this.text = text;
         this.choice1 = choice1;
@@ -17,6 +19,7 @@ public class QuizEntity {
         this.choice3 = choice3;
         this.choice4 = choice4;
         this.correctAnswer = correctAnswer;
+        this.genre = genre;
     }
 
     public int getId() {
@@ -62,6 +65,14 @@ public class QuizEntity {
     public String getCorrectAnswer() {
         return correctAnswer;
     }
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 
     // その他、必要なメソッドを追加する
 }

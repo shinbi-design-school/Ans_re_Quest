@@ -31,8 +31,9 @@ public class QuizDAO {
                 String choice3 = resultSet.getString("choice3");
                 String choice4 = resultSet.getString("choice4");
                 String correctAnswer = resultSet.getString("correctAnswer");
+                String genre = resultSet.getString("genre");
 
-                QuizEntity question = new QuizEntity(id, text, choice1, choice2, choice3, choice4, correctAnswer);
+                QuizEntity question = new QuizEntity(id, text, choice1, choice2, choice3, choice4, correctAnswer,genre);
                 questions.add(question);
             }
         }
