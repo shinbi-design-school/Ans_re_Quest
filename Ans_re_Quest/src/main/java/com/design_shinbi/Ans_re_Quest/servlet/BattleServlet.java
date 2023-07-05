@@ -16,9 +16,11 @@ import com.design_shinbi.Ans_re_Quest.model.Battle;
 import com.design_shinbi.Ans_re_Quest.model.dao.EnemyDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.PlayerDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.QuizDAO;
+import com.design_shinbi.Ans_re_Quest.model.dao.TowerDAO;
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.QuizEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.TowerEntity;
 import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 
 /**
@@ -39,6 +41,9 @@ public class BattleServlet extends HttpServlet {
 			QuizDAO quizDAO = new QuizDAO(connection);
 			List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
 		
+			TowerDAO towerDAO = new TowerDAO(connection);
+			TowerEntity tower = towerDAO.getTowerById(1);//<-メインページから取得
+			
 			PlayerDAO playerDAO = new PlayerDAO(connection);
 			PlayerEntity player = playerDAO.getPlayerById(1);//<-Login()
 
@@ -46,7 +51,7 @@ public class BattleServlet extends HttpServlet {
 			enemies = enemyDAO.getAllEnemies();
 			
 			
-			battle = new Battle(player, enemies, quizEntities);
+			battle = new Battle(tower, player, enemies, quizEntities);
 			battle.startBattle();
 			
 		} catch (SQLException | ClassNotFoundException e) {
@@ -59,30 +64,37 @@ public class BattleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// ビューに表示するデータを設定
+		
+		//tower
+		request.setAttribute("towerName", battle.getTowerName());
+		request.setAttribute("currentFloor", battle.getCurrentFloor());
+		//player
+		request.setAttribute("playerHP", battle.getPlayerHP());
+		request.setAttribute("playerMaxHP", battle.getPlayerMaxHP());
+		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
+		//enemy
+		request.setAttribute("enemyName", battle.getEnemyName());
+		request.setAttribute("enemyHP", battle.getEnemyHP());
+		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
+		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+		//quiz
+		request.setAttribute("currentQuizNo", battle.getCurrentQuizIndex()+1);
+		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
+		//question
 		request.setAttribute("questionText", battle.getCurrentQuestion().getText());
 		battle.shuffleChoices();
 		request.setAttribute("choice1", battle.getCurrentQuestion().getChoice1());
 		request.setAttribute("choice2", battle.getCurrentQuestion().getChoice2());
 		request.setAttribute("choice3", battle.getCurrentQuestion().getChoice3());
 		request.setAttribute("choice4", battle.getCurrentQuestion().getChoice4());
+		request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime());
 
-		request.setAttribute("currentQuizNo", battle.getCurrentQuizIndex()+1);
-		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
-
-		request.setAttribute("playerHP", battle.getPlayerHP());
-		request.setAttribute("playerMaxHP", battle.getPlayerMaxHP());
-		
-		request.setAttribute("enemyName", battle.getEnemyName());
-		request.setAttribute("enemyHP", battle.getEnemyHP());
-		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
-		
-		request.setAttribute("towerName", "衒学の塔");
-		request.setAttribute("currentFloor", battle.getCurrentFloor());
+		//hint
+		request.setAttribute("aiAnswer", battle.getCurrentQuestion().getAi_answer());
+		request.setAttribute("50/50Count", Integer.parseInt("99"));
+		request.setAttribute("skipCount", Integer.parseInt("99"));
 
 
-		
-		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
-		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
 
 
 		// Battle.jspにフォワード

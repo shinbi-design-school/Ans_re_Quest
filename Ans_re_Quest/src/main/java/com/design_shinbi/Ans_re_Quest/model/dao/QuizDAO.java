@@ -31,10 +31,12 @@ public class QuizDAO {
                 String choice3 = resultSet.getString("choice3");
                 String choice4 = resultSet.getString("choice4");
                 String correctAnswer = resultSet.getString("correctAnswer");
+                String aiAnswer = resultSet.getString("ai_answer");
+                int limitTime = resultSet.getInt("limit_time");
                 String genre = resultSet.getString("genre");
                 String difficulty = resultSet.getString("difficulty");
 
-                QuizEntity question = new QuizEntity(id, text, choice1, choice2, choice3, choice4, correctAnswer,genre,difficulty);
+                QuizEntity question = new QuizEntity(id, text, choice1, choice2, choice3, choice4, correctAnswer, aiAnswer, limitTime, genre,difficulty);
                 questions.add(question);
             }
         }

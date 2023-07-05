@@ -8,10 +8,13 @@ public class QuizEntity {
     private String choice3;
     private String choice4;
     private String correctAnswer;
+    private String aiAnswer;
+    private int limitTime;
     private String genre;
     private String difficulty;
+    
 
-    public QuizEntity(int id, String text, String choice1, String choice2, String choice3, String choice4, String correctAnswer,String genre,String difficulty) {
+    public QuizEntity(int id, String text, String choice1, String choice2, String choice3, String choice4, String correctAnswer,String aiAnswer, int limitTime, String genre,String difficulty) {
         this.id = id;
         this.text = text;
         this.choice1 = choice1;
@@ -19,11 +22,15 @@ public class QuizEntity {
         this.choice3 = choice3;
         this.choice4 = choice4;
         this.correctAnswer = correctAnswer;
+        this.aiAnswer = aiAnswer;
+        this.limitTime = limitTime;
         this.genre = genre;
         this.difficulty = difficulty;
     }
 
-    public int getId() {
+
+
+	public int getId() {
         return id;
     }
 
@@ -31,23 +38,7 @@ public class QuizEntity {
         return text;
     }
 
-    public void setChoice1(String choice1) {
-		this.choice1 = choice1;
-	}
-
-	public void setChoice2(String choice2) {
-		this.choice2 = choice2;
-	}
-
-	public void setChoice3(String choice3) {
-		this.choice3 = choice3;
-	}
-
-	public void setChoice4(String choice4) {
-		this.choice4 = choice4;
-	}
-
-	public String getChoice1() {
+    public String getChoice1() {
         return choice1;
     }
 
@@ -67,13 +58,40 @@ public class QuizEntity {
         return correctAnswer;
     }
 
-	public String getGenre() {
-		return genre;
+    public String getAi_answer() {
+        return aiAnswer;
+    }
+    
+    public int getLimitTime() {
+		return limitTime;
 	}
+    public String getGenre() {
+        return genre;
+    }
 
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setChoice1(String choice1) {
+        this.choice1 = choice1;
+    }
+
+    public void setChoice2(String choice2) {
+        this.choice2 = choice2;
+    }
+
+    public void setChoice3(String choice3) {
+        this.choice3 = choice3;
+    }
+
+    public void setChoice4(String choice4) {
+        this.choice4 = choice4;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
     // その他、必要なメソッドを追加する
 }

@@ -4,11 +4,12 @@ public class TowerEntity {
     private int towerId;
     private String name;
     private int flores;
+    private int eventFlore;
     private String genre;
     private String difficulty;
     
     
-    public TowerEntity(int towerId, String name, int flores, String genre, String difficulty) {
+    public TowerEntity(int towerId, String name, int flores, int eventFlore, String genre, String difficulty) {
 		super();
 		this.towerId = towerId;
 		this.name = name;

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.QuizEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.TowerEntity;
 
 public class Battle {
+	private TowerEntity tower;
     private List<QuizEntity> quizEntities;
     private PlayerEntity player;
 	private List<EnemyEntity> enemies;
@@ -24,10 +26,11 @@ public class Battle {
 	private int currentEnemyIndex;
 	private int currentFloor;
 	
-    public Battle(PlayerEntity player,List<EnemyEntity> enemies,List<QuizEntity> quizEntities) {
+	
+    public Battle(TowerEntity tower, PlayerEntity player,List<EnemyEntity> enemies,List<QuizEntity> quizEntities) {
         // 初期化などのコード
     	
-    	
+    	this.tower = tower;
         this.player = player;
         this.enemies = enemies;
         this.currentEnemy = enemies.get(currentEnemyIndex);
@@ -83,6 +86,11 @@ public class Battle {
     	return null;
     }
 
+	public String getTowerName() {
+		String towerName = tower.getName();
+		return towerName;
+	}
+	
     public int getPlayerHP() {
         return player.getHp();
     }
@@ -205,10 +213,6 @@ public class Battle {
 	            EnemyEntity firstEnemy = enemies.get(0);
 	            resetBattle(firstEnemy);
 	        }
-
-
-
-	    
 	}
 
 	public void shuffleChoices() {
@@ -225,7 +229,4 @@ public class Battle {
 	        currentQuestion.setChoice3(choices.get(2));
 	        currentQuestion.setChoice4(choices.get(3));
 	    }
-
-
 }
-

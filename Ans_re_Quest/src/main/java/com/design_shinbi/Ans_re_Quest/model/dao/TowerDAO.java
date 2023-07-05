@@ -17,18 +17,19 @@ public class TowerDAO {
     public TowerEntity getTowerById(int towerId) throws SQLException {
         TowerEntity tower = null;
 
-        String query = "SELECT * FROM enemies WHERE tower_id = ?";
+        String query = "SELECT * FROM towers WHERE tower_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, towerId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     int id = resultSet.getInt("tower_id");
                     String name = resultSet.getString("name");
-                    int flore = resultSet.getInt("flore");
+                    int flores = resultSet.getInt("flores");
+                    int eventFlore = resultSet.getInt("event_flore");
                     String genre = resultSet.getString("genre");
                     String difficulty = resultSet.getString("difficulty");
 
-                    tower = new TowerEntity(towerId, name, flore, genre, difficulty);
+                    tower = new TowerEntity(towerId, name, flores, eventFlore, genre, difficulty);
                 }
             }
         }
