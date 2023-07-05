@@ -19,12 +19,14 @@
 </div>
 <div id="totalMenu">
 
-	<img alt="logo" src="imgs/Ans_re_Quest_logo.png">
+	<img alt="logo" src="imgs/Ans_re_Quest_logo.png" class="topimg">
+	<div>
 	<button class="btn">
 		<a href="home">冒険に出る</a>
 	</button>
+	</div>
 	<audio id="audio" src="https://tool-engineer.work/wp-content/uploads/2022/10/demo.mp3"></audio>
-
+	<jsp:include page="login.jsp"/>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>

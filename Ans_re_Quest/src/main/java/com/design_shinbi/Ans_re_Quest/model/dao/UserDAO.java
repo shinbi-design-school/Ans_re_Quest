@@ -69,7 +69,7 @@ public class UserDAO {
 		user.setName(resultSet.getString("name"));
 		user.setAdmin(resultSet.getBoolean("is_admin"));
 		user.setPassword(resultSet.getString("password"));
-		user.setCreatedAt(resultSet.getTimestamp("Created_at"));
+		user.setCreatedAt(resultSet.getTimestamp("created_at"));
 		user.setUpdatedAt(resultSet.getTimestamp("updated_at"));
 		
 		return user;
