@@ -24,7 +24,7 @@
         <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>"><%= request.getAttribute("choice4") %></button><br>
     </form>
     <p>AI使ったらパラメーターに使用の有無情報が伝わるように設定予定</p>
-    <p>Open AI Answer: <%= request.getAttribute("aianswer") %></p>
+    <p>Open AI Answer: <%= request.getAttribute("aiAnswer") %></p>
     <p>50/50: <%= request.getAttribute("50/50Count") %>個</p>
     <p>SKIP: <%= request.getAttribute("skipCount") %>個</p>
     
