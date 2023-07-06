@@ -62,7 +62,7 @@ public class BattleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// ビューに表示するデータを設定
-		
+		//if 5050used collect answer + random1 別ルート構築 
 		//tower
 		request.setAttribute("towerName", battle.getTowerName());
 		request.setAttribute("currentFloor", battle.getCurrentFloor());
@@ -92,40 +92,38 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("50/50Count", Integer.parseInt("99"));
 		request.setAttribute("skipCount", Integer.parseInt("99"));
 
-
-
-
 		// Battle.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/battle.jsp");
 		dispatcher.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
-	    // フォームからの回答を取得
-	    request.setCharacterEncoding("UTF-8");
-	    String choice = request.getParameter("choice");
-	    battle.answerQuiz(choice);
+			throws ServletException, IOException {
+		// フォームからの回答を取得
+		request.setCharacterEncoding("UTF-8");
 
-	    // バトルの結果に応じてリダイレクト
-	    if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
-//	    	if(battle.isEventFlore()) {
-//	    		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/middleEvent.jsp");
-//		    	dispatcher.forward(request, response);
-//	    	} else {
-	        request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
-	        request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+		if (request.getParameter("isUsed5050").equals("true")) {
+			doGet(request, response);
+		} else {
+			String choice = request.getParameter("choice");
+			battle.answerQuiz(choice);
 
-	        battle.handleBattleResult();
-	        if(battle.isEventFlore()) {
-		    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/middleEvent.jsp");
-		    	dispatcher.forward(request, response);
-	        } else {
-	    	RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
-	    	dispatcher.forward(request, response);
-	    	}
-	    } else {
-	    	doGet(request, response);
-	   }
+			// バトルの結果に応じてリダイレクト
+			if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
+				request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
+				request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+
+				battle.handleBattleResult();
+				if (battle.isEventFlore()) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/middleEvent.jsp");
+					dispatcher.forward(request, response);
+				} else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+					dispatcher.forward(request, response);
+				}
+			} else {
+				doGet(request, response);
+			}
+		}
 	}
 }

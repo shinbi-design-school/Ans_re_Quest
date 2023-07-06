@@ -31,15 +31,7 @@ public class Battle {
         this.currentEnemy = enemies.get(currentEnemyIndex);
         this.quizEntities = quizEntities;
     }
-
-    public EnemyEntity getCurrentEnemy() {
-		return currentEnemy;
-	}
-
-	public void setCurrentEnemy(EnemyEntity currentEnemy) {
-		this.currentEnemy = currentEnemy;
-	}
-
+    
 	public void startBattle() {
     	currentQuizIndex = 0;
     	currentEnemyIndex = 0;
@@ -49,7 +41,7 @@ public class Battle {
         // バトルの開始処理
         // 最初の問題を設定するなど
     }
-
+	
     public void answerQuiz(String choice) {
         // 問題に対する回答処理
         QuizEntity currentQuestion = getCurrentQuestion();
@@ -73,14 +65,98 @@ public class Battle {
             if (currentQuizIndex >= 0 && currentQuizIndex < quizEntities.size()-1) {
             currentQuizIndex++;
             } else {
+            	shuffleQuizEntities();
             	currentQuizIndex = 0;
             }
         }
     }
+    
+	public void startNextBattle(EnemyEntity currentEnemy) {
+        // 次の戦闘の初期化処理を行う
+        this.currentEnemy = currentEnemy;
+        player.setHp(player.getMaxHp());
+        resetEnemyHP();
+	}
+	public void resetBattle(EnemyEntity firstEnemy) {
+	    // 最初の戦闘の初期化処理を行う
+		currentEnemy = firstEnemy;
+	    currentQuizIndex = 0;
+	    currentFloor = 1;
+	    player.setHp(player.getMaxHp()); // プレイヤーのHPをリセット
+	    currentEnemy.setHp(currentEnemy.getMaxHp());
+	    
+	    //階層リセット
+	    // その他の初期化処理を実装する
+	    // 例: 最初の敵の設定、初期問題の設定など
+	}
+	public void resetEnemyHP() {
+		currentEnemy.setHp(currentEnemy.getMaxHp());
+	}
+	
+	public void handleBattleResult(){
+	    // バトルの結果に応じた処理を実装する
 
+	    
+	        if (!isEnemyAlive()) {
+	            // 敵が倒された場合の処理
+	            // 次の戦闘の初期化を行う（例: startNextBattle()）
+	            setCurrentFloor(getCurrentFloor() + 1);
+	            setCurrentEnemyIndex(getCurrentEnemyIndex() + 1);
+	            if (getCurrentEnemyIndex() < enemies.size()) {
+	                EnemyEntity currentEnemy = enemies.get(getCurrentEnemyIndex());
+	                startNextBattle(currentEnemy);
+	            } else {
+	                setCurrentEnemyIndex(0);
+	                EnemyEntity currentEnemy = enemies.get(getCurrentEnemyIndex());
+	                startNextBattle(currentEnemy);//ホーム実装合修正
+	            }
+	        }
 
+	        if (!isPlayerAlive()) {
+	            // プレイヤーが敗北した場合の処理
+	            // 最初の戦闘に戻るために初期化を行う
+	            setCurrentFloor(1);
+	            EnemyEntity firstEnemy = enemies.get(0);
+	            resetBattle(firstEnemy);
+	        }
+	}
 
+	public void shuffleChoices() {
+	    QuizEntity currentQuestion = getCurrentQuestion();
+	        List<String> choices = new ArrayList<>();
+	        choices.add(currentQuestion.getChoice1());
+	        choices.add(currentQuestion.getChoice2());
+	        choices.add(currentQuestion.getChoice3());
+	        choices.add(currentQuestion.getChoice4());
+	        Collections.shuffle(choices);
 
+	        currentQuestion.setChoice1(choices.get(0));
+	        currentQuestion.setChoice2(choices.get(1));
+	        currentQuestion.setChoice3(choices.get(2));
+	        currentQuestion.setChoice4(choices.get(3));
+	    }
+	
+	public void shuffleQuizEntities() {
+	   Collections.shuffle(quizEntities);
+	}
+
+	public boolean isEventFlore() {
+			System.out.println("C=:"+currentFloor);
+			System.out.println("E=:"+tower.getEventFlore());
+			if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getEventFlore()))	){
+			return true;
+		} else {
+		return false;
+		}
+	}
+	
+    public EnemyEntity getCurrentEnemy() {
+		return currentEnemy;
+	}
+
+	public void setCurrentEnemy(EnemyEntity currentEnemy) {
+		this.currentEnemy = currentEnemy;
+	}
 
 	public Object getResult() {
     	return null;
@@ -163,85 +239,8 @@ public class Battle {
 	}
     // GetterとSetterなど、必要なメソッドを追加する
 
-	public void startNextBattle(EnemyEntity currentEnemy) {
-        // 次の戦闘の初期化処理を行う
-        this.currentEnemy = currentEnemy;
-        player.setHp(player.getMaxHp());
-        resetEnemyHP();
 
-	}
-	public void resetBattle(EnemyEntity firstEnemy) {
-	    // 最初の戦闘の初期化処理を行う
-		currentEnemy = firstEnemy;
-	    currentQuizIndex = 0;
-	    currentFloor = 1;
-	    player.setHp(player.getMaxHp()); // プレイヤーのHPをリセット
-	    currentEnemy.setHp(currentEnemy.getMaxHp());
-	    
-	    //階層リセット
-	    // その他の初期化処理を実装する
-	    // 例: 最初の敵の設定、初期問題の設定など
-	}
 
-	public void resetEnemyHP() {
-		currentEnemy.setHp(currentEnemy.getMaxHp());
-	}
-	
-	public void handleBattleResult(){
-	    // バトルの結果に応じた処理を実装する
 
-	    
-	        if (!isEnemyAlive()) {
-	            // 敵が倒された場合の処理
-	            // 次の戦闘の初期化を行う（例: startNextBattle()）
-	            setCurrentFloor(getCurrentFloor() + 1);
-	            setCurrentEnemyIndex(getCurrentEnemyIndex() + 1);
-	            if (getCurrentEnemyIndex() < enemies.size()) {
-	                EnemyEntity currentEnemy = enemies.get(getCurrentEnemyIndex());
-	                startNextBattle(currentEnemy);
-	            } else {
-	                setCurrentEnemyIndex(0);
-	                EnemyEntity currentEnemy = enemies.get(getCurrentEnemyIndex());
-	                startNextBattle(currentEnemy);//ホーム実装合修正
-	            }
-	        }
-
-	        if (!isPlayerAlive()) {
-	            // プレイヤーが敗北した場合の処理
-	            // 最初の戦闘に戻るために初期化を行う
-	            setCurrentFloor(1);
-	            EnemyEntity firstEnemy = enemies.get(0);
-	            resetBattle(firstEnemy);
-	        }
-	}
-
-	public void shuffleChoices() {
-	    QuizEntity currentQuestion = getCurrentQuestion();
-	        List<String> choices = new ArrayList<>();
-	        choices.add(currentQuestion.getChoice1());
-	        choices.add(currentQuestion.getChoice2());
-	        choices.add(currentQuestion.getChoice3());
-	        choices.add(currentQuestion.getChoice4());
-	        Collections.shuffle(choices);
-
-	        currentQuestion.setChoice1(choices.get(0));
-	        currentQuestion.setChoice2(choices.get(1));
-	        currentQuestion.setChoice3(choices.get(2));
-	        currentQuestion.setChoice4(choices.get(3));
-	    }
-	
-	public void shuffleQuizEntities() {
-	   Collections.shuffle(quizEntities);
-	}
-
-	public boolean isEventFlore() {
-			System.out.println("C=:"+currentFloor);
-			System.out.println("E=:"+tower.getEventFlore());
-			if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getEventFlore()))	){
-			return true;
-		} else {
-		return false;
-		}
-	}
 
 }

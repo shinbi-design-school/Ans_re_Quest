@@ -17,16 +17,28 @@
     <p id="player">プレイヤーのHP:  <input type="range" id="inputSlider" min="0" max="<%=request.getAttribute("playerMaxHP") %>" value="<%= request.getAttribute("playerHP") %>" /><%= request.getAttribute("playerHP") %></p>
     <p>第<%= request.getAttribute("currentQuizNo") %>問/全<%= request.getAttribute("totalQuizCount") %>問</p>
     <p>問題: <%= request.getAttribute("questionText") %></p>
-    <form method="post" action="battle" id="flex">
-        <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice1") %>"><%= request.getAttribute("choice1") %></button><br>
-        <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice2") %>"><%= request.getAttribute("choice2") %></button><br>
-        <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>"><%= request.getAttribute("choice3") %></button><br>
-        <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>"><%= request.getAttribute("choice4") %></button><br>
-    </form>
+<form method="post" action="battle" id="flex">
+    <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice1") %>"><%= request.getAttribute("choice1") %></button><br>
+    <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice2") %>"><%= request.getAttribute("choice2") %></button><br>
+    <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>"><%= request.getAttribute("choice3") %></button><br>
+    <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>"><%= request.getAttribute("choice4") %></button><br>
+    <input type="hidden" name="isUsed5050" value="false">
+</form>
+	
+	<!-- 修正 -->
     <p>制限時間:<%= request.getAttribute("limitTime") %>
     <p>//AIやアイテムを使ったらパラメーターに使用の有無情報が伝わるように設定予定//</p>
     <p>Opened AI Answer: <%= request.getAttribute("aiAnswer") %> →parameter=isUsedAI</p>
-    <p>50/50: <%= request.getAttribute("50/50Count") %>個 →parameter=isUsed50/50</p> 
+    
+    <!--  アイテム0なら隠す -->
+    <form method="post" name="form1" action="battle">
+    <input type="hidden" name="isUsed5050" value="true">
+    <a href="javascript:form1.submit()">
+    	50/50: <%= request.getAttribute("50/50Count") %>個</a>
+	</form>
+	
+	<!--  アイテム0なら隠す -->
+	<!--  未 -->
     <p>SKIP: <%= request.getAttribute("skipCount") %>個 →parameter=isUsedSKIP</p>
     
 </div>
