@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div id="loginform">
 <form action="/login" method="post">
-ユーザーID：<input type="text" name="id" required><br>
+メールアドレス：<input type="text" name="email" required><br>
 パスワード：<input type="password" name="password" required><br>
 <input type="submit" value="ログイン"><br>
 </form>
