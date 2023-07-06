@@ -41,13 +41,27 @@ img#enemy{
 	text-align: center;
 }
 
-#totalMenu{
+/*#totalMenu{
 	color: red;
 	background-image: url(../imgs/background2.jpg);
 	background-size: cover;
 	width: 800px;
 	height: 600px;
 	border: ridge 3px;
+	margin: auto;
+	text-align: center;
+	position: relative;
+}*/
+
+#totalMenu{
+	color: red;
+	background-image: url(../imgs/background2.jpg);
+	background-size: cover;
+	width: 800px;
+	height: 600px;
+	border: ridge 10px;
+	border-color:darkred; 
+	border-radius: 2ch;
 	margin: auto;
 	text-align: center;
 	position: relative;
@@ -110,6 +124,7 @@ div#loginform{
 	float:left;
 	margin:10px;
 }
+
 
 footer{
 	text-align: center;
