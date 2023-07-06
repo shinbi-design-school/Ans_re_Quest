@@ -39,7 +39,6 @@
 	</form>
 	
 	<!--  SKIPアイテム0なら隠す -->
-	<!--  未 -->
     <form method="post" name="form2" action="battle">
 	    <input type="hidden" name="isUsedSKIP" value="true">
 	    <a href="javascript:form2.submit()">

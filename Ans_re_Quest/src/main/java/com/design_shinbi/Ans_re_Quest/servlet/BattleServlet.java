@@ -46,13 +46,13 @@ public class BattleServlet extends HttpServlet {
 			TowerEntity tower = towerDAO.getTowerById(1);//<-メインページから取得orセッションスコープ
 			
 			PlayerDAO playerDAO = new PlayerDAO(connection);
-			PlayerEntity player = playerDAO.getPlayerById(1);//<-Login()orセッションスコープ
+			PlayerEntity player = playerDAO.getPlayerById(1);//<-セッションスコープ;userテーブルにプレイヤーid追加
 
 			EnemyDAO enemyDAO = new EnemyDAO(connection);
 			enemies = enemyDAO.getAllEnemies();
 			
 			ItemDAO itemDAO = new ItemDAO(connection); 
-			items = itemDAO.getAllItemsByPlayerId(1); //<-メインページから取得orセッションスコープ
+			items = itemDAO.getAllItemsByPlayerId(1); //<-セッションスコープ;user
 			
 			
 			battle = new Battle(tower, player, enemies, quizEntities, items);
@@ -67,6 +67,9 @@ public class BattleServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	    if (battle == null) { // battle インスタンスが null の場合は初期化処理を再度実行
+	        init();
+	    }
 		// ビューに表示するデータを設定
 		//if 5050used collect answer + random1 別ルート構築 
 		//tower
@@ -126,21 +129,29 @@ public class BattleServlet extends HttpServlet {
 			doGet(request, response);
 		//5050使ったら
 		} else if (Boolean.parseBoolean(request.getParameter("isUsed5050"))) {
+			battle.used5050();
 			doGet(request, response);
 		//通常選択処理
 		} else {
 			String choice = request.getParameter("choice");
 			battle.answerQuiz(choice);
 
-			// バトルの結果に応じてリダイレクト
+			// どちらかのHPが尽きたか
 			if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
 				request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 				request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
 
 				battle.handleBattleResult();
+				//イベントフロアか
 				if (battle.isEventFlore()) {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/middleEvent.jsp");
 					dispatcher.forward(request, response);
+				} else if(battle.isClearFlore()) {
+					//クリアか
+					battle = null;
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clearEvent.jsp");
+					dispatcher.forward(request, response);
+					
 				} else {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
 					dispatcher.forward(request, response);

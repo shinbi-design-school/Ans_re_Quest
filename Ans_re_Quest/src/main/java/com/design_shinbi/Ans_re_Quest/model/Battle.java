@@ -124,10 +124,13 @@ public class Battle {
 	            resetBattle(firstEnemy);
 	        }
 	}
-	
-	public void usedSKIP() {
-		currentQuizIndex++;
+	//未使用
+	public void cleared() {
+		setCurrentFloor(1);
+        EnemyEntity firstEnemy = enemies.get(0);
+        resetBattle(firstEnemy);
 	}
+
 	
 	public List<String> adapt5050() {
 		QuizEntity currentQuestion = getCurrentQuestion();
@@ -171,13 +174,21 @@ public class Battle {
 	}
 
 	public boolean isEventFlore() {
-			System.out.println("C=:"+currentFloor);
-			System.out.println("E=:"+tower.getEventFlore());
+			System.out.println("isEventFlore C=:"+currentFloor);
+			System.out.println("isEventFlore E=:"+tower.getEventFlore());
 			if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getEventFlore()))	){
 			return true;
 		} else {
 		return false;
 		}
+	}
+	
+	public boolean isClearFlore() {
+		System.out.println("isClearFlore Clear=:"+tower.getFlores());
+		if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getFlores()+1))	){
+			return true;
+		}
+		return false;
 	}
 	
     public EnemyEntity getCurrentEnemy() {
@@ -236,7 +247,24 @@ public class Battle {
 	}
 	
 	public void change5050Quantity(int i) {
-		
+		int quantity = get5050Quantity();
+		quantity = quantity + i;
+		items.get(0).setQuantity(quantity);
+	}
+	
+	public void changeSkipQuantity(int i) {
+		int quantity = getSkipQuantity();
+		quantity = quantity + i;
+		items.get(1).setQuantity(quantity);
+	}
+	
+	public void usedSKIP() {
+		changeSkipQuantity(-1);
+		currentQuizIndex++;
+	}
+	
+	public void used5050() {
+		change5050Quantity(-1);
 	}
 
 	public boolean isPlayerAlive() {
@@ -290,6 +318,10 @@ public class Battle {
 		this.currentFloor = currentFloor;
 	}
     // GetterとSetterなど、必要なメソッドを追加する
+
+
+
+
 
 
 
