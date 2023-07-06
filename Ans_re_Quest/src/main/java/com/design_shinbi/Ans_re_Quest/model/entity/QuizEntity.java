@@ -1,5 +1,8 @@
 package com.design_shinbi.Ans_re_Quest.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuizEntity {
     private int id;
     private String text;
@@ -91,6 +94,19 @@ public class QuizEntity {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+    
+    public List<String> getOtherChoices() {
+        List<String> otherChoices = new ArrayList<>();
+        otherChoices.add(choice1);
+        otherChoices.add(choice2);
+        otherChoices.add(choice3);
+        otherChoices.add(choice4);
+
+        // 正解を他の選択肢から削除する
+        otherChoices.remove(correctAnswer);
+
+        return otherChoices;
     }
 
     // その他、必要なメソッドを追加する

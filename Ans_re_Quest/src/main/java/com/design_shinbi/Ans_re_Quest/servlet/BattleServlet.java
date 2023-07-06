@@ -80,16 +80,27 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
 		//question
 		request.setAttribute("questionText", battle.getCurrentQuestion().getText());
-		battle.shuffleChoices();
+
+		if (Boolean.parseBoolean(request.getParameter("isUsed5050"))) {
+			List<String> choices = battle.adapt5050();
+			request.setAttribute("choice1", choices.get(0));
+			request.setAttribute("choice2", choices.get(1));
+			request.setAttribute("choice3", choices.get(2));
+			request.setAttribute("choice4", choices.get(3));
+			request.setAttribute("isUsed5050", true);
+
+		} else {
+			battle.shuffleChoices();
 		request.setAttribute("choice1", battle.getCurrentQuestion().getChoice1());
 		request.setAttribute("choice2", battle.getCurrentQuestion().getChoice2());
 		request.setAttribute("choice3", battle.getCurrentQuestion().getChoice3());
 		request.setAttribute("choice4", battle.getCurrentQuestion().getChoice4());
+		}
 		request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime());
 
 		//hint
 		request.setAttribute("aiAnswer", battle.getCurrentQuestion().getAi_answer());
-		request.setAttribute("50/50Count", Integer.parseInt("99"));
+		request.setAttribute("5050Count", Integer.parseInt("99"));
 		request.setAttribute("skipCount", Integer.parseInt("99"));
 
 		// Battle.jspにフォワード
@@ -101,8 +112,11 @@ public class BattleServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// フォームからの回答を取得
 		request.setCharacterEncoding("UTF-8");
-
-		if (request.getParameter("isUsed5050").equals("true")) {
+		
+		if (Boolean.parseBoolean(request.getParameter("isUsedSKIP"))||Boolean.parseBoolean(request.getParameter("isUsed5050"))) {
+			battle.usedSKIP();
+			doGet(request, response);
+		} else if (Boolean.parseBoolean(request.getParameter("isUsed5050"))) {
 			doGet(request, response);
 		} else {
 			String choice = request.getParameter("choice");

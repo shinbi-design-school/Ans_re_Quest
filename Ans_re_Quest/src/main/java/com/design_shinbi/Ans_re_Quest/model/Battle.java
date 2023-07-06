@@ -3,6 +3,7 @@ package com.design_shinbi.Ans_re_Quest.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
@@ -120,21 +121,47 @@ public class Battle {
 	            resetBattle(firstEnemy);
 	        }
 	}
+	
+	public void usedSKIP() {
+		currentQuizIndex++;
+	}
+	
+	public List<String> adapt5050() {
+		QuizEntity currentQuestion = getCurrentQuestion();
+		
+		List<String> choices = new ArrayList<>();
+		String correctAnswer = currentQuestion.getCorrectAnswer();
+		choices.add(correctAnswer);
+		
+	    List<String> otherChoices = currentQuestion.getOtherChoices();
+
+	    Random random = new Random();
+	    while (choices.size() < 2) {
+	        int randomIndex = random.nextInt(otherChoices.size());
+	        String choice = otherChoices.get(randomIndex);
+	        if (!choices.contains(choice)) {
+	            choices.add(choice);
+	        }
+	    }
+	    choices.add("×");
+	    choices.add("×");
+		return choices;
+	}
 
 	public void shuffleChoices() {
-	    QuizEntity currentQuestion = getCurrentQuestion();
-	        List<String> choices = new ArrayList<>();
-	        choices.add(currentQuestion.getChoice1());
-	        choices.add(currentQuestion.getChoice2());
-	        choices.add(currentQuestion.getChoice3());
-	        choices.add(currentQuestion.getChoice4());
-	        Collections.shuffle(choices);
+		QuizEntity currentQuestion = getCurrentQuestion();
+		List<String> choices = new ArrayList<>();
+		choices.add(currentQuestion.getChoice1());
+		choices.add(currentQuestion.getChoice2());
+		choices.add(currentQuestion.getChoice3());
+		choices.add(currentQuestion.getChoice4());
+		Collections.shuffle(choices);
 
-	        currentQuestion.setChoice1(choices.get(0));
-	        currentQuestion.setChoice2(choices.get(1));
-	        currentQuestion.setChoice3(choices.get(2));
-	        currentQuestion.setChoice4(choices.get(3));
-	    }
+		currentQuestion.setChoice1(choices.get(0));
+		currentQuestion.setChoice2(choices.get(1));
+		currentQuestion.setChoice3(choices.get(2));
+		currentQuestion.setChoice4(choices.get(3));
+	}
 	
 	public void shuffleQuizEntities() {
 	   Collections.shuffle(quizEntities);
@@ -238,6 +265,8 @@ public class Battle {
 		this.currentFloor = currentFloor;
 	}
     // GetterとSetterなど、必要なメソッドを追加する
+
+
 
 
 
