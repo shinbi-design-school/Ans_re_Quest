@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="head.jsp"/>
 <title>home画面(構成中)</title>
 </head>
 <body>
@@ -14,6 +14,6 @@
 
 </div>
 
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

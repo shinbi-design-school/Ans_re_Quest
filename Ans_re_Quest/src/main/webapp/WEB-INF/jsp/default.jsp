@@ -11,8 +11,9 @@
 ヘッド部分とフッター部分、それと枠組みを用意したjspです。
 新規ページ用にコピペでご利用ください。
 
-<jsp:include page="bottomMenu.jsp"></jsp:include>
+
 ボトムメニューは必要に応じて削除してください。
+<jsp:include page="bottomMenu.jsp"></jsp:include>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>
