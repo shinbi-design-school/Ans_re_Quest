@@ -5,16 +5,19 @@ public class PlayerEntity {
     private String name;
     private int hp;
     private int maxHp;
+    private int achieve;
 
 
-	public PlayerEntity(int hp) {
-//        this.id = id;
-//        this.name = name;
-        this.hp = hp;
-        this.maxHp = hp;
-    }
 
-    public int getId() {
+    public PlayerEntity(int id, String name, int hp) {
+		this.id = id;
+		this.name = name;
+		this.hp = hp;
+		this.maxHp = hp;
+		this.achieve = 0;
+	}
+
+	public int getId() {
         return id;
     }
 

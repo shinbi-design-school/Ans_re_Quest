@@ -22,7 +22,7 @@
 	%>
 
 	<p>プレイヤーは敗北しました。</p>
-	<a href="battle">最初に戻る。</a>
+	<a href="home">最初に戻る。</a>
 	<%
 	} else if (!isEnemyAlive) {
 	%>

@@ -3,8 +3,10 @@ package com.design_shinbi.Ans_re_Quest.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.ItemEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.QuizEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.TowerEntity;
@@ -15,6 +17,7 @@ public class Battle {
     private PlayerEntity player;
 	private List<EnemyEntity> enemies;
     private EnemyEntity currentEnemy;
+    private List<ItemEntity> items;
     
     private int currentQuizIndex;
     private int totalQuizCount;
@@ -22,7 +25,7 @@ public class Battle {
 	private int currentFloor;
 	
 	
-    public Battle(TowerEntity tower, PlayerEntity player,List<EnemyEntity> enemies,List<QuizEntity> quizEntities) {
+    public Battle(TowerEntity tower, PlayerEntity player,List<EnemyEntity> enemies,List<QuizEntity> quizEntities,List<ItemEntity> items) {
         // 初期化などのコード
     	
     	this.tower = tower;
@@ -30,6 +33,7 @@ public class Battle {
         this.enemies = enemies;
         this.currentEnemy = enemies.get(currentEnemyIndex);
         this.quizEntities = quizEntities;
+        this.items = items;
     }
     
 	public void startBattle() {
@@ -120,34 +124,71 @@ public class Battle {
 	            resetBattle(firstEnemy);
 	        }
 	}
+	//未使用
+	public void cleared() {
+		setCurrentFloor(1);
+        EnemyEntity firstEnemy = enemies.get(0);
+        resetBattle(firstEnemy);
+	}
+
+	
+	public List<String> adapt5050() {
+		QuizEntity currentQuestion = getCurrentQuestion();
+		
+		List<String> choices = new ArrayList<>();
+		String correctAnswer = currentQuestion.getCorrectAnswer();
+		choices.add(correctAnswer);
+		
+	    List<String> otherChoices = currentQuestion.getOtherChoices();
+
+	    Random random = new Random();
+	    while (choices.size() < 2) {
+	        int randomIndex = random.nextInt(otherChoices.size());
+	        String choice = otherChoices.get(randomIndex);
+	        if (!choices.contains(choice)) {
+	            choices.add(choice);
+	        }
+	    }
+	    choices.add("×××");
+	    choices.add("×××");
+		return choices;
+	}
 
 	public void shuffleChoices() {
-	    QuizEntity currentQuestion = getCurrentQuestion();
-	        List<String> choices = new ArrayList<>();
-	        choices.add(currentQuestion.getChoice1());
-	        choices.add(currentQuestion.getChoice2());
-	        choices.add(currentQuestion.getChoice3());
-	        choices.add(currentQuestion.getChoice4());
-	        Collections.shuffle(choices);
+		QuizEntity currentQuestion = getCurrentQuestion();
+		List<String> choices = new ArrayList<>();
+		choices.add(currentQuestion.getChoice1());
+		choices.add(currentQuestion.getChoice2());
+		choices.add(currentQuestion.getChoice3());
+		choices.add(currentQuestion.getChoice4());
+		Collections.shuffle(choices);
 
-	        currentQuestion.setChoice1(choices.get(0));
-	        currentQuestion.setChoice2(choices.get(1));
-	        currentQuestion.setChoice3(choices.get(2));
-	        currentQuestion.setChoice4(choices.get(3));
-	    }
+		currentQuestion.setChoice1(choices.get(0));
+		currentQuestion.setChoice2(choices.get(1));
+		currentQuestion.setChoice3(choices.get(2));
+		currentQuestion.setChoice4(choices.get(3));
+	}
 	
 	public void shuffleQuizEntities() {
 	   Collections.shuffle(quizEntities);
 	}
 
 	public boolean isEventFlore() {
-			System.out.println("C=:"+currentFloor);
-			System.out.println("E=:"+tower.getEventFlore());
+			System.out.println("isEventFlore C=:"+currentFloor);
+			System.out.println("isEventFlore E=:"+tower.getEventFlore());
 			if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getEventFlore()))	){
 			return true;
 		} else {
 		return false;
 		}
+	}
+	
+	public boolean isClearFlore() {
+		System.out.println("isClearFlore Clear=:"+tower.getFlores());
+		if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getFlores()+1))	){
+			return true;
+		}
+		return false;
 	}
 	
     public EnemyEntity getCurrentEnemy() {
@@ -186,8 +227,47 @@ public class Battle {
     public int getEnemyMaxHP() {
         return currentEnemy.getMaxHp();
     }
+    
+    public List<ItemEntity> getItems() {
+		return items;
+	}
 
-    public boolean isPlayerAlive() {
+	public void setItems(List<ItemEntity> items) {
+		this.items = items;
+	}
+	
+	public int get5050Quantity() {
+		int quantity = items.get(0).getQuantity();
+		return quantity;
+	}
+	
+	public int getSkipQuantity() {
+		int quantity = items.get(1).getQuantity();
+		return quantity;
+	}
+	
+	public void change5050Quantity(int i) {
+		int quantity = get5050Quantity();
+		quantity = quantity + i;
+		items.get(0).setQuantity(quantity);
+	}
+	
+	public void changeSkipQuantity(int i) {
+		int quantity = getSkipQuantity();
+		quantity = quantity + i;
+		items.get(1).setQuantity(quantity);
+	}
+	
+	public void usedSKIP() {
+		changeSkipQuantity(-1);
+		currentQuizIndex++;
+	}
+	
+	public void used5050() {
+		change5050Quantity(-1);
+	}
+
+	public boolean isPlayerAlive() {
         return player.getHp() > 0;
     }
 
@@ -238,6 +318,12 @@ public class Battle {
 		this.currentFloor = currentFloor;
 	}
     // GetterとSetterなど、必要なメソッドを追加する
+
+
+
+
+
+
 
 
 

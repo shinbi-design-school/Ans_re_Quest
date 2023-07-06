@@ -30,17 +30,21 @@
     <p>//AIやアイテムを使ったらパラメーターに使用の有無情報が伝わるように設定予定//</p>
     <p>Opened AI Answer: <%= request.getAttribute("aiAnswer") %> →parameter=isUsedAI</p>
     
-    <!--  アイテム0なら隠す -->
+    <!--  5050アイテム0または使用済みなら隠す -->
+    <% request.getAttribute("isUsed5050"); %>
     <form method="post" name="form1" action="battle">
     <input type="hidden" name="isUsed5050" value="true">
     <a href="javascript:form1.submit()">
-    	50/50: <%= request.getAttribute("50/50Count") %>個</a>
+    	50/50: <%= request.getAttribute("5050Quantity") %>個</a>
 	</form>
 	
-	<!--  アイテム0なら隠す -->
-	<!--  未 -->
-    <p>SKIP: <%= request.getAttribute("skipCount") %>個 →parameter=isUsedSKIP</p>
-    
+	<!--  SKIPアイテム0なら隠す -->
+    <form method="post" name="form2" action="battle">
+	    <input type="hidden" name="isUsedSKIP" value="true">
+	    <a href="javascript:form2.submit()">
+		<p>SKIP: <%= request.getAttribute("skipQuantity") %>個 </p>
+		</a>
+	</form>
 </div>
 </div>
 <jsp:include page="footer.jsp"/>
