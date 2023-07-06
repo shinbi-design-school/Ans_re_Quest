@@ -19,7 +19,6 @@ a:visited{
 	height: 280px;
 	justify-content: center;
 	margin: auto;
-	
 }
 #box{
 	width: 350px;
@@ -74,7 +73,7 @@ img#enemy{
 	justify-content: center;
 	width: 760px;
 	height: 65px;
-	margin: 10px;
+	margin: 10px 10px 18px 18px;
 	border: solid 1px khaki;
 	border-radius: 0px 0px 50px 50px;
 	position: absolute;
@@ -92,6 +91,32 @@ img#enemy{
 	scale: 0.8;
 	transition-timing-function: ease-in;
 }
+.homeRel{
+	position: relative;
+	width: 100px;
+	height:100px;
+}
+.homeImg{
+	position:absolute;
+	left:8px;
+	z-index:1;
+}
+#homeButton{
+	position: absolute;
+	left:5%;
+	bottom:8%;
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	background-color: snow;
+	background-image: url("../imgs/magic_circuit001.png");
+	background-size: cover;
+	animation:homeanime 2s linear infinite;
+}
+@keyframes homeanime{
+	from {transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
+}
 
 #quest{
 	background-image: url("../imgs/icon1.jpg");
@@ -99,12 +124,12 @@ img#enemy{
 	background-size: contain;
 }
 #mypage{
-	background-image: url("../imgs/icon2.jpg");
+	background-image: url("../imgs/icon3.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
 }
 #shop{
-	background-image: url("../imgs/icon3.jpg");
+	background-image: url("../imgs/icon2.jpg");
 	background-repeat: no-repeat;
 	background-size: contain;
 }#guide{
@@ -118,14 +143,47 @@ img#enemy{
 }
 
 div#loginform{
+	background-color: purple;
 	width:350px;
+	height: 180px;
 	color: snow;
 	border: solid 1px khaki;
 	float:left;
 	margin:10px;
+	padding: 5px;
 }
+<<<<<<< HEAD
+div.guestMode{
+	background-color: gray;
+	width:250px;
+	height: 150px;
+	color: snow;
+	border: solid 1px khaki;
+	float:right;
+	margin:10px;
+}
+.leftMenu>div{
+	background:rgba(81,55,67,0.5);
+	border:solid 1px purple;
+	margin:8px
+}
+.rightMenu>div{
+	text-align: left;
+	background:rgba(81,55,67,0.5);
+	border:solid 1px powderblue;
+	margin:8px
+}
+.trickMenuList{
+	background:rgba(81,55,67,0.5);
+}
+.trickMenuList>li{
+	background-color: black;
+	text-align: justify;
+}
+=======
 
 
+>>>>>>> branch 'master' of git@github.com:shinbi-design-school/Ans_re_Quest.git
 footer{
 	text-align: center;
 	font-style: italic;
