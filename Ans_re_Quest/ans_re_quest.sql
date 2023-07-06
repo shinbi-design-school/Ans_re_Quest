@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2023-07-05 09:16:33
+-- 生成日時: 2023-07-06 07:12:53
 -- サーバのバージョン： 10.4.28-MariaDB
 -- PHP のバージョン: 8.2.4
 
@@ -77,6 +77,14 @@ CREATE TABLE `items` (
   `effect` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- テーブルのデータのダンプ `items`
+--
+
+INSERT INTO `items` (`item_id`, `name`, `effect`) VALUES
+(1, '5050', '選択肢を半分に絞る'),
+(2, 'SKIP', 'この問題を飛ばす');
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +119,14 @@ CREATE TABLE `player_items` (
   `item_id` int(11) NOT NULL,
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- テーブルのデータのダンプ `player_items`
+--
+
+INSERT INTO `player_items` (`player_id`, `item_id`, `quantity`) VALUES
+(1, 1, 10),
+(1, 2, 10);
 
 -- --------------------------------------------------------
 

@@ -35,7 +35,7 @@
     <form method="post" name="form1" action="battle">
     <input type="hidden" name="isUsed5050" value="true">
     <a href="javascript:form1.submit()">
-    	50/50: <%= request.getAttribute("5050Count") %>個</a>
+    	50/50: <%= request.getAttribute("5050Quantity") %>個</a>
 	</form>
 	
 	<!--  SKIPアイテム0なら隠す -->
@@ -43,7 +43,7 @@
     <form method="post" name="form2" action="battle">
 	    <input type="hidden" name="isUsedSKIP" value="true">
 	    <a href="javascript:form2.submit()">
-		<p>SKIP: <%= request.getAttribute("skipCount") %>個 </p>
+		<p>SKIP: <%= request.getAttribute("skipQuantity") %>個 </p>
 		</a>
 	</form>
 </div>

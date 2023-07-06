@@ -28,7 +28,7 @@ public class PlayerDAO {
                 String name = resultSet.getString("name");
                 int hp = resultSet.getInt("hp");
 
-                PlayerEntity player = new PlayerEntity(hp);
+                PlayerEntity player = new PlayerEntity(id,name,hp);
                 players.add(player);
             }
         }
@@ -47,7 +47,7 @@ public class PlayerDAO {
                     String name = resultSet.getString("name");
                     int hp = resultSet.getInt("hp");
 
-                    player = new PlayerEntity(hp);
+                    player = new PlayerEntity(id,name,hp);
                 }
             }
         }
