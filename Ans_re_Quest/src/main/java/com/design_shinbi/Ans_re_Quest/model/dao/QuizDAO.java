@@ -43,6 +43,33 @@ public class QuizDAO {
 
         return questions;
     }
+    public List<QuizEntity> getQuestionsByGenre(String genre) throws SQLException {
+        List<QuizEntity> questions = new ArrayList<>();
 
+        String query = "SELECT * FROM questions WHERE genre = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, genre);
+            ResultSet resultSet = statement.executeQuery();
+        	
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String text = resultSet.getString("text");
+                String choice1 = resultSet.getString("choice1");
+                String choice2 = resultSet.getString("choice2");
+                String choice3 = resultSet.getString("choice3");
+                String choice4 = resultSet.getString("choice4");
+                String correctAnswer = resultSet.getString("correctAnswer");
+                String aiAnswer = resultSet.getString("ai_answer");
+                int limitTime = resultSet.getInt("limit_time");
+                String genreValue  = resultSet.getString("genre");
+                String difficulty = resultSet.getString("difficulty");
+
+                QuizEntity question = new QuizEntity(id, text, choice1, choice2, choice3, choice4, correctAnswer, aiAnswer, limitTime, genreValue ,difficulty);
+                questions.add(question);
+            }
+        }
+
+        return questions;
+    }
     // その他、必要なメソッドを追加する（例: 問題の追加、更新、削除など）
 }

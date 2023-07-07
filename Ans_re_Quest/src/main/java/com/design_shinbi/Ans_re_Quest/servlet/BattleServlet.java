@@ -38,8 +38,8 @@ public class BattleServlet extends HttpServlet {
 	
     private Connection connection;
     private UserDAO userDAO;
-    private QuizDAO quizDAO;
     private TowerDAO towerDAO;
+    private QuizDAO quizDAO;
     private PlayerDAO playerDAO;
     private EnemyDAO enemyDAO;
     private ItemDAO itemDAO;
@@ -50,8 +50,8 @@ public class BattleServlet extends HttpServlet {
             this.connection = DbUtil.connect();
             // DAOインスタンスの初期化
             this.userDAO = new UserDAO(connection);
-            this.quizDAO = new QuizDAO(connection);
             this.towerDAO = new TowerDAO(connection);
+            this.quizDAO = new QuizDAO(connection);
             this.playerDAO = new PlayerDAO(connection);
             this.enemyDAO = new EnemyDAO(connection);
             this.itemDAO = new ItemDAO(connection);
@@ -70,34 +70,25 @@ public class BattleServlet extends HttpServlet {
 	
 //		        if (player != null && items != null) {
 		            try {
-		                Connection connection = DbUtil.connect();
-		    			userDAO = new UserDAO(connection);
 		    			User user = userDAO.getUserById(1);//<-仮置き実際はログイン時にセッションスコープにあげる
 		    			session.setAttribute("user", user);//<-仮置きテスト用
 		    			user = (User)session.getAttribute("user");//<-セッションスコープから受け取り
-		                
-		                
-		                quizDAO = new QuizDAO(connection);
-		                List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
-
-		                towerDAO = new TowerDAO(connection);
+		    			
 //		                int towerId = Integer.parseInt(request.getParameter("towerId"));//<-★★★★★ホームのページパラメーターから取得★★★★★
 //		                TowerEntity tower = towerDAO.getTowerById(towerId);//<-★★★★★ホームのページパラメーターから取得★★★★★
-		                TowerEntity tower = towerDAO.getTowerById(1);//<-仮置き ↑
+		                TowerEntity tower = towerDAO.getTowerById(1);//<-仮置き ↑	    			
+		                List<QuizEntity> quizEntities = quizDAO.getQuestionsByGenre(tower.getGenre());//ジャンルは今normalのみ
 
-		                playerDAO = new PlayerDAO(connection);//<-仮置き、ログイン時playerをセッションスコープに載せたら不要
 		                player = playerDAO.getPlayerById(user.getPlayer_id());//<-仮置き、ログイン時playerをセッションスコープに載せたら不要
 
-		                enemyDAO = new EnemyDAO(connection);
 		                List<EnemyEntity> enemies = enemyDAO.getAllEnemies();
 
-		                itemDAO = new ItemDAO(connection);//<-仮置き、ログイン時itemsをセッションスコープに載せたら不要
 		                items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());//<-仮置き、ログイン時itemsをセッションスコープに載せたら不要 
 
 		                battle = new Battle(tower, player, enemies, quizEntities, items);
 		                battle.startBattle();
 
-		            } catch (SQLException | ClassNotFoundException | NoSuchAlgorithmException e) {
+		            } catch (SQLException e) {
 		                System.out.println(e);
 		                throw new ServletException(e);
 		            }
@@ -121,10 +112,8 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("questionText", battle.getCurrentQuestion().getText());
 		//SKIP使用時の表示情報
 		if(Boolean.parseBoolean(request.getParameter("isUsedSkip"))) {
-			System.out.println("Skip true");
 			request.setAttribute("isUsedSkip", true);
 		} else {
-			System.out.println("skip false");
 			request.setAttribute("isUsedSkip", false);
 		}
 		
@@ -212,8 +201,8 @@ public class BattleServlet extends HttpServlet {
 							// TODO 自動生成された catch ブロック
 							e.printStackTrace();
 						}
+						battle.defeated();//特にペナルティーの予定なし。
 						battle = null;
-						battle.defeated();//まだかけてない
 					}
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
 					dispatcher.forward(request, response);
