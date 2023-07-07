@@ -1,6 +1,7 @@
 package com.design_shinbi.Ans_re_Quest.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -177,17 +178,46 @@ public class Battle {
 	public void shuffleQuizEntities() {
 	   Collections.shuffle(quizEntities);
 	}
-
+	//イベントフロア関連
 	public boolean isEventFlore() {
 			System.out.println("isEventFlore C=:"+currentFloor);
 			System.out.println("isEventFlore E=:"+tower.getEventFlore());
-			if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getEventFlore()))	){
+			if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getEventFlore()+1))	){
 			return true;
 		} else {
 		return false;
 		}
 	}
 	
+	public List<Integer> arriveEventFloor() {
+		int pattern1;
+		int pattern2;
+        Random random = new Random();
+        pattern1 = random.nextInt(3 - 1 + 1) + 1;
+        pattern2 = random.nextInt(3- 1 + 1) + 1;
+        List<Integer> patterns = new ArrayList<>(Arrays.asList(pattern1, pattern2));
+        switch (pattern1) {
+        case 1:
+            // パターン1のイベント
+        	change5050Quantity(pattern2);
+            break;
+        case 2:
+            // パターン2のイベント
+        	changeSkipQuantity(pattern2);
+            break;
+        case 3:
+        	// パターン3のイベント
+        	change5050Quantity(1);
+        	changeSkipQuantity(1);
+            break;
+        default:
+            System.out.println("無効なパターンです。");
+            break;
+    }
+		return patterns;
+	}
+	
+	//クリア関連
 	public boolean isClearFlore() {
 		System.out.println("isClearFlore Clear=:"+tower.getFlores());
 		if(Integer.valueOf(currentFloor).equals(Integer.valueOf(tower.getFlores()+1))	){

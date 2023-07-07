@@ -74,10 +74,10 @@ public class BattleServlet extends HttpServlet {
 		    			session.setAttribute("user", user);//<-仮置きテスト用
 		    			user = (User)session.getAttribute("user");//<-セッションスコープから受け取り
 		    			
-//		                int towerId = Integer.parseInt(request.getParameter("towerId"));//<-★★★★★ホームのページパラメーターから取得★★★★★
-//		                TowerEntity tower = towerDAO.getTowerById(towerId);//<-★★★★★ホームのページパラメーターから取得★★★★★
+//		                int towerId = Integer.parseInt(request.getParameter("towerId"));//<-ホームのページパラメーターから取得 1~
+//		                TowerEntity tower = towerDAO.getTowerById(towerId);//<-ホームのページパラメーターから取得
 		                TowerEntity tower = towerDAO.getTowerById(1);//<-仮置き ↑	    			
-		                List<QuizEntity> quizEntities = quizDAO.getQuestionsByGenre(tower.getGenre());//ジャンルは今normalのみ
+		                List<QuizEntity> quizEntities = quizDAO.getQuestionsByGenre(tower.getGenre());//ジャンルは今現在はnormalのみ
 
 		                player = playerDAO.getPlayerById(user.getPlayer_id());//<-仮置き、ログイン時playerをセッションスコープに載せたら不要
 
@@ -173,6 +173,8 @@ public class BattleServlet extends HttpServlet {
 				battle.handleBattleResult();
 				//イベントフロアか
 				if (battle.isEventFlore()) {
+					List<Integer> patterns = battle.arriveEventFloor();
+					request.setAttribute("patterns", patterns);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/middleEvent.jsp");
 					dispatcher.forward(request, response);
 					//クリアか
