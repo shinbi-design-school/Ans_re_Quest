@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2023-07-06 07:12:53
+-- 生成日時: 2023-07-07 08:01:54
 -- サーバのバージョン： 10.4.28-MariaDB
 -- PHP のバージョン: 8.2.4
 
@@ -106,7 +106,7 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`player_id`, `name`, `level`, `experience`, `hp`, `mp`, `achieve`) VALUES
-(1, 'aaaa', 1, 1, 30, 30, 0);
+(1, 'aaaa', 1, 1, 30, 30, 1);
 
 -- --------------------------------------------------------
 
@@ -125,8 +125,8 @@ CREATE TABLE `player_items` (
 --
 
 INSERT INTO `player_items` (`player_id`, `item_id`, `quantity`) VALUES
-(1, 1, 10),
-(1, 2, 10);
+(1, 1, 4),
+(1, 2, 7);
 
 -- --------------------------------------------------------
 
@@ -186,6 +186,30 @@ CREATE TABLE `towers` (
 INSERT INTO `towers` (`tower_id`, `name`, `flores`, `event_flore`, `genre`, `difficulty`) VALUES
 (1, '衒学の塔', 5, 3, 'normal', 'normal');
 
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(64) NOT NULL COMMENT 'メールアドレス',
+  `name` varchar(64) NOT NULL COMMENT '名前',
+  `password` varchar(256) NOT NULL COMMENT 'パスワード',
+  `is_admin` tinyint(1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `player_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- テーブルのデータのダンプ `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `name`, `password`, `is_admin`, `created_at`, `updated_at`, `player_id`) VALUES
+(1, 'admin@example.com', '管理者', 'administrator', 1, '2023-07-07 02:14:43', NULL, 1);
+
 --
 -- ダンプしたテーブルのインデックス
 --
@@ -236,6 +260,13 @@ ALTER TABLE `towers`
   ADD PRIMARY KEY (`tower_id`);
 
 --
+-- テーブルのインデックス `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `player_id` (`player_id`);
+
+--
 -- ダンプしたテーブルの AUTO_INCREMENT
 --
 
@@ -250,6 +281,12 @@ ALTER TABLE `questions`
 --
 ALTER TABLE `towers`
   MODIFY `tower_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- テーブルの AUTO_INCREMENT `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- ダンプしたテーブルの制約
