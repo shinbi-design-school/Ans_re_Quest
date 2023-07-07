@@ -11,23 +11,57 @@
 <div id="totalMenu">
     <h1>ショップ</h1>
     
-    <div class="item">
-        <img src="item1.png" alt="アイテム1">
-    	<p>価格: $10</p>
-        <button>購入</button>
-    </div>
+ <div class="currency">所持コイン: 100</div>
     
-    <div class="item">
-        <img src="item2.png" alt="アイテム2">
-        <p>価格: $20</p>
-        <button>購入</button>
-    </div>
-    
-    <div class="item">
-        <img src="item3.png" alt="アイテム3">
-        <p>価格: $30</p>
-        <button>購入</button>
+       <div class="item-container">
+        <div class="item">
+            <div class="item-wrapper">
+                <h2>アイテム1</h2>
+            </div>
+            <div class="price">$10</div>
+            <button>購入する</button>
+        </div>
         
+        <div class="item">
+            <div class="item-wrapper">
+                <h2>アイテム2</h2>
+            </div>
+            <div class="price">$20</div>
+            <button>購入する</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-wrapper">
+                <h2>アイテム3</h2>
+            </div>
+            <div class="price">$30</div>
+            <button>購入する</button>
+        </div>  
+        
+        <div class="item">
+            <div class="item-wrapper">
+                <h2>アイテム4</h2>
+            </div>
+            <div class="price">$40</div>
+            <button>購入する</button>
+        </div>  
+        
+        <div class="item">
+            <div class="item-wrapper">
+                <h2>アイテム5</h2>
+            </div>
+            <div class="price">$50</div>
+            <button>購入する</button>
+        </div>  
+        
+        <div class="item">
+            <div class="item-wrapper">
+                <h2>アイテム6</h2>
+            </div>
+            <div class="price">$60</div>
+            <button>購入する</button>
+        </div>  
+        </div>  
         <jsp:include page="bottomMenu.jsp"></jsp:include>
     </div>
 </body>
