@@ -37,4 +37,12 @@ public class PlayerEntity {
 		return maxHp;
 	}
     // その他、必要なメソッドを追加する
+
+	public int getAchieve() {
+		return achieve;
+	}
+
+	public void setAchieve(int achieve) {
+		this.achieve = achieve;
+	}
 }

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <div class="bottom">
 	<a class="menu" href="battle" id="quest"></a>
 	<a class="menu" href="mypage" id="mypage"></a>

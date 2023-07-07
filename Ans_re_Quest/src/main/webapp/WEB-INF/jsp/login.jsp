@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="loginform">
+<div class="loginform">
 <form action="/login" method="post">
 メールアドレス：<input type="text" name="email" required><br>
 　パスワード　：<input type="password" name="password" required><br>

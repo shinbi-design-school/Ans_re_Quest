@@ -1,9 +1,11 @@
 @charset "UTF-8";
+/*枠外背景*/
 body{
 	background-color: navy;
 	background-image: url(../imgs/割れたガラス3.png);
 	background-size: cover;
 }
+/*リンク装飾（後に消去？）*/
 a{
 	color: navy;
 	text-decoration: none;
@@ -11,12 +13,13 @@ a{
 a:visited{
 	color: navy;
 }
-
-#flex{
+/*battleページ装飾*/
+#flex-questions{
 	display: flex;
 	flex-wrap: wrap;
 	width: 800px;
 	height: 280px;
+	font-size: large;
 	justify-content: center;
 	margin: auto;
 }
@@ -25,6 +28,7 @@ a:visited{
 	height: 90px;
 	padding: 5px;
 	margin: auto;
+	font-size: large;
 }
 #enemy{
 	text-align: right;
@@ -43,10 +47,11 @@ img#enemy{
 	background:rgba(81,55,67,0.5);
 }
 .helpItems{
-	color: orange;
-	background:rgba(238,130,124,0.5);
+	color: black;
+	background:rgba(254,244,244,0.8);
 }
 
+/*ゲーム枠*/
 /*#totalMenu{
 	color: red;
 	background-image: url(../imgs/background2.jpg);
@@ -69,19 +74,109 @@ img#enemy{
 	border-color:darkred; 
 	border-radius: 2ch;
 	margin: auto;
+	margin-top:50px;
 	text-align: center;
 	position: relative;
 	cursor: url(../imgs/pointer.cur), auto;
 }
 
+/*トップ・マイページのフレックス*/
+#flexMenu{
+	display: flex;
+	flex-wrap: wrap;
+	width: 1000px;
+	height: 300px;
+	font-size: large;
+	justify-content: center;
+	margin: auto;
+}
+/*トップページフレックスボックスメニュー*/
+div.loginform{
+	background-color: purple;
+	width:380px;
+	height: 200px;
+	color: snow;
+	border: solid 1px khaki;
+	float:left;
+	margin:10px;
+	margin-right:5%;
+	padding: 5px;
+}
+div.guestMode{
+	background-color: gray;
+	width:250px;
+	height: 200px;
+	color: snow;
+	border: solid 1px khaki;
+	float:right;
+	margin:10px;
+}
+
+/*マイページ内フレックスボックスメニュー*/
+.leftMenu>div{
+	background:rgba(81,55,67,0.5);
+	border:solid 1px purple;
+	margin:8px;
+	margin-left:0%;
+}
+.rightMenu{
+	background:rgba(81,55,67,0.5);	
+}
+.rightMenu>div{
+	text-align: left;
+	background-color: black;
+	border:solid 1px powderblue;
+	margin-top:15px;
+	padding:3px;
+}
+.trickMenuList{
+	background:rgba(81,55,67,0.5);
+	margin-left:5%;
+	margin-right:0;
+}
+.trickMenuList>p{
+	background-color: black;
+	text-align: center;
+}
+
+/*ホーム画面用*/
+.character{
+	width: 500px;
+}
+.word {
+  position: relative;
+  display: inline-block;
+  width: 380px;
+  top:-280px;
+  margin: 1.5em 0;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: snow;
+  font-size: 16px;
+  background:rgba(0,110,84,0.5);
+
+}
+
+.comment {
+  display: none;
+}
+
+.homeQuest{
+	position: absolute;
+	right: 50px;
+	bottom: 150px;
+}
+
+/*ボトムメニュー*/
 .bottom{
 	background-image: url(../imgs/black0003.png);
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	width: 760px;
-	height: 65px;
-	margin: 10px 10px 18px 18px;
+	width: 1100px;
+	height: 70px;
+	margin: 10% 15% 3% 5%;
 	border: solid 1px khaki;
 	border-radius: 0px 0px 50px 50px;
 	position: absolute;
@@ -89,11 +184,9 @@ img#enemy{
 }
 
 .menu{
-	text-align: center;
-	width: 100px;
-	height: 50px;
-	margin: 5px 15px;
-	padding: 10px;
+	width: 180px;
+	height: 60px;
+	margin: 5px 20px;
 	}
 .menu:active{
 	scale: 0.8;
@@ -111,10 +204,9 @@ img#enemy{
 }
 #homeButton{
 	position: absolute;
-	left:5%;
-	bottom:8%;
-	width: 100px;
-	height: 100px;
+	bottom:3%;
+	width: 110px;
+	height: 110px;
 	border-radius: 100%;
 	background-color: snow;
 	background-image: url("../imgs/magic_circuit001.png");
@@ -145,49 +237,14 @@ img#enemy{
 	background-repeat: no-repeat;
 	background-size: contain;
 }
+/*ゲーム内背景*/
 #bgi{
 	background-image: url("../imgs/background.jpg");
 	background-size: cover;
 }
 
-div#loginform{
-	background-color: purple;
-	width:350px;
-	height: 180px;
-	color: snow;
-	border: solid 1px khaki;
-	float:left;
-	margin:10px;
-	padding: 5px;
-}
-div.guestMode{
-	background-color: gray;
-	width:250px;
-	height: 150px;
-	color: snow;
-	border: solid 1px khaki;
-	float:right;
-	margin:10px;
-}
-.leftMenu>div{
-	background:rgba(81,55,67,0.5);
-	border:solid 1px purple;
-	margin:8px
-}
-.rightMenu>div{
-	text-align: left;
-	background:rgba(81,55,67,0.5);
-	border:solid 1px powderblue;
-	margin:8px
-}
-.trickMenuList{
-	background:rgba(81,55,67,0.5);
-}
-.trickMenuList>li{
-	background-color: black;
-	text-align: justify;
-}
 
+/*フッター装飾*/
 footer{
 	text-align: center;
 	font-style: italic;

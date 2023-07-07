@@ -1,6 +1,7 @@
 package com.design_shinbi.Ans_re_Quest.servlet;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.design_shinbi.Ans_re_Quest.model.Battle;
 import com.design_shinbi.Ans_re_Quest.model.dao.EnemyDAO;
@@ -18,11 +20,13 @@ import com.design_shinbi.Ans_re_Quest.model.dao.ItemDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.PlayerDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.QuizDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.TowerDAO;
+import com.design_shinbi.Ans_re_Quest.model.dao.UserDAO;
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.ItemEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.QuizEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.TowerEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.User;
 import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 
 /**
@@ -34,42 +38,73 @@ public class BattleServlet extends HttpServlet {
 	private List<EnemyEntity> enemies;
 	private List<ItemEntity> items;
 	
-	@Override
-	public void init() throws ServletException {
-		super.init();
-		try {
-			Connection connection = DbUtil.connect();
-			QuizDAO quizDAO = new QuizDAO(connection);
-			List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
-		
-			TowerDAO towerDAO = new TowerDAO(connection);
-			TowerEntity tower = towerDAO.getTowerById(1);//<-メインページから取得orセッションスコープ
-			
-			PlayerDAO playerDAO = new PlayerDAO(connection);
-			PlayerEntity player = playerDAO.getPlayerById(1);//<-セッションスコープ;userテーブルにプレイヤーid追加
-
-			EnemyDAO enemyDAO = new EnemyDAO(connection);
-			enemies = enemyDAO.getAllEnemies();
-			
-			ItemDAO itemDAO = new ItemDAO(connection); 
-			items = itemDAO.getAllItemsByPlayerId(1); //<-セッションスコープ;user
-			
-			
-			battle = new Battle(tower, player, enemies, quizEntities, items);
-			battle.startBattle();
-			
-		} catch (SQLException | ClassNotFoundException e) {
-		    System.out.println(e);
-		    throw new ServletException(e);
-		}
-
-	}
-
+    private Connection connection;
+    private UserDAO userDAO;
+    private QuizDAO quizDAO;
+    private TowerDAO towerDAO;
+    private PlayerDAO playerDAO;
+    private EnemyDAO enemyDAO;
+    private ItemDAO itemDAO;
+    
+    public void init() throws ServletException {
+        try {
+            // コネクションの初期化
+            this.connection = DbUtil.connect();
+            // DAOインスタンスの初期化
+            this.userDAO = new UserDAO(connection);
+            this.quizDAO = new QuizDAO(connection);
+            this.towerDAO = new TowerDAO(connection);
+            this.playerDAO = new PlayerDAO(connection);
+            this.enemyDAO = new EnemyDAO(connection);
+            this.itemDAO = new ItemDAO(connection);
+        } catch (SQLException | ClassNotFoundException | NoSuchAlgorithmException e) {
+            throw new ServletException(e);
+        }
+    }
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	    if (battle == null) { // battle インスタンスが null の場合は初期化処理を再度実行
-	        init();
-	    }
+		// battle インスタンスが null の場合は初期化処理を再度実行
+		  if (battle == null) {
+		        HttpSession session = request.getSession();
+		        PlayerEntity player = (PlayerEntity) session.getAttribute("player");
+		        List<ItemEntity> items = (List<ItemEntity>) session.getAttribute("items");
+	
+//		        if (player != null && items != null) {
+		            try {
+		                Connection connection = DbUtil.connect();
+		    			userDAO = new UserDAO(connection);
+		    			User user = userDAO.getUserById(1);//<-仮置き実際はログイン時にセッションスコープにあげる
+		    			session.setAttribute("user", user);//<-仮置きテスト用
+		    			user = (User)session.getAttribute("user");//<-セッションスコープから受け取り
+		                
+		                
+		                quizDAO = new QuizDAO(connection);
+		                List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
+
+		                towerDAO = new TowerDAO(connection);
+//		                int towerId = Integer.parseInt(request.getParameter("towerId"));//<-★★★★★ホームのページパラメーターから取得★★★★★
+//		                TowerEntity tower = towerDAO.getTowerById(towerId);//<-★★★★★ホームのページパラメーターから取得★★★★★
+		                TowerEntity tower = towerDAO.getTowerById(1);//<-仮置き ↑
+
+		                playerDAO = new PlayerDAO(connection);//<-仮置き、ログイン時playerをセッションスコープに載せたら不要
+		                player = playerDAO.getPlayerById(user.getPlayer_id());//<-仮置き、ログイン時playerをセッションスコープに載せたら不要
+
+		                enemyDAO = new EnemyDAO(connection);
+		                enemies = enemyDAO.getAllEnemies();
+
+		                itemDAO = new ItemDAO(connection);//<-仮置き、ログイン時itemsをセッションスコープに載せたら不要
+		                items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());//<-仮置き、ログイン時itemsをセッションスコープに載せたら不要 
+
+		                battle = new Battle(tower, player, enemies, quizEntities, items);
+		                battle.startBattle();
+
+		            } catch (SQLException | ClassNotFoundException | NoSuchAlgorithmException e) {
+		                System.out.println(e);
+		                throw new ServletException(e);
+		            }
+		        }
+//		  }
 		// ビューに表示するデータを設定
 		//if 5050used collect answer + random1 別ルート構築 
 		//tower
@@ -89,8 +124,16 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
 		//question
 		request.setAttribute("questionText", battle.getCurrentQuestion().getText());
+		//SKIP使用時の表示情報
+		if(Boolean.parseBoolean(request.getParameter("isUsedSkip"))) {
+			System.out.println("Skip true");
+			request.setAttribute("isUsedSkip", true);
+		} else {
+			System.out.println("skip false");
+			request.setAttribute("isUsedSkip", false);
+		}
 		
-		//5050使用時情報
+		//5050使用時の表示情報
 		if (Boolean.parseBoolean(request.getParameter("isUsed5050"))) {
 			List<String> choices = battle.adapt5050();
 			request.setAttribute("choice1", choices.get(0));
@@ -109,6 +152,7 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime());
 
 		//hint
+		request.setAttribute("isUsed5050", false);
 		request.setAttribute("aiAnswer", battle.getCurrentQuestion().getAi_answer());
 		request.setAttribute("5050Quantity", battle.get5050Quantity());
 		request.setAttribute("skipQuantity", battle.getSkipQuantity());
@@ -121,10 +165,11 @@ public class BattleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// フォームからの回答を取得
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		//SKIP使ったら
-		if (Boolean.parseBoolean(request.getParameter("isUsedSKIP"))) {
+		if (Boolean.parseBoolean(request.getParameter("isUsedSkip"))) {
 			battle.usedSKIP();
 			doGet(request, response);
 		//5050使ったら
@@ -140,19 +185,35 @@ public class BattleServlet extends HttpServlet {
 			if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {
 				request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
 				request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
-
+				
 				battle.handleBattleResult();
 				//イベントフロアか
 				if (battle.isEventFlore()) {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/middleEvent.jsp");
 					dispatcher.forward(request, response);
-				} else if(battle.isClearFlore()) {
 					//クリアか
+				} else if(battle.isClearFlore()) {
+					battle.cleared();
+					try {
+						System.out.println("塔クリアのためのセーブ処理1");
+						playerDAO.updatePlayer(battle.getPlayer());
+						System.out.println("塔クリアのためのセーブ処理2");
+						itemDAO.updateItems(battle.getPlayer().getId(),battle.getItems());
+					} catch (SQLException e) {
+						// TODO 自動生成された catch ブロック
+						e.printStackTrace();
+					}
+					battle.cleared();//まだかけてない
 					battle = null;
+					//ここでデータベースに残りアイテムを記録
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clearEvent.jsp");
 					dispatcher.forward(request, response);
-					
+					//負けたか
 				} else {
+					if(!battle.isPlayerAlive()) {
+						battle = null;
+						battle.defeated();//まだかけてない
+					}
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
 					dispatcher.forward(request, response);
 				}
