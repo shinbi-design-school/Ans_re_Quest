@@ -35,8 +35,6 @@ import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 @WebServlet("/battle")
 public class BattleServlet extends HttpServlet {
 	private Battle battle;
-	private List<EnemyEntity> enemies;
-	private List<ItemEntity> items;
 	
     private Connection connection;
     private UserDAO userDAO;
@@ -91,7 +89,7 @@ public class BattleServlet extends HttpServlet {
 		                player = playerDAO.getPlayerById(user.getPlayer_id());//<-仮置き、ログイン時playerをセッションスコープに載せたら不要
 
 		                enemyDAO = new EnemyDAO(connection);
-		                enemies = enemyDAO.getAllEnemies();
+		                List<EnemyEntity> enemies = enemyDAO.getAllEnemies();
 
 		                itemDAO = new ItemDAO(connection);//<-仮置き、ログイン時itemsをセッションスコープに載せたら不要
 		                items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());//<-仮置き、ログイン時itemsをセッションスコープに載せたら不要 
@@ -104,9 +102,6 @@ public class BattleServlet extends HttpServlet {
 		                throw new ServletException(e);
 		            }
 		        }
-//		  }
-		// ビューに表示するデータを設定
-		//if 5050used collect answer + random1 別ルート構築 
 		//tower
 		request.setAttribute("towerName", battle.getTowerName());
 		request.setAttribute("currentFloor", battle.getCurrentFloor());
@@ -203,7 +198,6 @@ public class BattleServlet extends HttpServlet {
 						// TODO 自動生成された catch ブロック
 						e.printStackTrace();
 					}
-					battle.cleared();//まだかけてない
 					battle = null;
 					//ここでデータベースに残りアイテムを記録
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/clearEvent.jsp");
@@ -211,6 +205,13 @@ public class BattleServlet extends HttpServlet {
 					//負けたか
 				} else {
 					if(!battle.isPlayerAlive()) {
+						try {
+							System.out.println("敗北時セーブ処理1");
+							itemDAO.updateItems(battle.getPlayer().getId(),battle.getItems());
+						} catch (SQLException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						}
 						battle = null;
 						battle.defeated();//まだかけてない
 					}
