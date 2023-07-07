@@ -13,7 +13,7 @@
 
 
 ボトムメニューは必要に応じて削除してください。
-<jsp:include page="bottomMenu.jsp"></jsp:include>
+<jsp:include page="bottomMenu.jsp"/>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>

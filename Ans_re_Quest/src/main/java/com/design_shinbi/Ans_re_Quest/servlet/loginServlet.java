@@ -23,6 +23,10 @@ public class loginServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO 自動生成されたメソッド・スタブ
 		super.doGet(req, resp);
+		String jsp = "WEB-INF/jsp/top.jsp";
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
+		dispatcher.forward(req, resp);
 	}	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

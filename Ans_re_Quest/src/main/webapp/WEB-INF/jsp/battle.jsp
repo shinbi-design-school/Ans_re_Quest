@@ -24,7 +24,7 @@
     	<p>問題: <%= request.getAttribute("questionText") %></p>
     	<p>制限時間:<%= request.getAttribute("limitTime") %></p>
     </div>
-    <form method="post" action="battle" id="flex">
+    <form method="post" action="battle" id="flex-questions">
         <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice1") %>"><%= request.getAttribute("choice1") %></button><br>
         <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice2") %>"><%= request.getAttribute("choice2") %></button><br>
         <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>"><%= request.getAttribute("choice3") %></button><br>
