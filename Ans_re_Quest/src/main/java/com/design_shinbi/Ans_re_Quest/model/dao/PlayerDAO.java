@@ -54,5 +54,19 @@ public class PlayerDAO {
 
         return player;
     }
+    
+	public PlayerEntity updatePlayer(PlayerEntity player) throws SQLException {
+		String sql = "UPDATE players SET achieve = ? WHERE player_id = ?";
+		
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+		statement.setInt(1, player.getAchieve());
+		statement.setInt(2, player.getId());
+		
+		statement.executeUpdate();
+		statement.close();
+		
+		return player;
+	}
+    
     // その他、必要なメソッドを追加する（例: プレイヤーの追加、更新、削除など）
 }

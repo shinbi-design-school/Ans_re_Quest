@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
+<%
+Boolean isUsed5050 = Boolean.parseBoolean(request.getParameter("isUsed5050"));
+Boolean isUsedSkip = Boolean.parseBoolean(request.getParameter("isUsedSkip"));
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,16 +44,21 @@
     <p>Opened AI Answer: <%= request.getAttribute("aiAnswer") %> →parameter=isUsedAI</p>
     
     <!--  5050アイテム0または使用済みなら隠す -->
-    <% request.getAttribute("isUsed5050"); %>
-    <form method="post" name="form1" action="battle" class="half">
+    <% if(isUsed5050){ %>
+	<p>5050使用済み<p>
+	<%} %>    
+    <form method="post" name="form1" action="battle">
     <input type="hidden" name="isUsed5050" value="true">
     <a href="javascript:form1.submit()">
     	50/50: <%= request.getAttribute("5050Quantity") %>個</a>
 	</form>
 	
 	<!--  SKIPアイテム0なら隠す -->
+	    <% if(isUsedSkip){ %>
+	<p>Skip使用した<p>
+	<%} %>    
     <form method="post" name="form2" action="battle" class="skip">
-	    <input type="hidden" name="isUsedSKIP" value="true">
+	    <input type="hidden" name="isUsedSkip" value="true">
 	    <a href="javascript:form2.submit()">
 		<p>SKIP: <%= request.getAttribute("skipQuantity") %>個 </p>
 		</a>

@@ -10,6 +10,7 @@ private String email;
 private String name;
 private String password;
 private boolean admin;
+private int player_id;
 
 
 public int getId() {
@@ -54,6 +55,12 @@ public boolean isAdmin() {
 }
 public void setAdmin(boolean admin) {
 	this.admin = admin;
+}
+public int getPlayer_id() {
+	return player_id;
+}
+public void setPlayer_id(int player_id) {
+	this.player_id = player_id;
 }
 
 

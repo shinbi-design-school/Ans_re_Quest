@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.ItemEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.PlayerData;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.QuizEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.TowerEntity;
@@ -23,6 +24,8 @@ public class Battle {
     private int totalQuizCount;
 	private int currentEnemyIndex;
 	private int currentFloor;
+	
+	private PlayerData playerdata;
 	
 	
     public Battle(TowerEntity tower, PlayerEntity player,List<EnemyEntity> enemies,List<QuizEntity> quizEntities,List<ItemEntity> items) {
@@ -126,6 +129,8 @@ public class Battle {
 	}
 	//未使用
 	public void cleared() {
+		player.setAchieve(tower.getTowerId());
+		
 		setCurrentFloor(1);
         EnemyEntity firstEnemy = enemies.get(0);
         resetBattle(firstEnemy);
@@ -298,9 +303,7 @@ public class Battle {
         	QuizEntity currentQuestion = quizEntities.get(currentQuizIndex);
         	 return currentQuestion;
         }
-       
     }
-
     
 	public int getCurrentEnemyIndex() {
 		return currentEnemyIndex;
@@ -317,16 +320,33 @@ public class Battle {
 	public void setCurrentFloor(int currentFloor) {
 		this.currentFloor = currentFloor;
 	}
-    // GetterとSetterなど、必要なメソッドを追加する
 
+	public void defeated() {
+		
+	}
+	//セーブロード機能
+	public void saveData() {
+	    PlayerData data = new PlayerData(player.getAchieve(), items);
+	    playerdata = data;
+	}
+	
+	public void loadData(PlayerData data) {
+	    // ロード時の処理
+	    // プレイヤーの到達度と所持アイテム情報を適切に反映する
+	    player.setAchieve(data.getAchieve());
+	    items = data.getItems();
+	}
 
+	public PlayerData getPlayerdata() {
+		return playerdata;
+	}
 
+	public void setPlayerdata(PlayerData playerdata) {
+		this.playerdata = playerdata;
+	}
 
-
-
-
-
-
-
-
+	public PlayerEntity getPlayer() {
+		return player;
+	}
+	
 }

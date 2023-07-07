@@ -71,6 +71,8 @@ public class UserDAO {
 		user.setPassword(resultSet.getString("password"));
 		user.setCreatedAt(resultSet.getTimestamp("created_at"));
 		user.setUpdatedAt(resultSet.getTimestamp("updated_at"));
+		user.setUpdatedAt(resultSet.getTimestamp("updated_at"));
+		user.setPlayer_id(resultSet.getInt("player_id"));
 		
 		return user;
 	}
@@ -246,4 +248,34 @@ throws SQLException {
 		user = this.findById(id);
 		return user;
 	}
+	
+	//ここから自作
+    public User getUserById(int userId) throws SQLException {
+        User user = new User();
+
+        String query = "SELECT * FROM users WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                	
+            		user.setId(resultSet.getInt("id"));
+            		user.setEmail(resultSet.getString("email"));
+            		user.setName(resultSet.getString("name"));
+            		user.setAdmin(resultSet.getBoolean("is_admin"));
+            		user.setPassword(resultSet.getString("password"));
+            		user.setCreatedAt(resultSet.getTimestamp("created_at"));
+            		user.setUpdatedAt(resultSet.getTimestamp("updated_at"));
+            		user.setUpdatedAt(resultSet.getTimestamp("updated_at"));
+            		user.setPlayer_id(resultSet.getInt("player_id"));
+                }
+            }
+        }
+
+        return user;
+    }
+	
+	
+	
+	
 }

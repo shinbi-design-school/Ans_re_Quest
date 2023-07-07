@@ -1,6 +1,8 @@
 package com.design_shinbi.Ans_re_Quest.model.entity;
 
-public class ItemEntity {
+import java.io.Serializable;
+
+public class ItemEntity implements Serializable {
 	private int itemID;
 	private String name;
 	private String effect;
