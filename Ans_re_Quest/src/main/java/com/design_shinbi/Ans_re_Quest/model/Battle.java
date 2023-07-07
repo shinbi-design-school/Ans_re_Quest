@@ -129,6 +129,8 @@ public class Battle {
 	}
 	//未使用
 	public void cleared() {
+		player.setAchieve(tower.getTowerId());
+		
 		setCurrentFloor(1);
         EnemyEntity firstEnemy = enemies.get(0);
         resetBattle(firstEnemy);
@@ -341,6 +343,10 @@ public class Battle {
 
 	public void setPlayerdata(PlayerData playerdata) {
 		this.playerdata = playerdata;
+	}
+
+	public PlayerEntity getPlayer() {
+		return player;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.design_shinbi.Ans_re_Quest.servlet;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,11 +20,13 @@ import com.design_shinbi.Ans_re_Quest.model.dao.ItemDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.PlayerDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.QuizDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.TowerDAO;
+import com.design_shinbi.Ans_re_Quest.model.dao.UserDAO;
 import com.design_shinbi.Ans_re_Quest.model.entity.EnemyEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.ItemEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.QuizEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.TowerEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.User;
 import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 
 /**
@@ -48,8 +51,22 @@ public class SessionTestServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
 			Connection connection = DbUtil.connect();
+			HttpSession session = request.getSession();
+			UserDAO userDAO = new UserDAO(connection);
+			
+			User user = userDAO.getUserById(1);//<-仮置き
+			session.setAttribute("user", user);//<-仮置き
+			user = (User)session.getAttribute("user");
+			
 			QuizDAO quizDAO = new QuizDAO(connection);
 			List<QuizEntity> quizEntities = quizDAO.getAllQuestions();
 		
@@ -69,17 +86,11 @@ public class SessionTestServlet extends HttpServlet {
 			battle = null;
 			//battle.startBattle();//後でうつす
 			
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException | NoSuchAlgorithmException e) {
 		    System.out.println(e);
 		    throw new ServletException(e);
 		}
-
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
         HttpSession session = request.getSession();
         session.setAttribute("player", player);
         session.setAttribute("items", items);

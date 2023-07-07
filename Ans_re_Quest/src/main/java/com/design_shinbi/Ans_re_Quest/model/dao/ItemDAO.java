@@ -70,5 +70,33 @@ public class ItemDAO {
 	     
 	     return items;
 	 }
-	
+
+	public List<ItemEntity> updateItems(int playerId, List<ItemEntity> items) throws SQLException {
+	    String sql = "UPDATE player_items SET quantity = ? WHERE player_id = ? AND item_id = 1";
+
+		
+		PreparedStatement statement = this.connection.prepareStatement(sql);
+		statement.setInt(1, items.get(0).getQuantity());
+		statement.setInt(2, playerId);
+		statement.executeUpdate();
+		
+		sql = "UPDATE player_items SET quantity = ? WHERE player_id = ? AND item_id = 2";
+		
+		statement = this.connection.prepareStatement(sql);
+		statement.setInt(1, items.get(1).getQuantity());
+		statement.setInt(2, playerId);
+		statement.executeUpdate();
+		statement.close();
+		
+		return items;
+	}
+	private void deleteItem(int itemId) throws SQLException {
+	    String sql = "DELETE FROM player_items WHERE id = ?";
+
+	    PreparedStatement statement = this.connection.prepareStatement(sql);
+	    statement.setInt(1, itemId);
+	    statement.executeUpdate();
+
+	    statement.close();
+	}
 }
