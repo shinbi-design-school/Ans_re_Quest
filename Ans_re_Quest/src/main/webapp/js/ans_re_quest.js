@@ -35,12 +35,9 @@ $(function() {
       });
     });
     // 吹き出しを表示
-    $('div.word').fadeIn(500, function() {
+    $('div.word').animate({opacity: 1}, {duration: 500, easing: 'linear'}, function() { // opacityを1にするアニメーションを追加
       // 時間経過で吹き出しを非表示
-      $(this).delay(4000).fadeOut(500, function() { // コールバック関数の中に書く
-        // コメントを非表示にする
-        $('div.comment').hide();
-      });
+      $(this).delay(4000).animate({opacity: 0}, {duration: 500, easing: 'linear'}); // opacityを0にするアニメーションを追加
     });
     
    });
