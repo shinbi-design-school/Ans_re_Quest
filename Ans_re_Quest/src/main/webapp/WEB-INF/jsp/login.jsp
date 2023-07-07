@@ -3,7 +3,7 @@
 <div id="loginform">
 <form action="/login" method="post">
 メールアドレス：<input type="text" name="email" required><br>
-パスワード：<input type="password" name="password" required><br>
+　パスワード　：<input type="password" name="password" required><br>
 <input type="submit" value="ログイン"><br>
 </form>
 <p>

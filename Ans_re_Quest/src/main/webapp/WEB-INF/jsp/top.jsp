@@ -14,20 +14,29 @@
     </div>
   </div>
 
+<%--
+現状モーダルウインドウを機能させられないのでコメントアウト中
 <div id="button-wrap" class="start">
     <button id="can-play-button">当サイトは音楽が流れます<br>ご注意ください</button>
 </div>
+ --%>
 <div id="totalMenu">
 
 	<img alt="logo" src="imgs/Ans_re_Quest_logo.png" class="topimg">
-	<div>
-	<button class="btn">
-		<a href="home">冒険に出る</a>
-	</button>
+	<div id="flex">
+	<jsp:include page="login.jsp"/>
+	<div class="guestMode">
+		<p>ゲストモードでプレイ</p>
+		<button class="btn">
+			<a href="home">冒険に出る</a>
+		</button>
+	</div>
 	</div>
 	<audio id="audio" src="https://tool-engineer.work/wp-content/uploads/2022/10/demo.mp3"></audio>
-	<jsp:include page="login.jsp"/>
 </div>
+
+
+
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

@@ -20,6 +20,11 @@ import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 public class loginServlet extends HttpServlet{
 	
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO 自動生成されたメソッド・スタブ
+		super.doGet(req, resp);
+	}	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			Connection connection = DbUtil.connect();

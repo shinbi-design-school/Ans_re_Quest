@@ -4,9 +4,13 @@
 
 <html>
 <head>
+<jsp:include page="head.jsp"/>
 <title>Result Page</title>
 </head>
 <body>
+<div id="totalMenu">
+
+
 	<h1>バトル結果</h1>
 	<%
 	boolean isPlayerAlive = (boolean) request.getAttribute("isPlayerAlive");
@@ -34,5 +38,8 @@
 	<%
 	}
 	%>
+	
+</div>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>
