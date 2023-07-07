@@ -7,13 +7,14 @@
 <title>Ans re Quest</title>
 </head>
 <body>
+  
   <div id="splash">
     <div id="splash_logo">
       <img src="imgs/Ans_re_Quest_logo.png" alt="logo" class="fadeUp">
       <div id="containe"></div>
     </div>
   </div>
-
+	
 <%--
 現状モーダルウインドウを機能させられないのでコメントアウト中
 <div id="button-wrap" class="start">
@@ -34,8 +35,6 @@
 	</div>
 	<audio id="audio" src="https://tool-engineer.work/wp-content/uploads/2022/10/demo.mp3"></audio>
 </div>
-
-
 
 <jsp:include page="footer.jsp"/>
 </body>

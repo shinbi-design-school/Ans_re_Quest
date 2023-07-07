@@ -71,6 +71,7 @@ img#enemy{
 	margin: auto;
 	text-align: center;
 	position: relative;
+	cursor: url(../imgs/pointer.cur), auto;
 }
 
 .bottom{
