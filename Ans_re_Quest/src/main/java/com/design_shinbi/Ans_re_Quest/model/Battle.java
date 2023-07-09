@@ -46,38 +46,40 @@ public class Battle {
     	currentFloor = 1;
     	totalQuizCount = 1;
     	shuffleQuizEntities();
-        // バトルの開始処理
-        // 最初の問題を設定するなど
     }
 	
     public void answerQuiz(String choice) {
-        // 問題に対する回答処理
         QuizEntity currentQuestion = getCurrentQuestion();
+        
         if (currentQuestion != null) {
             if (currentQuestion.getCorrectAnswer().equals(choice)) {
-                // 正解の場合はスコアを加算などの処理を行う
-                // 今回はスコアを加算する処理は省略
-                System.out.println("正解です！");
-                
-                int currentHP = currentEnemy.getHp();
-                currentEnemy.setHp(currentHP - 10);
-
+                handleCorrectAnswer();
             } else {
-                System.out.println("不正解です...");
-
-                // 不正解の場合はプレイヤーのHPを減少させる処理を行う
-                int currentHP = player.getHp();
-                player.setHp(currentHP - 10); // 仮の減少値
+                handleWrongAnswer();
             }
-            // 次の問題へ進む
-            if (currentQuizIndex >= 0 && currentQuizIndex < quizEntities.size()-1) {
-            currentQuizIndex++;
-            } else {
-            	shuffleQuizEntities();
-            	currentQuizIndex = 0;
-            }
+            
+            moveToNextQuestion();
         }
     }
+    
+    private void handleCorrectAnswer() {
+        int currentHP = currentEnemy.getHp();
+        currentEnemy.setHp(currentHP - 10);
+    }
+    
+    private void handleWrongAnswer() {
+        int currentHP = player.getHp();
+        player.setHp(currentHP - 10);
+    }
+    
+    private void moveToNextQuestion() {
+        currentQuizIndex++;
+        
+        if (currentQuizIndex >= quizEntities.size()) {
+            shuffleQuizEntities();
+            currentQuizIndex = 0;
+        }
+    }	
     
 	public void startNextBattle(EnemyEntity currentEnemy) {
         // 次の戦闘の初期化処理を行う
@@ -90,9 +92,7 @@ public class Battle {
 		currentEnemy = firstEnemy;
 	    currentQuizIndex = 0;
 	    currentFloor = 1;
-	    player.setHp(player.getMaxHp()); // プレイヤーのHPをリセット
-	    currentEnemy.setHp(currentEnemy.getMaxHp());
-	    
+	    resetEnemyHP();
 	    //階層リセット
 	    // その他の初期化処理を実装する
 	    // 例: 最初の敵の設定、初期問題の設定など
@@ -116,7 +116,7 @@ public class Battle {
 	            } else {
 	                setCurrentEnemyIndex(0);
 	                EnemyEntity currentEnemy = enemies.get(getCurrentEnemyIndex());
-	                startNextBattle(currentEnemy);//ホーム実装合修正
+	                startNextBattle(currentEnemy);//ホーム実装後修正
 	            }
 	        }
 
@@ -128,10 +128,9 @@ public class Battle {
 	            resetBattle(firstEnemy);
 	        }
 	}
-	//未使用
+	
 	public void cleared() {
 		player.setAchieve(tower.getTowerId());
-		
 		setCurrentFloor(1);
         EnemyEntity firstEnemy = enemies.get(0);
         resetBattle(firstEnemy);
@@ -352,7 +351,7 @@ public class Battle {
 	}
 
 	public void defeated() {
-		
+	    player.setHp(player.getMaxHp()); // プレイヤーのHPをリセット
 	}
 	//セーブロード機能
 	public void saveData() {
@@ -378,5 +377,25 @@ public class Battle {
 	public PlayerEntity getPlayer() {
 		return player;
 	}
-	
+	//状態異常
+	public  String maskString(String input, double maskRatio) {
+        if (maskRatio <= 0 || maskRatio > 1) {
+            throw new IllegalArgumentException("Invalid mask ratio");
+        }
+        
+        StringBuilder maskedBuilder = new StringBuilder();
+        Random random = new Random();
+        
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            
+            maskedBuilder.append(c);
+            
+            if (random.nextDouble() < maskRatio && (i + 1) < input.length()) {
+                maskedBuilder.append("■");
+            }
+        }
+        
+        return maskedBuilder.toString();
+    }
 }
