@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2023-07-07 08:01:54
+-- 生成日時: 2023-07-10 03:12:33
 -- サーバのバージョン： 10.4.28-MariaDB
 -- PHP のバージョン: 8.2.4
 
@@ -93,20 +93,21 @@ INSERT INTO `items` (`item_id`, `name`, `effect`) VALUES
 
 CREATE TABLE `players` (
   `player_id` int(11) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT 'プレイヤー',
   `level` int(11) DEFAULT NULL,
   `experience` int(11) DEFAULT NULL,
-  `hp` int(11) DEFAULT NULL,
+  `hp` int(11) DEFAULT 30,
   `mp` int(11) DEFAULT NULL,
-  `achieve` int(11) NOT NULL DEFAULT 0
+  `achieve` int(11) NOT NULL DEFAULT 0,
+  `money` int(11) NOT NULL DEFAULT 100
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- テーブルのデータのダンプ `players`
 --
 
-INSERT INTO `players` (`player_id`, `name`, `level`, `experience`, `hp`, `mp`, `achieve`) VALUES
-(1, 'aaaa', 1, 1, 30, 30, 1);
+INSERT INTO `players` (`player_id`, `name`, `level`, `experience`, `hp`, `mp`, `achieve`, `money`) VALUES
+(1, 'aaaa', 1, 1, 30, 30, 1, 100);
 
 -- --------------------------------------------------------
 
@@ -125,8 +126,8 @@ CREATE TABLE `player_items` (
 --
 
 INSERT INTO `player_items` (`player_id`, `item_id`, `quantity`) VALUES
-(1, 1, 4),
-(1, 2, 7);
+(1, 1, 12),
+(1, 2, 14);
 
 -- --------------------------------------------------------
 
@@ -155,7 +156,7 @@ CREATE TABLE `questions` (
 INSERT INTO `questions` (`id`, `text`, `correctAnswer`, `choice1`, `choice2`, `choice3`, `choice4`, `ai_answer`, `limit_time`, `genre`, `difficulty`) VALUES
 (1, 'moziretu　id=1', 'moziretu', '1', '2', '3', 'moziretu', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
 (2, '文字列', '文字列', '1', '2', '3', '文字列', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
-(3, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
+(3, 'あああああああああああああああああああああああああああああああああああああああああああああああああああああああああ', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
 (4, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
 (5, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),
 (6, '3', '3', '1', '2', '3', '4', 'こんにちは！ご質問がありますか？もしご質問があれば、お気軽にお聞きください。', 15, 'normal', 'normal'),

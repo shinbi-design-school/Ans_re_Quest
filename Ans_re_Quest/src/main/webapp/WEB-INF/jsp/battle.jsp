@@ -16,13 +16,15 @@ Boolean isUsedSkip = Boolean.parseBoolean(request.getParameter("isUsedSkip"));
 <div id="totalMenu">
 <div id="bgi">
     <h1><%= request.getAttribute("towerName") %>   <%= request.getAttribute("currentFloor") %>階</h1>
-    <div>
+    <div class="enemy">
+    	<p><%=request.getAttribute("enemyName") %></p>
     	<img alt="enemy" src="imgs/face.png" id="enemy">
-    	<p id="enemy">敵のHP: <progress id="file" max="<%=request.getAttribute("enemyMaxHP") %>" value="<%= request.getAttribute("enemyHP") %>"></progress><%= request.getAttribute("enemyHP") %></p>
+    	<p id="enemy">HP: <progress id="file" max="<%=request.getAttribute("enemyMaxHP") %>" value="<%= request.getAttribute("enemyHP") %>"></progress><%= request.getAttribute("enemyHP") %></p>
     </div>
-    <div>
+    <div class="player">
+    	<p><%=request.getAttribute("Name") %></p>
 	    <img alt="PLface" src="imgs/face.png" id="player">
-	    <p id="player">プレイヤーのHP:  <input type="range" id="inputSlider" min="0" max="<%=request.getAttribute("playerMaxHP") %>" value="<%= request.getAttribute("playerHP") %>" /><%= request.getAttribute("playerHP") %></p>
+	    <p id="player">HP:  <input type="range" id="inputSlider" min="0" max="<%=request.getAttribute("playerMaxHP") %>" value="<%= request.getAttribute("playerHP") %>" /><%= request.getAttribute("playerHP") %></p>
     </div>
     <div class="questions">
     	<p>第<%= request.getAttribute("currentQuizNo") %>問/全<%= request.getAttribute("totalQuizCount") %>問</p>

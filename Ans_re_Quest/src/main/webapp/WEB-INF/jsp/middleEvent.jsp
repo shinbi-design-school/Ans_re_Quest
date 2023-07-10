@@ -15,25 +15,33 @@
     int pattern2 = patterns.get(1);
     %>
 
-    <h1>RPGイベントフロア</h1>
+    <h3>RPGイベントフロア</h3>
     <p>現在のパターン: <%= pattern1 %></p>
 
     <% if (pattern1 == 1) { %>
         <h2>パターン1のイベント</h2>
+        <form method="post" name="form1" action="battle">
+  		<input type="hidden" name="isSerious" value="true">
         <p>5050Quantityを<%= pattern2 %>個手に入れた。</p>
-        <a href="battle">特定階層でのイベント画面</a>
+        <p>まじめかの罠を踏んだ（アイテム使用不可）</p>
+        <p><a href="javascript:form1.submit()">特定階層でのイベント画面</a></p>
+        </form>
     <% } else if (pattern1 == 2) { %>
         <h2>パターン2のイベント</h2>
+        <form method="post" name="form2" action="battle">
+  		<input type="hidden" name="isImpatient" value="true">
         <p>SkipQuantityを<%= pattern2 %>個手に入れた。</p>
-        <a href="battle">特定階層でのイベント画面</a>
+        <p>あせりの罠を踏んだ（制限時間減少）</p>
+		<p><a href="javascript:form2.submit()">特定階層でのイベント画面</a></p>
+		</form>
     <% } else if (pattern1 == 3) { %>
     	<h2>パターン3のイベント</h2>
-        <form method="post" name="form1" action="battle">
+        <form method="post" name="form3" action="battle">
   		<input type="hidden" name="isConfused" value="true">
-   		<a href="javascript:form1.submit()">
-        5050QuantityとSkipQuantityを１つずつ手に入れた。
-        特定階層でのイベント画面</a>
-	</form>
+        <p>5050QuantityとSkipQuantityを１つずつ手に入れた。</p>
+        <p>混乱の罠を踏んだ。（問題文把握困難）	</p>
+        <p><a href="javascript:form3.submit()">特定階層でのイベント画面</a></p>
+		</form>
 
     <% } else { %>
         <h2>無効なパターンです。</h2>

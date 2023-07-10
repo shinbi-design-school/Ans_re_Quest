@@ -8,6 +8,9 @@
 </head>
 <body>
 <div id="totalMenu">
+<%--挑戦中、もしくは踏破した塔やプレイヤーネームを表示させたい --%>
+<div class="circle"><p style="word-wrap: break-word;"><%= request.getAttribute("towerName") %><br><%= request.getAttribute("currentFloor") %>階</p></div>
+<div class="userName"><p>ここに名前を表示させたい</p></div>
 
 <div class="homeChara">
 <div><img src="imgs/homeChara/face1.png" id="change_image" class="character"></div>
@@ -16,9 +19,13 @@
 </div></div></div></div>
 </div>
 
-<div class="homeQuest"><a href="battle"><button class="Quest"></button></a></div>
+<div class="homeMenu">
+	<div class="homeScenario"><a href="scenario"><button class="scenario"></button></a></div>
+	<div class="homeQuest"><a href="battle"><button class="Quest"></button></a></div>
+	<div class="homeLogout"><a href="logout"><button class="logout"></button></a></div>
+</div>
 
-<jsp:include page="bottomMenu.jsp"></jsp:include>
+<jsp:include page="bottomMenu.jsp"/>
 
 </div>
 

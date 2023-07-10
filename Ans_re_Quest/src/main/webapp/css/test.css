@@ -47,6 +47,102 @@
 .Quest:active {
   transform: scale(0.95);
 }
+/*シナリオボタン*/
+.scenario {
+  width: 240px;
+  height: 80px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
+  background-size: 250%;
+  background-position: left;
+  color: #ffd277;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 1s;
+  overflow: hidden;
+  font-size:35px;
+}
+
+.scenario::before {
+  position: absolute;
+  content: "シナリオ";
+  color: #ffd277;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 97%;
+  height: 90%;
+  border-radius: 8px;
+  transition-duration: 1s;
+  background-color: rgba(0, 0, 0, 0.842);
+  background-size: 200%;
+}
+
+.scenario:hover {
+  background-position: right;
+  transition-duration: 1s;
+}
+
+.scenario:hover::before {
+  background-position: right;
+  transition-duration: 1s;
+}
+
+.scenario:active {
+  transform: scale(0.95);
+}
+/*ログアウトボタン*/
+.logout {
+  width: 240px;
+  height: 80px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
+  background-size: 250%;
+  background-position: left;
+  color: #ffd277;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 1s;
+  overflow: hidden;
+  font-size:35px;
+}
+
+.logout::before {
+  position: absolute;
+  content: "Logout";
+  color: #ffd277;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 97%;
+  height: 90%;
+  border-radius: 8px;
+  transition-duration: 1s;
+  background-color: rgba(0, 0, 0, 0.842);
+  background-size: 200%;
+}
+
+.logout:hover {
+  background-position: right;
+  transition-duration: 1s;
+}
+
+.logout:hover::before {
+  background-position: right;
+  transition-duration: 1s;
+}
+
+.logout:active {
+  transform: scale(0.95);
+}
 /*トップページ用ボタン(以前のはデザインが崩れたので変更)*/
 .btn {
   --border-color: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);

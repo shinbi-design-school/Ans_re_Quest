@@ -7,14 +7,13 @@
 <title>Ans re Quest</title>
 </head>
 <body>
-  
   <div id="splash">
     <div id="splash_logo">
       <img src="imgs/Ans_re_Quest_logo.png" alt="logo" class="fadeUp">
       <div id="containe"></div>
     </div>
   </div>
-	
+<div> </div>
 <%--
 現状モーダルウインドウを機能させられていないのでコメントアウト中
 <div id="button-wrap" class="start">

@@ -1,6 +1,8 @@
 @charset "UTF-8";
 /*枠外背景*/
 body{
+	margin: 0;
+	height:100vh;
 	background-color: navy;
 	background-image: url(../imgs/割れたガラス3.png);
 	background-size: cover;
@@ -13,6 +15,67 @@ a{
 a:visited{
 	color: navy;
 }
+/* Loading背景画面設定　*/
+#splash {
+    /*fixedで全面に固定*/
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	z-index: 999;
+	background:#333;
+	text-align:center;
+	color:#fff;
+}
+
+/* Loading画像中央配置　*/
+#splash_logo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* Loading アイコンの大きさ設定　*/
+#splash_logo img {
+	width:260px;
+}
+
+/* fadeUpをするアイコンの動き */
+.fadeUp{
+animation-name: fadeUpAnime;
+animation-duration:0.5s;
+animation-fill-mode:forwards;
+opacity: 0;
+}
+
+@keyframes fadeUpAnime{
+  from {
+    opacity: 0;
+	transform: translateY(100px);
+  }
+
+  to {
+    opacity: 1;
+	transform: translateY(0);
+  }
+}
+/*ゲーム枠*/
+#totalMenu{
+	color: red;
+	background-image: url(../imgs/background2.jpg);
+	background-size: cover;
+	width: 1280px;
+	height: 720px;
+	border: ridge 10px;
+	border-color:darkred; 
+	border-radius: 2ch;
+	margin: auto;
+	margin-top:50px;
+	text-align: center;
+	position: relative;
+	cursor: url(../imgs/pointer.cur), auto;
+}
+
 /*battleページ装飾*/
 #flex-questions{
 	display: flex;
@@ -30,14 +93,18 @@ a:visited{
 	margin: auto;
 	font-size: large;
 }
+.enemy{
+	float: right;
+}
 #enemy{
 	text-align: right;
 }
 img#enemy{
-	float: right;
 	transform: scale(-1,1);
 }
-#player{
+.player{
+	border: khaki 10px;
+	border-radius: 50% 50% 0% 0%;
 	float: left;
 }
 .questions{
@@ -51,34 +118,6 @@ img#enemy{
 	background:rgba(254,244,244,0.8);
 }
 
-/*ゲーム枠*/
-/*#totalMenu{
-	color: red;
-	background-image: url(../imgs/background2.jpg);
-	background-size: cover;
-	width: 800px;
-	height: 600px;
-	border: ridge 3px;
-	margin: auto;
-	text-align: center;
-	position: relative;
-}*/
-
-#totalMenu{
-	color: red;
-	background-image: url(../imgs/background2.jpg);
-	background-size: cover;
-	width: 1280px;
-	height: 720px;
-	border: ridge 10px;
-	border-color:darkred; 
-	border-radius: 2ch;
-	margin: 1em;
-	margin: -3px;
-	text-align: center;
-	position: relative;
-	cursor: url(../imgs/pointer.cur), auto;
-}
 
 /*トップ・マイページのフレックス*/
 #flexMenu{
@@ -143,6 +182,30 @@ div.guestMode{
 .character{
 	width: 500px;
 }
+
+.circle {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border: solid 4px blue;
+  border-radius: 50%;
+  background: linear-gradient(to top right, #ff0000, #ff6666, #ffcccc);
+  color: seashell;
+  z-index:1
+}
+.userName{
+	position: absolute;
+	text-align:left;
+	width: 25em;
+	height: 4em;
+	margin-top:30px;
+	margin-left:100px;
+	padding-left:30px;
+	border: white 1px double;
+	border-radius: 0% 0% 95% 0%;
+	background-color: rgba(0,110,84,0.5);
+}
+
 .word {
   position: relative;
   display: inline-block;
@@ -155,17 +218,21 @@ div.guestMode{
   color: snow;
   font-size: 16px;
   background:rgba(0,110,84,0.5);
-
+/*  opacity: 0; これを入れると表示がうまくいかない悲しみ*/
 }
 
 .comment {
   display: none;
 }
 
-.homeQuest{
+.homeMenu{
 	position: absolute;
+	padding: 3px;
 	right: 50px;
 	bottom: 150px;
+}
+.homeQuest{
+		margin: 10px 0px;
 }
 
 /*ボトムメニュー*/
@@ -243,11 +310,102 @@ div.guestMode{
 	background-size: cover;
 }
 
+/*shop関係*/
+.item {
 
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 200px;
+    transition: box-shadow 0.3s;
+}
+
+.item img {
+    max-width: 100%;
+        height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.item h2 {
+    color: #333;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.item button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.item button:hover {
+    background-color: #45a049;
+}
+
+.item:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.currency {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.item .item-frame {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item .item-frame h2 {
+    margin: 0;
+    color: #333;
+}
+
+.item-container {
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.item .item-wrapper {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item .item-wrapper h2 {
+    margin: 0;
+    color: #333;
+}
 /*フッター装飾*/
 footer{
 	text-align: center;
 	font-style: italic;
 	color: black;
-	text-shadow: 1px;
+	margin-top:3px;
 }

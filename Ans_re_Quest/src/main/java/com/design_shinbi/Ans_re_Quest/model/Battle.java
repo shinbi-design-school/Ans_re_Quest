@@ -22,7 +22,7 @@ public class Battle {
     private List<ItemEntity> items;
     
     private int currentQuizIndex;
-    private int totalQuizCount;
+    private int totalQuizCount;//現在使用予定なし。
 	private int currentEnemyIndex;
 	private int currentFloor;
 	
@@ -64,12 +64,32 @@ public class Battle {
     
     private void handleCorrectAnswer() {
         int currentHP = currentEnemy.getHp();
-        currentEnemy.setHp(currentHP - 10);
+        String difficulty = getCurrentQuestion().getDifficulty();
+        double damageMultiplier = 1.0;
+        if (difficulty.equals("normal")) {
+            damageMultiplier = 1.0;
+        } else if (difficulty.equals("hard")) {
+            damageMultiplier = 1.5;
+        } else if (difficulty.equals("easy")) {
+            damageMultiplier = 0.7;
+        }
+        int damage = (int) (10 * damageMultiplier);
+        currentEnemy.setHp(currentHP - damage);
     }
     
     private void handleWrongAnswer() {
         int currentHP = player.getHp();
-        player.setHp(currentHP - 10);
+        String difficulty = getCurrentQuestion().getDifficulty();
+        double damageMultiplier = 1.0;
+        if (difficulty.equals("normal")) {
+            damageMultiplier = 1.0;
+        } else if (difficulty.equals("hard")) {
+            damageMultiplier = 0.7;
+        } else if (difficulty.equals("easy")) {
+            damageMultiplier = 1.5;
+        }
+        int damage = (int) (10 * damageMultiplier);
+        currentEnemy.setHp(currentHP - damage);
     }
     
     private void moveToNextQuestion() {
@@ -130,6 +150,7 @@ public class Battle {
 	}
 	
 	public void cleared() {
+		player.setMoney(player.getMoney()+tower.getTowerId()*100);
 		player.setAchieve(tower.getTowerId());
 		setCurrentFloor(1);
         EnemyEntity firstEnemy = enemies.get(0);
@@ -137,6 +158,7 @@ public class Battle {
 	}
 
 	
+
 	public List<String> adapt5050() {
 		QuizEntity currentQuestion = getCurrentQuestion();
 		
@@ -364,6 +386,10 @@ public class Battle {
 	    // プレイヤーの到達度と所持アイテム情報を適切に反映する
 	    player.setAchieve(data.getAchieve());
 	    items = data.getItems();
+	}
+	
+	public TowerEntity getTower() {
+		return tower;
 	}
 
 	public PlayerData getPlayerdata() {

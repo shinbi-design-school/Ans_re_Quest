@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.design_shinbi.Ans_re_Quest.model.Const;
+import com.design_shinbi.Ans_re_Quest.model.dao.ItemDAO;
+import com.design_shinbi.Ans_re_Quest.model.dao.PlayerDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.UserDAO;
 import com.design_shinbi.Ans_re_Quest.model.entity.User;
 import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 
 @WebServlet("/login")
-public class loginServlet extends HttpServlet{
+public class LoginServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,6 +38,8 @@ public class loginServlet extends HttpServlet{
 			User user = null;
 			
 			UserDAO userDAO = new UserDAO(connection);
+			PlayerDAO playerDAO = new PlayerDAO(connection); 
+			ItemDAO itemDAO = new ItemDAO(connection);
 			
 			String email = req.getParameter("email");
 			if(email == null || email.isEmpty()) {
@@ -57,10 +60,14 @@ public class loginServlet extends HttpServlet{
 					error = "ユーザ名、もしくはパスワードが違います。";
 				}
 				req.setAttribute("error", error);
-				jsp = "WEB-INF/jsp/home.jsp";
+				jsp = "/WEB-INF/jsp/top.jsp";
 			}else {
 				HttpSession session = req.getSession();
-				session.setAttribute(Const.LOGIN_USER_KEY, user);
+				session.setAttribute("user", user);
+				session.setAttribute("player", playerDAO.getPlayerById(user.getPlayer_id()));
+				session.setAttribute("items", itemDAO.getAllItemsByPlayerId(user.getPlayer_id()));
+				
+				System.out.println("ログイン後セッション上げ");
 				jsp = "/WEB-INF/jsp/home.jsp";
 			}
 			RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
