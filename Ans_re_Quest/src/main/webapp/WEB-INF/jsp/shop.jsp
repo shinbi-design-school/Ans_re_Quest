@@ -38,29 +38,6 @@
             <button>購入する</button>
         </div>  
         
-        <div class="item">
-            <div class="item-wrapper">
-                <h2>アイテム4</h2>
-            </div>
-            <div class="price">$40</div>
-            <button>購入する</button>
-        </div>  
-        
-        <div class="item">
-            <div class="item-wrapper">
-                <h2>アイテム5</h2>
-            </div>
-            <div class="price">$50</div>
-            <button>購入する</button>
-        </div>  
-        
-        <div class="item">
-            <div class="item-wrapper">
-                <h2>アイテム6</h2>
-            </div>
-            <div class="price">$60</div>
-            <button>購入する</button>
-        </div>  
         </div>  
         <jsp:include page="bottomMenu.jsp"></jsp:include>
     </div>

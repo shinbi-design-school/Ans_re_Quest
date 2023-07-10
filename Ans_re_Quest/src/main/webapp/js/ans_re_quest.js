@@ -9,9 +9,11 @@ $(function() {
   
   // リストアップ
   var elements = [
-              ['サポートキャラの「名称未設定」だよ。アバターとして冥鳴ひまりを使っているよ。', 'imgs/homeChara/face2.png'],
+              ['サポートキャラの「名称未設定」だよ。<br>アバターとして冥鳴ひまりを使っているよ。', 'imgs/homeChara/face2.png'],
               ['なんでこのアバターなのかって？<br>動画制作で使わなかった素材だからだよ。', 'imgs/homeChara/face3.png'],
-              ['正直CSS担当していてもコンテンツでやりたいことはあるんだよ。でも実装どころか構成もろくにできてない有様だよ。', 'imgs/homeChara/face4.png']
+              ['正直CSS担当していてもコンテンツでやりたいことはあるんだよ。でも実装どころか構成も構想もろくにできてない有様だよ。', 'imgs/homeChara/face4.png'],
+              ['フフフフ、分からない。分からないんだよ。どうすればいいのか分からないんだよ！', 'imgs/homeChara/face5.png']
+//              ['', 'imgs/homeChara/'],
              ];
 
   // リストからランダムに取得
@@ -64,24 +66,6 @@ $(window).on('load',function(){
   
   bar.animate(1.0); 
 
-//ホームキャラ変化用
-// const image = document.getElementById('image'); // imgタグを取得
-// const images = [
-//	 	'imgs/homeChara/face2.jpg',
-//	 	'imgs/homeChara/face3.jpg',
-//	 	'imgs/homeChara/face4.jpg',
-//	 	'imgs/homeChara/face5.jpg']; // 画像の配列
-//
-//  function OnButtonClick() { // クリックした時に実行する関数
-//   const imageNo = Math.floor(Math.random() * images.length); // 0から3までのランダムな整数
-//   image.src = images[imageNo]; // imgタグのsrc属性をランダムな画像に変更
-//  }
-//
-//  image.addEventListener('click', OnButtonClick); // imgタグにイベントハンドラーを登録
-//  
-
-
-  
 //音楽再生用モーダルウインドウ、処理確定が出来ていないのでコメントアウト中
 //const audio = $("#audio")[0]
 //
@@ -99,3 +83,35 @@ $(window).on('load',function(){
 //  audio.play();
 //}
 
+
+//カーソル追従エフェクト 対応するJS入れると背景変えられるしでよくわからん
+//  // パーティクルを生成する
+//  var particles = bubbly({
+//    colorStart: "#fff4e6",
+//    colorStop: "#ffe9e4",
+//    blur: 1,
+//    compose: "source-over",
+//    bubbleFunc: () => `hsla(${Math.random() * 50}, 100%, 50%, .3)`,
+//      bubbles: 500,  selector: "#totalMenu" 
+//  }).firstChild;
+//
+//  // #totalMenu要素にmousemoveイベントを設定する
+//  var totalMenu = document.getElementById("totalMenu");
+//  totalMenu.addEventListener("mousemove", function (e) {
+//    // マウスの座標を取得する
+//    var x = e.clientX;
+//    var y = e.clientY;
+//
+//    // #totalMenu要素の範囲内であるかどうかを判定する
+//    var rect = totalMenu.getBoundingClientRect();
+//    if (
+//      x >= rect.left &&
+//      x <= rect.right &&
+//      y >= rect.top &&
+//      y <= rect.bottom
+//    ) {
+//      // パーティクルの位置をマウスの座標に合わせる
+//      particles.style.left = x + "px";
+//      particles.style.top = y + "px";
+//    }
+//  });
