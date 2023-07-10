@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/mypage")
-public class Mypage extends HttpServlet{
+public class MypageServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO 自動生成されたメソッド・スタブ
 		String jsp = null;
 		jsp = "WEB-INF/jsp/mypage.jsp";
 		
