@@ -73,8 +73,8 @@ img#enemy{
 	border: ridge 10px;
 	border-color:darkred; 
 	border-radius: 2ch;
-	margin: auto;
-	margin-top:50px;
+	margin: 1em;
+	margin: -3px;
 	text-align: center;
 	position: relative;
 	cursor: url(../imgs/pointer.cur), auto;
