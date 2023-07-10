@@ -126,12 +126,13 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
 		//question
 		
-		
+		//混乱か
 		if(Boolean.parseBoolean(request.getParameter("isConfused"))) {
 		request.setAttribute("questionText", battle.maskString(battle.getCurrentQuestion().getText(), 0.5));
 		} else {
 		request.setAttribute("questionText", battle.getCurrentQuestion().getText());
 		}
+		
 		//SKIP使用時の表示情報
 		if(Boolean.parseBoolean(request.getParameter("isUsedSkip"))) {
 			request.setAttribute("isUsedSkip", true);
@@ -154,11 +155,17 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("choice2", battle.getCurrentQuestion().getChoice2());
 		request.setAttribute("choice3", battle.getCurrentQuestion().getChoice3());
 		request.setAttribute("choice4", battle.getCurrentQuestion().getChoice4());
-		}
-		request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime());
-
-		//hint
 		request.setAttribute("isUsed5050", false);
+
+		}
+		
+		//制限時間
+		if (Boolean.parseBoolean(request.getParameter("isImpatient"))) {
+			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime()-5);
+		} else {
+			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime());
+		}
+		//hint
 		request.setAttribute("aiAnswer", battle.getCurrentQuestion().getAi_answer());
 		request.setAttribute("5050Quantity", battle.get5050Quantity());
 		request.setAttribute("skipQuantity", battle.getSkipQuantity());

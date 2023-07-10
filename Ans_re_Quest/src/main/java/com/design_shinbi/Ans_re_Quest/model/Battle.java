@@ -64,12 +64,32 @@ public class Battle {
     
     private void handleCorrectAnswer() {
         int currentHP = currentEnemy.getHp();
-        currentEnemy.setHp(currentHP - 10);
+        String difficulty = getCurrentQuestion().getDifficulty();
+        double damageMultiplier = 1.0;
+        if (difficulty.equals("normal")) {
+            damageMultiplier = 1.0;
+        } else if (difficulty.equals("hard")) {
+            damageMultiplier = 1.5;
+        } else if (difficulty.equals("easy")) {
+            damageMultiplier = 0.7;
+        }
+        int damage = (int) (10 * damageMultiplier);
+        currentEnemy.setHp(currentHP - damage);
     }
     
     private void handleWrongAnswer() {
         int currentHP = player.getHp();
-        player.setHp(currentHP - 10);
+        String difficulty = getCurrentQuestion().getDifficulty();
+        double damageMultiplier = 1.0;
+        if (difficulty.equals("normal")) {
+            damageMultiplier = 1.0;
+        } else if (difficulty.equals("hard")) {
+            damageMultiplier = 0.7;
+        } else if (difficulty.equals("easy")) {
+            damageMultiplier = 1.5;
+        }
+        int damage = (int) (10 * damageMultiplier);
+        currentEnemy.setHp(currentHP - damage);
     }
     
     private void moveToNextQuestion() {
