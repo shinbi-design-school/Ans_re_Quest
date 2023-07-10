@@ -15,7 +15,6 @@
 	<%
 	boolean isPlayerAlive = (boolean) request.getAttribute("isPlayerAlive");
 	boolean isEnemyAlive = (boolean) request.getAttribute("isEnemyAlive");
-	
 	%>
 	<%
 	if (!isPlayerAlive) {

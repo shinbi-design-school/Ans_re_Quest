@@ -32,6 +32,7 @@
   		<input type="hidden" name="isConfused" value="true">
    		<a href="javascript:form1.submit()">
         5050QuantityとSkipQuantityを１つずつ手に入れた。
+        混乱の罠を踏んだ。
         特定階層でのイベント画面</a>
 	</form>
 

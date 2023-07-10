@@ -8,8 +8,8 @@
 </head>
 <body>
 <div id="totalMenu">
+<p><%= request.getAttribute("getMoney") %>マネー手に入れた</p>
 <a href="home">クリア階層でのイベント画面</a>
-
 </div>
 <jsp:include page="footer.jsp"/>
 </body>

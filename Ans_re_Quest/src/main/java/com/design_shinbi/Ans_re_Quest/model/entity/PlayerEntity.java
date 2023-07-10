@@ -6,15 +6,25 @@ public class PlayerEntity {
     private int hp;
     private int maxHp;
     private int achieve;
+    private int money;
 
 
 
-    public PlayerEntity(int id, String name, int hp) {
+    public PlayerEntity(int id, String name, int hp,int achieve,int money) {
 		this.id = id;
 		this.name = name;
 		this.hp = hp;
 		this.maxHp = hp;
-		this.achieve = 0;
+		this.achieve = achieve;
+		this.money = money;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
 	public int getId() {

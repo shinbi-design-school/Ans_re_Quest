@@ -211,8 +211,9 @@ public class BattleServlet extends HttpServlet {
 						System.out.println("塔クリアのためのセーブ処理2");
 						itemDAO.updateItems(battle.getPlayer().getId(),battle.getItems());
 						System.out.println("セッションセーブ");
-						request.setAttribute("player", battle.getPlayer());
-						request.setAttribute("items", battle.getItems());
+						session.setAttribute("player", battle.getPlayer());
+						session.setAttribute("items", battle.getItems());
+						request.setAttribute("getMoney", battle.getTower().getTowerId()*100);
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}

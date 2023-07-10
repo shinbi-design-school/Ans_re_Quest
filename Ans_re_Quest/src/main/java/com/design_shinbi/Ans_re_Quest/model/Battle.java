@@ -130,6 +130,7 @@ public class Battle {
 	}
 	
 	public void cleared() {
+		player.setMoney(player.getMoney()+tower.getTowerId()*100);
 		player.setAchieve(tower.getTowerId());
 		setCurrentFloor(1);
         EnemyEntity firstEnemy = enemies.get(0);
@@ -137,6 +138,7 @@ public class Battle {
 	}
 
 	
+
 	public List<String> adapt5050() {
 		QuizEntity currentQuestion = getCurrentQuestion();
 		
@@ -364,6 +366,10 @@ public class Battle {
 	    // プレイヤーの到達度と所持アイテム情報を適切に反映する
 	    player.setAchieve(data.getAchieve());
 	    items = data.getItems();
+	}
+	
+	public TowerEntity getTower() {
+		return tower;
 	}
 
 	public PlayerData getPlayerdata() {
