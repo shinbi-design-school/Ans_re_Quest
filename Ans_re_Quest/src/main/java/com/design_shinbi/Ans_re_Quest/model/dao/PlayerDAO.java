@@ -27,8 +27,10 @@ public class PlayerDAO {
                 int id = resultSet.getInt("player_id");
                 String name = resultSet.getString("name");
                 int hp = resultSet.getInt("hp");
+                int achieve = resultSet.getInt("achieve");
+                int money = resultSet.getInt("money");
 
-                PlayerEntity player = new PlayerEntity(id,name,hp);
+                PlayerEntity player = new PlayerEntity(id,name,hp,achieve,money);
                 players.add(player);
             }
         }
@@ -46,8 +48,10 @@ public class PlayerDAO {
                     int id = resultSet.getInt("player_id");
                     String name = resultSet.getString("name");
                     int hp = resultSet.getInt("hp");
+                    int achieve = resultSet.getInt("achieve");
+                    int money = resultSet.getInt("money");
 
-                    player = new PlayerEntity(id,name,hp);
+                    player = new PlayerEntity(id,name,hp,achieve,money);
                 }
             }
         }
