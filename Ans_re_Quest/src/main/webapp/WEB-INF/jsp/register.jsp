@@ -8,7 +8,12 @@
 </head>
 <body>
 <form action="user" method="post">
-<%= request.getAttribute("error") %>
+        <% 
+        Object error = request.getAttribute("error");
+        if (error != null) {
+        %>
+        <%= error %>
+        <% } %>
 <p>すべて入力してください</p>
 <p>
 <input type="radio" name=is_admin value="true">管理者で登録する

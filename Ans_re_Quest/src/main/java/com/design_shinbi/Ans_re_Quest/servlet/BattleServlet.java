@@ -67,7 +67,7 @@ public class BattleServlet extends HttpServlet {
 		// battle インスタンスが null の場合は初期化処理を再度実行
 		
 		  if (battle == null) {
-			  	System.out.println("再作成処理");
+			  	System.out.println("battle作成処理");
 		        PlayerEntity player = (PlayerEntity) session.getAttribute("player");
 		        List<ItemEntity> items = (List<ItemEntity>) session.getAttribute("items");
 	

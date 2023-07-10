@@ -5,7 +5,12 @@
 メールアドレス：<input type="text" name="email" required><br>
 　パスワード　：<input type="password" name="password" required><br>
 <input type="submit" value="ログイン"><br>
-<%= request.getAttribute("error") %>
+        <% 
+        Object error = request.getAttribute("error");
+        if (error != null) {
+        %>
+        <%= error %>
+        <% } %>
 </form>
 <p>アカウント登録がお済みでない方はこちらへ↓
     <form method="post" name="form1" action="user">

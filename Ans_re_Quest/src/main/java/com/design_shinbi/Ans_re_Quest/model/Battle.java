@@ -22,7 +22,7 @@ public class Battle {
     private List<ItemEntity> items;
     
     private int currentQuizIndex;
-    private int totalQuizCount;
+    private int totalQuizCount;//現在使用予定なし。
 	private int currentEnemyIndex;
 	private int currentFloor;
 	
