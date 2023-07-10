@@ -96,8 +96,8 @@ public class UserDAO {
 		
 		String hashString = UserDAO.createHash(password);
 		
-		String sql = "INSERT INTO users (email, name, password, " + "is_admin,updated_at, created_at) "
-		+ "VALUES(?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO users (email, name, password, " + "is_admin,updated_at, created_at, player_id) "
+		+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement statement = this.connection.prepareStatement(sql);
 		statement.setString(1, email);
@@ -106,6 +106,7 @@ public class UserDAO {
 		statement.setBoolean(4, isAdmin);
 		statement.setTimestamp(5,  now);
 		statement.setTimestamp(6,  now);
+		statement.setInt(7, count()+1);
 		
 		statement.executeUpdate();
 		statement.close();
