@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.design_shinbi.Ans_re_Quest.implementation.DataRetrieverImpl;
 import com.design_shinbi.Ans_re_Quest.model.Battle;
 import com.design_shinbi.Ans_re_Quest.model.dao.EnemyDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.ItemDAO;
@@ -43,6 +44,7 @@ public class BattleServlet extends HttpServlet {
     private PlayerDAO playerDAO;
     private EnemyDAO enemyDAO;
     private ItemDAO itemDAO;
+    private DataRetrieverImpl dataRetrieverImpl;
     
     public void init() throws ServletException {
         try {
@@ -55,6 +57,7 @@ public class BattleServlet extends HttpServlet {
             this.playerDAO = new PlayerDAO(connection);
             this.enemyDAO = new EnemyDAO(connection);
             this.itemDAO = new ItemDAO(connection);
+            this.dataRetrieverImpl = new DataRetrieverImpl();
         } catch (SQLException | ClassNotFoundException | NoSuchAlgorithmException e) {
             throw new ServletException(e);
         }
@@ -65,48 +68,23 @@ public class BattleServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 	    
 		// battle インスタンスが null の場合は初期化処理を再度実行
-		
 		  if (battle == null) {
 			  	System.out.println("battle作成処理");
-		        PlayerEntity player = (PlayerEntity) session.getAttribute("player");
-		        List<ItemEntity> items = (List<ItemEntity>) session.getAttribute("items");
 	
-//		        if (player != null && items != null) {
 		            try {
-		            	User user;
-		            	if((User)session.getAttribute("user") == null) {
-		            		System.out.println("UserDAOから");
-			    			user = userDAO.getUserById(1);//<-アカウント作らない人用
-			    			session.setAttribute("user", user);
-		            	} else {
-		            		System.out.println("Userセッションスコープから");
-		            		user = (User)session.getAttribute("user");//<-セッションスコープから受け取り
-		            		session.setAttribute("user", user);
-		            	}
+		            	User user = dataRetrieverImpl.retrieveUserPlayerItems(connection, session);
+		            	PlayerEntity player = (PlayerEntity) session.getAttribute("player");
+		            	List<ItemEntity> items = (List<ItemEntity>) session.getAttribute("items");
 //		                int towerId = Integer.parseInt(request.getParameter("towerId"));//<-ホームのページパラメーターから取得 1~
 //		                TowerEntity tower = towerDAO.getTowerById(towerId);//<-ホームのページパラメーターから取得
 		                TowerEntity tower = towerDAO.getTowerById(1);//<-仮置き ↑	    			
 		                List<QuizEntity> quizEntities = quizDAO.getQuestionsByGenre(tower.getGenre());//ジャンルは今現在はnormalのみ
 
-		                if(session.getAttribute("player") == null) {
-		                	System.out.println("playerDAOから");
-		                	player = playerDAO.getPlayerById(user.getPlayer_id());//<-仮置き、ログイン時playerをセッションスコープに載せたら不要
-		                } else {
-		                	System.out.println("playerセッションスコープから");
-						}
-		                	session.setAttribute("player", player);
 		                List<EnemyEntity> enemies = enemyDAO.getAllEnemies();
 		                
-		            	if(items == null || items.isEmpty()) {
-			    			items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());//<-アカウント作らない人用
-		            	} else {
-		            		System.out.println("itemsセッションスコープから");
-		            	}
-		            		session.setAttribute("items", items);
-
 		                battle = new Battle(tower, player, enemies, quizEntities, items);
 		                battle.startBattle();
-		            } catch (SQLException e) {
+		            } catch (SQLException | NoSuchAlgorithmException e) {
 		                System.out.println(e);
 		                throw new ServletException(e);
 		            }
@@ -115,6 +93,7 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("towerName", battle.getTowerName());
 		request.setAttribute("currentFloor", battle.getCurrentFloor());
 		//player
+		request.setAttribute("Name", battle.getPlayer().getName());
 		request.setAttribute("playerHP", battle.getPlayerHP());
 		request.setAttribute("playerMaxHP", battle.getPlayerMaxHP());
 		request.setAttribute("isPlayerAlive", battle.isPlayerAlive());
