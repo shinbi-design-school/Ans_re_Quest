@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="totalMenu">
-    <!-- <jsp:include page="moneyFrame.jsp"/> ファイルが見当たらないためコメントアウト-->
+    <%-- <jsp:include page="moneyFrame.jsp"/> ファイルが見当たらないためコメントアウト--%>
     <h1>ショップ</h1>
         <% 
         Object action = request.getAttribute("isBuy5050");
