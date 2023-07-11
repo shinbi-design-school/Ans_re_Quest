@@ -17,9 +17,10 @@
 </div>
 <div class="rightMenu">
 <p>現在の装備</p>
-<div class="weapon">武器：エスカリボルグ</div>
-<div class="armor">防具：sampleローブ</div>
-<div class="items">装飾：sampleブレスレット</div>
+<div class="weapon">武器<br>　エスカリボルグ</div>
+<div class="armor">防具<br>　sampleローブ</div>
+<div class="items">装飾<br>　sampleブレスレット</div>
+<div class="money">現在の所持金<br>　9999999999$</div>
 </div>
 <div class="trickMenuList">
 <div>Menu</div>

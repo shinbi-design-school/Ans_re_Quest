@@ -10,6 +10,7 @@
 </head>
 <body>
 <div id="totalMenu">
+    <jsp:include page="moneyFrame.jsp"/>
     <h1>ショップ</h1>
     
  <div class="currency">所持コイン: 100</div>

@@ -12,8 +12,9 @@
         <%= error %>
         <% } %>
 </form>
-<p>アカウント登録がお済みでない方はこちらへ↓
-    <form method="post" name="form1" action="user">
+<p>アカウント登録がお済みでない方はこちら
+    <button><form method="post" name="form1" action="user">
     <input type="hidden" name="operation" value="new"><a href="javascript:form1.submit()">新規登録</a></form>
+    </button>
 </p>	
 </div>

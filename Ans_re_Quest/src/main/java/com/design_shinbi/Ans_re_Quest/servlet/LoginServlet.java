@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet{
 			
 			String email = req.getParameter("email");
 			if(email == null || email.isEmpty()) {
-				error = error + "メールアドレスを入力しやがってください";
+				error = error + "メールアドレスを入力してください";
 			}
 			
 			String password = req.getParameter("password");
@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet{
 					error = "ユーザ名、もしくはパスワードが違います。";
 				}
 				req.setAttribute("error", error);
-				jsp = "/WEB-INF/jsp/top.jsp";
+				jsp = "/WEB-INF/jsp/error.jsp";
 			}else {
 				HttpSession session = req.getSession();
 				session.setAttribute("user", user);
