@@ -2,6 +2,7 @@ package com.design_shinbi.Ans_re_Quest.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import com.design_shinbi.Ans_re_Quest.model.dao.ItemDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.PlayerDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.UserDAO;
+import com.design_shinbi.Ans_re_Quest.model.entity.ItemEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.User;
 import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 
@@ -63,11 +66,25 @@ public class LoginServlet extends HttpServlet{
 				jsp = "/WEB-INF/jsp/top.jsp";
 			}else {
 				HttpSession session = req.getSession();
+				PlayerEntity player = playerDAO.getPlayerById(user.getPlayer_id());
+				if(player == null) {
+					System.out.println("新規プレイヤー作成");
+					PlayerEntity newPlayer = new PlayerEntity(user.getId(), user.getName(), 30, 0, 100);
+					playerDAO.addOrUpdatePlayer(newPlayer);
+					player = playerDAO.getPlayerById(user.getPlayer_id());
+				}
+				List<ItemEntity> items = itemDAO.getAllItemsByPlayerId(player.getId());
+				items = itemDAO.getAllItemsByPlayerId(player.getId());
+				System.out.println(items);
+				if(items == null || items.isEmpty()) {
+					System.out.println("itemnull判定");
+					itemDAO.addDefaultItemsByPlayer(player);
+					items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());
+					System.out.println("items作成");
+				}
 				session.setAttribute("user", user);
-				
-				session.setAttribute("player", playerDAO.getPlayerById(user.getPlayer_id()));
+				session.setAttribute("player", player);
 				session.setAttribute("items", itemDAO.getAllItemsByPlayerId(user.getPlayer_id()));
-				
 				System.out.println("ログイン後セッション上げ");
 				jsp = "/WEB-INF/jsp/home.jsp";
 			}

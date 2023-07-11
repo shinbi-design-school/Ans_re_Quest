@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.design_shinbi.Ans_re_Quest.model.dao.ItemDAO;
+import com.design_shinbi.Ans_re_Quest.model.dao.PlayerDAO;
 import com.design_shinbi.Ans_re_Quest.model.dao.UserDAO;
+import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 import com.design_shinbi.Ans_re_Quest.model.entity.User;
 import com.design_shinbi.Ans_re_Quest.util.DbUtil;
 
@@ -62,6 +65,15 @@ public class UserServlet extends HttpServlet {
 				jsp = editUser(request, dao);
 			} else if (operation.equals("add")) {
 				jsp = addUser(request, dao);
+				User user = new UserDAO(connection).findNew();
+				//さらにplayertableとplayeritemsテーブルに要素追加
+				PlayerDAO playerDAO = new PlayerDAO(connection);
+				ItemDAO itemDAO = new ItemDAO(connection);
+				PlayerEntity player = new PlayerEntity(user.getId(), user.getName(), 30, 0, 100);
+				playerDAO.addOrUpdatePlayer(player);
+				itemDAO.addDefaultItemsByPlayer(player);
+				
+				
 			} else if (operation.equals("update")) {
 				jsp = updateUser(request, dao);
 			} else if (operation.equals("delete")) {
