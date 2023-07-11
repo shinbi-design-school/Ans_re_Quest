@@ -10,6 +10,7 @@
 </head>
 <body>
 <div id="totalMenu">
+    <!-- <jsp:include page="moneyFrame.jsp"/> ファイルが見当たらないためコメントアウト-->
     <h1>ショップ</h1>
         <% 
         Object action = request.getAttribute("isBuy5050");
@@ -28,18 +29,24 @@
        <div class="item-container">
         <div class="item">
             <div class="item-wrapper">
-                <h2>アイテム1(<%= request.getAttribute("5050Quantity") %>)</h2>
+                <h2>5050(<%= request.getAttribute("5050Quantity") %>)</h2>
             </div>
             <div class="price">$20</div>
-            <button>購入する</button>
-        </div>
+				<form method="post" name="form1" action="shop" class="5050">
+					<input type="hidden" name="operation" value="buy5050">
+					<button type="submit">購入する</button>
+				</form>
+			</div>
         
         <div class="item">
             <div class="item-wrapper">
-                <h2>アイテム2(<%= request.getAttribute("skipQuantity") %>)</h2>
+                <h2>Skip(<%= request.getAttribute("skipQuantity") %>)</h2>
             </div>
             <div class="price">$10</div>
-            <button>購入する</button>
+				<form method="post" name="form2" action="shop" class="skip">
+					<input type="hidden" name="operation" value="buySkip">
+					<button type="submit">購入する</button>
+				</form>
         </div>
         
         <div class="item">
