@@ -402,6 +402,16 @@ div.guestMode{
     margin: 0;
     color: #333;
 }
+/*エラー画面用*/
+#bad{
+	height: 720px;
+	margin: 0;
+	padding: 0;
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 2em;
+	text-align: left;
+}
+
 /*フッター装飾*/
 footer{
 	text-align: center;

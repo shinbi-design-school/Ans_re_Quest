@@ -3,8 +3,9 @@
     <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="shop.css">
 <jsp:include page="head.jsp"/>
-    <link rel="stylesheet" type="text/css" href="shop.css">
+    
     <title>shop</title>
 </head>
 <body>
