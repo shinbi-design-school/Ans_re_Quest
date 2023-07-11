@@ -402,6 +402,29 @@ div.guestMode{
     margin: 0;
     color: #333;
 }
+
+/*guide*/
+.details_container{
+    color: #fff;
+    width: 100%;
+    max-width: 500px;
+}
+.details_container summary{
+    display: inline-block;
+    width:250px;
+    background-color: #373b3c;
+    margin:5px 0;
+    padding: 15px;
+    text-align: center;
+    outline: none;
+}
+
+.details_container p{
+    background-color: #3f51b5;
+    width: 800px;
+    text-align: center;
+    list-style: none;
+}
 /*エラー画面用*/
 #bad{
 	height: 720px;

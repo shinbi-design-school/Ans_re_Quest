@@ -28,7 +28,7 @@
        <div class="item-container">
         <div class="item">
             <div class="item-wrapper">
-                <h2>アイテム1(<%= request.getAttribute("5050Quantity") %>)</h2>
+                <h2>5050<br>(<%= request.getAttribute("5050Quantity") %>)</h2>
             </div>
             <div class="price">$20</div>
             <button>購入する</button>
@@ -36,7 +36,7 @@
         
         <div class="item">
             <div class="item-wrapper">
-                <h2>アイテム2(<%= request.getAttribute("skipQuantity") %>)</h2>
+                <h2>skip<br>(<%= request.getAttribute("skipQuantity") %>)</h2>
             </div>
             <div class="price">$10</div>
             <button>購入する</button>
@@ -44,9 +44,9 @@
         
         <div class="item">
             <div class="item-wrapper">
-                <h2>アイテム3</h2>
+                <h2>coming soon…</h2>
             </div>
-            <div class="price">$30</div>
+            <div class="price">$--</div>
             <button>購入する</button>
         </div>  
         
