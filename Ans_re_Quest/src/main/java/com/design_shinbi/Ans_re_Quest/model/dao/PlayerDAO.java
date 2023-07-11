@@ -71,6 +71,25 @@ public class PlayerDAO {
 		
 		return player;
 	}
+	
+
+    public void addOrUpdatePlayer(PlayerEntity player) throws SQLException {
+        String query = "INSERT INTO players (player_id, name, achieve, money) " +
+                       "VALUES (?, ?, ?, ?) " +
+                       "ON DUPLICATE KEY UPDATE " +
+                       "name = VALUES(name), " +
+                       "achieve = VALUES(achieve), " +
+                       "money = VALUES(money)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, player.getId());
+            stmt.setString(2, player.getName());
+            stmt.setInt(3, player.getAchieve());
+            stmt.setInt(4, player.getMoney());
+
+            stmt.executeUpdate();
+        }
+    }
     
     // その他、必要なメソッドを追加する（例: プレイヤーの追加、更新、削除など）
 }

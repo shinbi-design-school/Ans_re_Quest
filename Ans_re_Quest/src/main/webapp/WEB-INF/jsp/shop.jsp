@@ -10,23 +10,34 @@
 <body>
 <div id="totalMenu">
     <h1>ショップ</h1>
-    
- <div class="currency">所持コイン: 100</div>
+        <% 
+        Object action = request.getAttribute("isBuy5050");
+        if (action != null) {
+        %>
+        <p>5050を購入した</p>
+        <% } %>
+        <%
+        Object action2 = request.getAttribute("isBuySkip");
+        if (action2 != null) {
+        %>
+        <p>5050を購入した</p>
+        <% } %>
+ <div class="currency">所持コイン: <%= request.getAttribute("money") %></div>
     
        <div class="item-container">
         <div class="item">
             <div class="item-wrapper">
-                <h2>アイテム1</h2>
+                <h2>アイテム1(<%= request.getAttribute("5050Quantity") %>)</h2>
             </div>
-            <div class="price">$10</div>
+            <div class="price">$20</div>
             <button>購入する</button>
         </div>
         
         <div class="item">
             <div class="item-wrapper">
-                <h2>アイテム2</h2>
+                <h2>アイテム2(<%= request.getAttribute("skipQuantity") %>)</h2>
             </div>
-            <div class="price">$20</div>
+            <div class="price">$10</div>
             <button>購入する</button>
         </div>
         

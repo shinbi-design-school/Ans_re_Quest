@@ -54,7 +54,7 @@ public class ShopServlet extends HttpServlet{
 		
 		String jsp = null;
 		jsp = "WEB-INF/jsp/shop.jsp";
-		
+		request.setAttribute("money", player.getMoney());
 		request.setAttribute("5050Quantity", items.get(0).getQuantity());
 		request.setAttribute("skipQuantity", items.get(1).getQuantity());
 		RequestDispatcher dispatcher = request.getRequestDispatcher(jsp);

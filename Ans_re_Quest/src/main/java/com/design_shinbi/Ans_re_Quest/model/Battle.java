@@ -89,7 +89,7 @@ public class Battle {
             damageMultiplier = 1.5;
         }
         int damage = (int) (10 * damageMultiplier);
-        currentEnemy.setHp(currentHP - damage);
+        player.setHp(currentHP - damage);
     }
     
     private void moveToNextQuestion() {

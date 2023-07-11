@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.design_shinbi.Ans_re_Quest.model.entity.ItemEntity;
+import com.design_shinbi.Ans_re_Quest.model.entity.PlayerEntity;
 
 public class ItemDAO {
 	private Connection connection;
@@ -99,4 +100,23 @@ public class ItemDAO {
 
 	    statement.close();
 	}
-}
+	
+    public void addDefaultItemsByPlayer(PlayerEntity player) throws SQLException {
+        String query = "INSERT INTO player_items (player_id, item_id, quantity) VALUES (?, ?, ?)";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            // デフォルトの値を設定してデータを追加
+            statement.setInt(1, player.getId());
+            statement.setInt(2, 1);
+            statement.setInt(3, 5);
+            statement.executeUpdate();
+
+            statement.setInt(1, player.getId());
+            statement.setInt(2, 2);
+            statement.setInt(3, 5);
+            statement.executeUpdate();
+        }
+    }
+	
+	
+	}
