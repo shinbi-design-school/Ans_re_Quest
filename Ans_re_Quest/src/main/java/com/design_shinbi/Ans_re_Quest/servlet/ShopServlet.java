@@ -63,9 +63,13 @@ public class ShopServlet extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String operation = request.getParameter("operation");
+		
 		try {
+			System.out.println("購入operate");
 			operate(request, operation);
+			session.setAttribute("items", shop.getItems());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -77,6 +81,7 @@ public class ShopServlet extends HttpServlet{
 		String jsp = null;
 		if (operation != null) {
 			if (operation.equals("buy5050")) {
+				System.out.println("buy5050");
 				shop.buy5050();
 				request.setAttribute("isBuy5050","true");
 			} else if (operation.equals("buySkip")) {

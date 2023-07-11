@@ -61,7 +61,8 @@ public class HomeServlet extends HttpServlet{
 					playerDAO.addOrUpdatePlayer(player);
 				}
 				items = itemDAO.getAllItemsByPlayerId(player.getId());
-				if(items == null) {
+				if(items == null || items.isEmpty()) {
+					System.out.println("新規アイテム所持追加");
 					itemDAO.addDefaultItemsByPlayer(player);
 					items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());
 				}
@@ -79,9 +80,23 @@ public class HomeServlet extends HttpServlet{
     		try {
     		System.out.println("Userセッションスコープから");
     		user = (User)session.getAttribute("user");//<-セッションスコープから受け取り
-			player = playerDAO.getPlayerById(user.getPlayer_id());
-			items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());
-    		session.setAttribute("user", user);
+			player = (PlayerEntity)session.getAttribute("player");
+			items = (List<ItemEntity>) session.getAttribute("items");
+			////
+			if(player == null) {
+				System.out.println("nodb 新規プレイヤー作成");
+				player = new PlayerEntity(user.getId(), user.getName(), 30, 0, 100);
+				playerDAO.addOrUpdatePlayer(player);
+			}
+			if(items == null) {
+				System.out.println("nodb 新規アイテム追加");
+				itemDAO.addDefaultItemsByPlayer(player);
+				items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());
+			}
+			System.out.println("全セッション上げ");
+			session.setAttribute("user", user);
+			session.setAttribute("player", player);
+			session.setAttribute("items", items);
 			} catch (SQLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();

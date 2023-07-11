@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/top")
 public class TopServlet extends HttpServlet{
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO 自動生成されたメソッド・スタブ
 		String jsp = null;
 		jsp = "WEB-INF/jsp/top.jsp";
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
 		dispatcher.forward(req, resp);
-	}
 
+	}
 }

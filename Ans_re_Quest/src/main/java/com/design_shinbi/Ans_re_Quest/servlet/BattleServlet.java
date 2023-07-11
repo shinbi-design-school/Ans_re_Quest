@@ -97,8 +97,10 @@ public class BattleServlet extends HttpServlet {
 		                	session.setAttribute("player", player);
 		                List<EnemyEntity> enemies = enemyDAO.getAllEnemies();
 		                
-		            	if(items == null) {
+		            	if(items == null || items.isEmpty()) {
 			    			items = itemDAO.getAllItemsByPlayerId(user.getPlayer_id());//<-アカウント作らない人用
+		            	} else {
+		            		System.out.println("itemsセッションスコープから");
 		            	}
 		            		session.setAttribute("items", items);
 
