@@ -133,6 +133,8 @@ public class UserServlet extends HttpServlet {
 			System.out.println("登録成功");
 			request.setAttribute("error", "登録完了");
 			jsp = "/WEB-INF/jsp/top.jsp";
+			
+/////////////////////////////			
 		} else {
 			System.out.println("error");
 			request.setAttribute("error", error);
