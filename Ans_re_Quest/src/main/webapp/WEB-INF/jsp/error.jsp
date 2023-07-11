@@ -13,11 +13,10 @@
     background-color: black;
   }
 </style>
-<div id="totalMenu">
   <div id="error">
     <p id="bad" style="word-wrap: break-word;"></p>
+    <button id="badButton"><a href="top">はヤく戻レ</a></button>
   </div>
-</div>
 <script type="text/javascript">
   var text = "エラー";
   var i = 0;
@@ -35,7 +34,6 @@
   }
   typeWriter();
 </script>
-
 </main>
 <jsp:include page="footer.jsp"/>
 </body>
