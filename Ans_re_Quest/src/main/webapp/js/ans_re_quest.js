@@ -12,7 +12,7 @@ $(function() {
               ['サポートキャラの「名称未設定」だよ。<br>アバターとして冥鳴ひまりを使っているよ。', 'imgs/homeChara/face2.png'],
               ['なんでこのアバターなのかって？<br>動画制作で使わなかった素材だからだよ。', 'imgs/homeChara/face3.png'],
               ['正直CSS担当していてもコンテンツでやりたいことはあるんだよ。でも実装どころか構成も構想もろくにできてない有様だよ。', 'imgs/homeChara/face4.png'],
-              ['フフフフ、分からない。分からないんだよ。どうすればいいのか分からないんだよ！(Guideページの事)', 'imgs/homeChara/face5.png']
+              ['フフフフ、分からない。分からないんだよ。どうすればいいのか分からないんだよ！', 'imgs/homeChara/face5.png']
 //              ['', 'imgs/homeChara/'],
              ];
 
@@ -48,7 +48,6 @@ $(function() {
 });
 
 
-
 //logoの表示
 $(window).on('load',function(){
     $("#splash").delay(1800).fadeOut('slow');//ローディング画面を1.8秒待機してからフェードアウト
@@ -65,6 +64,13 @@ $(window).on('load',function(){
   });
   
   bar.animate(1.0); 
+
+//ボタンにマウスオーバーした時の処理
+const scenarioArea = document.querySelector(".scenario");
+var SbuttonText = ['ここでシナリオの閲覧が出来る「予定」だよ。<br>因みに出来ても「最初から全部読める」ようになる気がしているよ。'];
+scenarioArea.addEventListener('mouseover',()=>{
+  $('div.comment').html(SbuttonText).show();
+});
 
 //音楽再生用モーダルウインドウ、処理確定が出来ていないのでコメントアウト中
 //const audio = $("#audio")[0]
