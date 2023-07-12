@@ -24,7 +24,7 @@
         %>
         <p>5050を購入した</p>
         <% } %>
- <div class="currency">所持コイン: <%= request.getAttribute("money") %></div>
+ <%--<div class="currency">所持コイン: <%= request.getAttribute("money") %></div> --%>
     
        <div class="item-container">
         <div class="item">

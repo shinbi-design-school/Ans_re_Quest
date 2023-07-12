@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /*塔に挑むボタン*/
 .Quest {
-  width: 240px;
-  height: 80px;
+  width: 180px;
+  height: 75px;
   border: none;
   border-radius: 10px;
   background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
@@ -49,8 +49,8 @@
 }
 /*シナリオボタン*/
 .scenario {
-  width: 240px;
-  height: 80px;
+  width: 180px;
+  height: 75px;
   border: none;
   border-radius: 10px;
   background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
@@ -97,8 +97,8 @@
 }
 /*ログアウトボタン*/
 .logout {
-  width: 240px;
-  height: 80px;
+  width: 180px;
+  height: 75px;
   border: none;
   border-radius: 10px;
   background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);

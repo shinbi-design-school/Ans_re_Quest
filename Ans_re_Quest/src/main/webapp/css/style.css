@@ -6,6 +6,8 @@ body{
 	background-color: navy;
 	background-image: url(../imgs/割れたガラス3.png);
 	background-size: cover;
+	font-size:large;
+
 }
 /*リンク装飾（後に消去？）*/
 a{
@@ -117,6 +119,40 @@ img#enemy{
 	color: black;
 	background:rgba(254,244,244,0.8);
 }
+/*リザルト画面の各種仮置き*/
+.clearEvent{
+	background:rgba(254,244,244,0.8);
+	margin:0% 2%;
+	height:93%;
+
+
+}
+.accessory {
+	margin:0% 3%;
+	border: none;
+	border-top: 3px double #333;
+	overflow: visible;
+	text-align: center;
+	height: 5px;
+}
+.accessory:after {
+	padding: 0 4px;
+	position: relative;
+	top: -15px;
+	}
+.clearCharacter{
+	width:400px;
+	position:absolute;
+}
+.clearText{
+	color:#fff;
+	position:absolute;
+	padding:10px;
+	right:18%;
+	bottom:15%;
+	z-index:1;
+	background:rgba(81,55,67,0.5);
+}
 
 
 /*トップ・マイページのフレックス*/
@@ -220,7 +256,7 @@ div.guestMode{
 	margin: 1%;
 	padding:1%;
 	border: white 1px double;
-	border-radius: 30% 30% 30% 30%;
+	border-radius:  60% 20%;
 	background-color: rgba(0,110,84,0.5);
 }
 
@@ -249,7 +285,7 @@ div.guestMode{
 	right: 50px;
 	bottom: 150px;
 }
-.homeQuest{
+.homeScenario{
 		margin: 10px 0px;
 }
 

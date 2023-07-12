@@ -12,18 +12,19 @@
 <div class="circle"><p style="word-wrap: break-word;"><p>塔の名前とかレベルとか出る予定</p></div>
 <div class="userName"><p>ここに名前を表示させたい</p></div>
 
-<jsp:include page="moneyFrame.jsp"/>
-
+<%--<jsp:include page="moneyFrame.jsp"/>
+ 	SHOPページと同じ変数を引っ張ってこれるようにしてほしいです。--%>
+ 	
 <div class="homeChara">
 <div><img src="imgs/homeChara/face1.png" id="change_image" class="character"></div>
 <div class="text"><div class="wordbox"><div class="word">
-<div class="comment" style="word-wrap: break-word;">
+<div class="comment" style="word-wrap: break-word;" text="表示">
 </div></div></div></div>
 </div>
 
 <div class="homeMenu">
-	<div class="homeScenario"><a href="scenario"><button class="scenario"></button></a></div>
 	<div class="homeQuest"><a href="battle"><button class="Quest"></button></a></div>
+	<div class="homeScenario"><a href="scenario"><button class="scenario"></button></a></div>
 	<div class="homeLogout"><a href="logout"><button class="logout"></button></a></div>
 </div>
 

@@ -11,7 +11,7 @@ $(function() {
   var elements = [
               ['サポートキャラの「名称未設定」だよ。<br>アバターとして冥鳴ひまりを使っているよ。', 'imgs/homeChara/face2.png'],
               ['なんでこのアバターなのかって？<br>動画制作で使わなかった素材だからだよ。', 'imgs/homeChara/face3.png'],
-              ['正直CSS担当していてもコンテンツでやりたいことはあるんだよ。でも実装どころか構成も構想もろくにできてない有様だよ。', 'imgs/homeChara/face4.png'],
+              ['未実装の要素がはすごく多いよ。<br>実装できるかは不明だよ。', 'imgs/homeChara/face4.png'],
               ['フフフフ、分からない。分からないんだよ。どうすればいいのか分からないんだよ！', 'imgs/homeChara/face5.png']
 //              ['', 'imgs/homeChara/'],
              ];
