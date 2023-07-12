@@ -514,3 +514,50 @@ footer{
  background-color: #FFF5EE;
  border-radius: 8px;
 }
+
+/*バトル結果画面*/
+#resultContainer {
+  text-align: center;
+}
+
+#resultContainer h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#gameOverText {
+  font-size: 100px;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 20px;
+  text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
+}
+
+#victoryText {
+  font-size: 100px;
+  font-weight: bold;
+  color: green;
+  margin-bottom: 20px;
+  text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
+}
+
+#resultMessage {
+ margin: 2em auto;
+ padding: 1em;
+ width: 400px;
+ background-color: #FFF5EE;
+}
+
+#result_next {
+margin: 2em auto;
+ padding: 1em;
+ width: 130px;
+ background-color: #FFF5EE;
+ border-radius: 8px;
+}
