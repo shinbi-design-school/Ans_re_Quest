@@ -25,11 +25,12 @@ public class Battle {
     private int totalQuizCount;//現在使用予定なし。
 	private int currentEnemyIndex;
 	private int currentFloor;
+	private long loginTime;
 	
 	private PlayerData playerdata;
 	
 	
-    public Battle(TowerEntity tower, PlayerEntity player,List<EnemyEntity> enemies,List<QuizEntity> quizEntities,List<ItemEntity> items) {
+    public Battle(TowerEntity tower, PlayerEntity player,List<EnemyEntity> enemies,List<QuizEntity> quizEntities,List<ItemEntity> items, Long loginTime) {
         // 初期化などのコード
     	
     	this.tower = tower;
@@ -38,6 +39,7 @@ public class Battle {
         this.currentEnemy = enemies.get(currentEnemyIndex);
         this.quizEntities = quizEntities;
         this.items = items;
+        this.loginTime = loginTime;
     }
     
 	public void startBattle() {
@@ -427,4 +429,13 @@ public class Battle {
         
         return maskedBuilder.toString();
     }
+
+	public long getLoginTime() {
+		return loginTime;
+	}
+
+	public void setLoginTime(long loginTime) {
+		this.loginTime = loginTime;
+	}
+	
 }
