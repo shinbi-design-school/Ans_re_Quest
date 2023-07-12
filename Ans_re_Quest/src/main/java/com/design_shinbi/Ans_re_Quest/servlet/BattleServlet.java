@@ -68,7 +68,7 @@ public class BattleServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 	    
 		// battle インスタンスが null の場合は初期化処理を再度実行
-		  if (battle == null) {
+		  if (battle == null|| battle.getLoginTime() != (long)session.getAttribute("loginTime")) {
 			  	System.out.println("battle作成処理");
 	
 		            try {
@@ -82,7 +82,16 @@ public class BattleServlet extends HttpServlet {
 
 		                List<EnemyEntity> enemies = enemyDAO.getAllEnemies();
 		                
-		                battle = new Battle(tower, player, enemies, quizEntities, items);
+		                long loginTime;
+		                Object loginTimeAttribute = session.getAttribute("loginTime");
+		                if (loginTimeAttribute != null) {
+		                    loginTime = (long) loginTimeAttribute;
+		                } else {
+		                    loginTime = System.currentTimeMillis();
+		                }		                	
+		                session.setAttribute("loginTime", loginTime);
+		                
+		                battle = new Battle(tower, player, enemies, quizEntities, items, loginTime);
 		                battle.startBattle();
 		            } catch (SQLException | NoSuchAlgorithmException e) {
 		                System.out.println(e);

@@ -85,6 +85,7 @@ public class LoginServlet extends HttpServlet{
 				session.setAttribute("user", user);
 				session.setAttribute("player", player);
 				session.setAttribute("items", itemDAO.getAllItemsByPlayerId(user.getPlayer_id()));
+				session.setAttribute("loginTime", System.currentTimeMillis());
 				System.out.println("ログイン時セッションセットuser,player,items");
 				jsp = "/WEB-INF/jsp/home.jsp";
 			}
