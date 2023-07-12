@@ -48,12 +48,12 @@ public class Battle {
     	shuffleQuizEntities();
     }
 	
-    public void answerQuiz(String choice) {
+    public void answerQuiz(String choice,Boolean isUsedAi) {
         QuizEntity currentQuestion = getCurrentQuestion();
         
         if (currentQuestion != null) {
             if (currentQuestion.getCorrectAnswer().equals(choice)) {
-                handleCorrectAnswer();
+                handleCorrectAnswer(isUsedAi);
             } else {
                 handleWrongAnswer();
             }
@@ -62,16 +62,19 @@ public class Battle {
         }
     }
     
-    private void handleCorrectAnswer() {
+    private void handleCorrectAnswer(Boolean isUsedAi) {
         int currentHP = currentEnemy.getHp();
         String difficulty = getCurrentQuestion().getDifficulty();
         double damageMultiplier = 1.0;
+        if(isUsedAi == true) {
+        	damageMultiplier = 0.5;
+        }
         if (difficulty.equals("normal")) {
-            damageMultiplier = 1.0;
+            damageMultiplier = damageMultiplier*1.0;
         } else if (difficulty.equals("hard")) {
-            damageMultiplier = 1.5;
+            damageMultiplier = damageMultiplier*1.5;
         } else if (difficulty.equals("easy")) {
-            damageMultiplier = 0.7;
+            damageMultiplier = damageMultiplier*0.7;
         }
         int damage = (int) (10 * damageMultiplier);
         currentEnemy.setHp(currentHP - damage);

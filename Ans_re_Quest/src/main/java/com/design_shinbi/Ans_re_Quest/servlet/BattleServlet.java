@@ -142,15 +142,20 @@ public class BattleServlet extends HttpServlet {
 		
 		//制限時間
 		if (Boolean.parseBoolean(request.getParameter("isImpatient"))) {
+			//焦り状態
 			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime()-5);
 		} else {
 			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime());
 		}
 		//hint
 		request.setAttribute("aiAnswer", battle.getCurrentQuestion().getAi_answer());
-		request.setAttribute("5050Quantity", battle.get5050Quantity());
-		request.setAttribute("skipQuantity", battle.getSkipQuantity());
-
+		request.setAttribute("quantity5050", battle.get5050Quantity());
+		request.setAttribute("quantitySkip", battle.getSkipQuantity());
+		//hint使用禁止用
+		if (Boolean.parseBoolean(request.getParameter("isNoHint"))) {
+		request.setAttribute("isNoHint", true);
+		}
+		
 		// Battle.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/battle.jsp");
 		dispatcher.forward(request, response);
@@ -159,6 +164,7 @@ public class BattleServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// フォームからの回答を取得
+		System.out.println("isusedai"+request.getParameter("isUsedAi"));
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		
@@ -174,7 +180,8 @@ public class BattleServlet extends HttpServlet {
 		} else {
 			System.out.println("通常選択処理");
 			String choice = request.getParameter("choice");
-			battle.answerQuiz(choice);
+			Boolean isUsedAi = Boolean.parseBoolean(request.getParameter("isUsedAi"));
+			battle.answerQuiz(choice,isUsedAi);
 
 			// どちらかのHPが尽きたか
 			if (!battle.isPlayerAlive() || !battle.isEnemyAlive()) {

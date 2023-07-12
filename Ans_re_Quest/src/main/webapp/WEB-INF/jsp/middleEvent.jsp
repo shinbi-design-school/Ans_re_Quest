@@ -24,7 +24,7 @@
     <% if (pattern1 == 1) { %>
         <h2>アイテムに目がくらんで<br>罠にかかってしまった！</h2>
         <form method="post" name="form1" action="battle">
-  		<input type="hidden" name="isSerious" value="true">
+  		<input type="hidden" name="isNoHint" value="true">
         <p>アイテム:5050を<%= pattern2 %>個手に入れた。</p>
         <p>まじめかの罠を踏んだ（アイテム使用不可）</p>
         <p><a href="javascript:form1.submit()">次へ</a></p>

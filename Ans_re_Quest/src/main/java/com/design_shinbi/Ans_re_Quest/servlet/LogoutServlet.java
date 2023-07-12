@@ -18,7 +18,10 @@ public class LogoutServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		session.removeAttribute(Const.LOGIN_USER_KEY);
-		
+		session.removeAttribute("user");
+		session.removeAttribute("player");
+		session.removeAttribute("items");
+
 		String jsp = "/WEB-INF/jsp/top.jsp";
 		try {
 			RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);
@@ -27,5 +30,4 @@ public class LogoutServlet extends HttpServlet{
 			throw new ServletException(e);
 		}
 	}
-
 }

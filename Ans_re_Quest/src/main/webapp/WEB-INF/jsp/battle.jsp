@@ -3,9 +3,24 @@
     
     
 <%
-Boolean isUsed5050 = Boolean.parseBoolean(request.getParameter("isUsed5050"));
-Boolean isUsedSkip = Boolean.parseBoolean(request.getParameter("isUsedSkip"));
+Boolean isUsed5050 = (Boolean) request.getAttribute("isUsed5050");
+if (isUsed5050 == null) {
+    isUsed5050 = false;
+}
+
+Boolean isUsedSkip = (Boolean) request.getAttribute("isUsedSkip");
+if (isUsedSkip == null) {
+    isUsedSkip = false;
+}
+
+Boolean isNoHint = (Boolean) request.getAttribute("isNoHint");
+if (isNoHint == null) {
+    isNoHint = false;
+}
+int quantity5050 = (int)request.getAttribute("quantity5050");
+int quantitySkip = (int)request.getAttribute("quantitySkip");
 %>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,29 +56,62 @@ Boolean isUsedSkip = Boolean.parseBoolean(request.getParameter("isUsedSkip"));
 	
 	<!-- 修正 -->
 
-    <p>//AIやアイテムを使ったらパラメーターに使用の有無情報が伝わるように設定予定//</p>
+    <p></p>
     <div class="helpItems">
-    <p>Opened AI Answer: <%= request.getAttribute("aiAnswer") %> →parameter=isUsedAI</p>
-    
+		<script>
+    function startTypewriter() {
+        var text = "<%= request.getAttribute("aiAnswer") %>"; // 表示したいテキスト
+        var speed = 100; // 文字を表示する速度（ミリ秒単位）
+
+        var i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typewriter").textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // タイプライターエフェクトを開始する
+        typeWriter();
+    }
+    function hideButtonText() {
+        var aiButton = document.getElementById("aiButton");
+        aiButton.style.display = "none";
+        
+        var form = document.getElementById("flex-questions");
+        var isUsedAiInput = document.createElement("input");
+        isUsedAiInput.type = "hidden";
+        isUsedAiInput.name = "isUsedAi";
+        isUsedAiInput.value = "true";
+        form.appendChild(isUsedAiInput);
+    }
+</script>
+	<button onclick="startTypewriter(); hideButtonText()" id="aiButton">AIに聞く</button>
+	<div id="typewriter"></div>
+	
     <!--  5050アイテム0または使用済みなら隠す -->
     <% if(isUsed5050){ %>
 	<p>5050使用済み<p>
 	<%} %>    
+	<% if(!(isNoHint || isUsed5050 || isNoHint || (quantity5050 <= 0))){ %>
     <form method="post" name="form1" action="battle">
     <input type="hidden" name="isUsed5050" value="true">
     <a href="javascript:form1.submit()">
-    	50/50: <%= request.getAttribute("5050Quantity") %>個</a>
+    	50/50: <%= quantity5050 %>個</a>
 	</form>
-	
+	<%} %>
 	<!--  SKIPアイテム0なら隠す -->
 	    <% if(isUsedSkip){ %>
 	<p>Skip使用した<p>
 	<%} %>    
+	<% if(!(isNoHint || (quantitySkip <= 0) )){ %>
     <form method="post" name="form2" action="battle" class="skip">
 	    <input type="hidden" name="isUsedSkip" value="true">
 	    <a href="javascript:form2.submit()">
-		<p>SKIP: <%= request.getAttribute("skipQuantity") %>個 </p>
-		</a>
+		SKIP: <%= quantitySkip %>個 </a>
+	<%} %>	
+		
 	</form>
 	</div>
 </div>
