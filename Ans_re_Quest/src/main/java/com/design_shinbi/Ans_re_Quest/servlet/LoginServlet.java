@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet{
 				session.setAttribute("user", user);
 				session.setAttribute("player", player);
 				session.setAttribute("items", itemDAO.getAllItemsByPlayerId(user.getPlayer_id()));
-				System.out.println("ログイン後セッション上げ");
+				System.out.println("ログイン時セッションセットuser,player,items");
 				jsp = "/WEB-INF/jsp/home.jsp";
 			}
 			RequestDispatcher dispatcher = req.getRequestDispatcher(jsp);

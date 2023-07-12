@@ -12,7 +12,7 @@
 <div class="circle"><p style="word-wrap: break-word;"><p>塔の名前とかレベルとか出る予定</p></div>
 <div class="userName"><p>ここに名前を表示させたい</p></div>
 
-<%-- <jsp:include page="moneyFrame.jsp"/> --%>
+<jsp:include page="moneyFrame.jsp"/>
 
 <div class="homeChara">
 <div><img src="imgs/homeChara/face1.png" id="change_image" class="character"></div>
