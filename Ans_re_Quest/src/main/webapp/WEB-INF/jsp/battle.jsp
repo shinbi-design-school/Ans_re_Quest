@@ -19,6 +19,8 @@ if (isNoHint == null) {
 }
 int quantity5050 = (int)request.getAttribute("quantity5050");
 int quantitySkip = (int)request.getAttribute("quantitySkip");
+
+String enemyImage = (String) request.getAttribute("enemyImage");
 %>    
 
 <!DOCTYPE html>
@@ -33,7 +35,7 @@ int quantitySkip = (int)request.getAttribute("quantitySkip");
     <h1><%= request.getAttribute("towerName") %>   <%= request.getAttribute("currentFloor") %>階</h1>
     <div class="enemy">
     	<p><%=request.getAttribute("enemyName") %></p>
-    	<img alt="enemy" src="imgs/face.png" id="enemy">
+    	<img alt="enemy" src="data:image/jpeg;base64,${enemyImage}" id="enemy">
     	<p id="enemy">HP: <progress id="file" max="<%=request.getAttribute("enemyMaxHP") %>" value="<%= request.getAttribute("enemyHP") %>"></progress><%= request.getAttribute("enemyHP") %></p>
     </div>
     <div class="player">

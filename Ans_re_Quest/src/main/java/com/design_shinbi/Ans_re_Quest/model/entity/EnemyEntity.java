@@ -7,14 +7,17 @@ public class EnemyEntity {
     private int maxHp;
     private String genre;
     private String difficulty;
+    private byte[] enemyImage;
+    
 
-    public EnemyEntity(int id, String name, int hp, String genre, String difficulty) {
+    public EnemyEntity(int id, String name, int hp, String genre, String difficulty, byte[] enemyImage) {
         this.id = id;
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
         this.genre = genre;
         this.difficulty = difficulty;
+        this.enemyImage = enemyImage;
     }
 
     public int getId() {
@@ -44,6 +47,11 @@ public class EnemyEntity {
     public void setGenre(String genre) {
         this.genre = genre;
     }
-  
+
+	public byte[] getEnemyImage() {
+		return enemyImage;
+	}
+    
+    
     // その他、必要なメソッドを追加する
 }

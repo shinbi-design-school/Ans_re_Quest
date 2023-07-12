@@ -82,7 +82,7 @@ public class SessionTestServlet extends HttpServlet {
 			ItemDAO itemDAO = new ItemDAO(connection); 
 			items = itemDAO.getAllItemsByPlayerId(1); //<-セッションスコープ;user
 			
-			battle = new Battle(tower, player, enemies, quizEntities, items);//後でうつす
+//			battle = new Battle(tower, player, enemies, quizEntities, items);//後でうつす
 			battle = null;
 			//battle.startBattle();//後でうつす
 			

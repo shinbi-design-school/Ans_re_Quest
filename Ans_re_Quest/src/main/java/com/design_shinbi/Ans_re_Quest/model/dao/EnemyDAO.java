@@ -1,5 +1,6 @@
 package com.design_shinbi.Ans_re_Quest.model.dao;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,8 +30,10 @@ public class EnemyDAO {
                     int hp = resultSet.getInt("hp");
                     String genre = resultSet.getString("genre");
                     String difficulty = resultSet.getString("difficulty");
-
-                    enemy = new EnemyEntity(id,name,hp,genre,difficulty);
+                    Blob imageBlob = resultSet.getBlob("image");
+                    byte[] enemyImage = imageBlob.getBytes(1, (int) imageBlob.length());
+                    
+                    enemy = new EnemyEntity(id,name,hp,genre,difficulty,enemyImage);
                 }
             }
         }
@@ -50,8 +53,10 @@ public class EnemyDAO {
                 int hp = resultSet.getInt("hp");
                 String genre = resultSet.getString("genre");
                 String difficulty = resultSet.getString("difficulty");
+                Blob imageBlob = resultSet.getBlob("image");
+                byte[] enemyImage = imageBlob.getBytes(1, (int) imageBlob.length());
 
-                EnemyEntity enemy = new EnemyEntity(id,name,hp,genre,difficulty);
+                EnemyEntity enemy = new EnemyEntity(id,name,hp,genre,difficulty,enemyImage);
                 enemies.add(enemy);
             }
         }

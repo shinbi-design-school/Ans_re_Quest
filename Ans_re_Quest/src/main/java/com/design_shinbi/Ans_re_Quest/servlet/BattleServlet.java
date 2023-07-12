@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -68,7 +69,7 @@ public class BattleServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 	    
 		// battle インスタンスが null の場合は初期化処理を再度実行
-		  if (battle == null) {
+		  if (battle == null|| battle.getLoginTime() != (long)session.getAttribute("loginTime")) {
 			  	System.out.println("battle作成処理");
 	
 		            try {
@@ -82,7 +83,16 @@ public class BattleServlet extends HttpServlet {
 
 		                List<EnemyEntity> enemies = enemyDAO.getAllEnemies();
 		                
-		                battle = new Battle(tower, player, enemies, quizEntities, items);
+		                long loginTime;
+		                Object loginTimeAttribute = session.getAttribute("loginTime");
+		                if (loginTimeAttribute != null) {
+		                    loginTime = (long) loginTimeAttribute;
+		                } else {
+		                    loginTime = System.currentTimeMillis();
+		                    session.setAttribute("loginTime", loginTime);
+		                }		                	
+		                
+		                battle = new Battle(tower, player, enemies, quizEntities, items, loginTime);
 		                battle.startBattle();
 		            } catch (SQLException | NoSuchAlgorithmException e) {
 		                System.out.println(e);
@@ -102,6 +112,12 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("enemyHP", battle.getEnemyHP());
 		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+		
+		byte[] imageData = battle.getCurrentEnemy().getEnemyImage();
+		// 画像データをBase64エンコードする
+		String encodedImage = Base64.getEncoder().encodeToString(imageData);
+		request.setAttribute("enemyImage", encodedImage);
+		
 		//quiz
 		request.setAttribute("currentQuizNo", battle.getCurrentQuizIndex()+1);
 		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
