@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -88,8 +89,8 @@ public class BattleServlet extends HttpServlet {
 		                    loginTime = (long) loginTimeAttribute;
 		                } else {
 		                    loginTime = System.currentTimeMillis();
+		                    session.setAttribute("loginTime", loginTime);
 		                }		                	
-		                session.setAttribute("loginTime", loginTime);
 		                
 		                battle = new Battle(tower, player, enemies, quizEntities, items, loginTime);
 		                battle.startBattle();
@@ -111,6 +112,12 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("enemyHP", battle.getEnemyHP());
 		request.setAttribute("enemyMaxHP", battle.getEnemyMaxHP());
 		request.setAttribute("isEnemyAlive", battle.isEnemyAlive());
+		
+		byte[] imageData = battle.getCurrentEnemy().getEnemyImage();
+		// 画像データをBase64エンコードする
+		String encodedImage = Base64.getEncoder().encodeToString(imageData);
+		request.setAttribute("enemyImage", encodedImage);
+		
 		//quiz
 		request.setAttribute("currentQuizNo", battle.getCurrentQuizIndex()+1);
 		request.setAttribute("totalQuizCount", battle.getTotalQuizCount());
