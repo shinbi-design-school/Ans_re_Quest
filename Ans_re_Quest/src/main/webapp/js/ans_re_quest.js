@@ -10,8 +10,8 @@ $(function() {
   // リストアップ
   var elements = [
               ['サポートキャラの「名称未設定」だよ。<br>アバターとして冥鳴ひまりを使っているよ。', 'imgs/homeChara/face2.png'],
-              ['なんでこのアバターなのかって？<br>動画制作で使わなかった素材だからだよ。', 'imgs/homeChara/face3.png'],
-              ['未実装の要素がはすごく多いよ。<br>実装できるかは不明だよ。', 'imgs/homeChara/face4.png'],
+              ['なんでこのアバターなのかって？<br>担当者が別の企画で使わなかった素材だからだよ。', 'imgs/homeChara/face3.png'],
+              ['未実装の要素はすごく多いよ。<br>実装できるかは不明だよ。', 'imgs/homeChara/face4.png'],
               ['フフフフ、分からない。分からないんだよ。どうすればいいのか分からないんだよ！', 'imgs/homeChara/face5.png']
 //              ['', 'imgs/homeChara/'],
              ];
@@ -89,35 +89,3 @@ scenarioArea.addEventListener('mouseover',()=>{
 //  audio.play();
 //}
 
-
-//カーソル追従エフェクト 対応するJS入れると背景変えられるしでよくわからん
-//  // パーティクルを生成する
-//  var particles = bubbly({
-//    colorStart: "#fff4e6",
-//    colorStop: "#ffe9e4",
-//    blur: 1,
-//    compose: "source-over",
-//    bubbleFunc: () => `hsla(${Math.random() * 50}, 100%, 50%, .3)`,
-//      bubbles: 500,  selector: "#totalMenu" 
-//  }).firstChild;
-//
-//  // #totalMenu要素にmousemoveイベントを設定する
-//  var totalMenu = document.getElementById("totalMenu");
-//  totalMenu.addEventListener("mousemove", function (e) {
-//    // マウスの座標を取得する
-//    var x = e.clientX;
-//    var y = e.clientY;
-//
-//    // #totalMenu要素の範囲内であるかどうかを判定する
-//    var rect = totalMenu.getBoundingClientRect();
-//    if (
-//      x >= rect.left &&
-//      x <= rect.right &&
-//      y >= rect.top &&
-//      y <= rect.bottom
-//    ) {
-//      // パーティクルの位置をマウスの座標に合わせる
-//      particles.style.left = x + "px";
-//      particles.style.top = y + "px";
-//    }
-//  });

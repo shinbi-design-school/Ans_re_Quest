@@ -9,16 +9,18 @@
 <body>
 <div id="totalMenu">
 <%--挑戦中、もしくは踏破した塔やプレイヤーネームを表示させたい --%>
-<div class="circle"><p style="word-wrap: break-word;"><p>塔の名前とかレベルとか出る予定</p></div>
+<div class="circle"><p style="word-wrap: break-word;">塔の名前とかレベルとか出る予定</p></div>
 <div class="userName"><p>ここに名前を表示させたい</p></div>
 
 <%--<jsp:include page="moneyFrame.jsp"/>
  	SHOPページと同じ変数を引っ張ってこれるようにしてほしいです。--%>
+ 	<%--<a href="test"><button>Test</button></a> --%>
+ 	<%-- このボタンのコメントアウト・削除忘れ注意 --%>
  	
 <div class="homeChara">
 <div><img src="imgs/homeChara/face1.png" id="change_image" class="character"></div>
 <div class="text"><div class="wordbox"><div class="word">
-<div class="comment" style="word-wrap: break-word;" text="表示">
+<div class="comment" style="word-wrap: break-word;">
 </div></div></div></div>
 </div>
 

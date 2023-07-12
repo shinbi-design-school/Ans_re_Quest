@@ -9,7 +9,7 @@
 <body>
 <div id="totalMenu">
 <div class="clearEvent">
-<h1>Congratulation</h1>
+<h1>Congratulations</h1>
 <hr class="accessory">
 <div class="resultArea">
 <p>貴方は<%= request.getAttribute("getMoney") %>$手に入れた</p>

@@ -75,8 +75,26 @@ opacity: 0;
 	text-align: center;
 	position: relative;
 	cursor: url(../imgs/pointer.cur), auto;
-
 }
+#myCanvas{
+	color: red;
+	background-image: url(../imgs/background2.jpg);
+	background-size: cover;
+	width: 1280px;
+	height: 720px;
+	border: ridge 10px;
+	border-color:darkred; 
+	border-radius: 2ch;
+	margin: auto;
+	text-align: center;
+	position: relative;
+	cursor: url(../imgs/pointer.cur), auto;
+}
+#canvas_wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 
 /*battleページ装飾*/
 #flex-questions{
@@ -455,7 +473,24 @@ div.guestMode{
     margin: 0;
     color: #333;
 }
-
+.shopGirl{
+	width:250px;
+	position:absolute;	
+}
+.shopText{
+	text-align:left;
+	color:#fff;
+	position:absolute;
+	padding:10px;
+	right:2%;
+	bottom:15%;
+	z-index:1;
+	background:rgb(57 81 55 / 90%);
+}
+.buyAction{
+	color:#fff;
+	background:rgb(57 81 55 / 90%);	
+}
 /*guide*/
 .details_container{
     color: #fff;
@@ -478,7 +513,6 @@ div.guestMode{
     text-align: center;
     list-style: none;
 }
-
 /*エラー画面*/
 #bad{
 	color:red;
