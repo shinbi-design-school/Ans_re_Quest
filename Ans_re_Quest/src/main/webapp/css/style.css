@@ -504,3 +504,13 @@ footer{
 	margin-top:3px;
     background:rgb(255 255 255 / 70%);
 }
+
+/*ミドルイベント装飾*/
+.middle_event_window {
+	
+ margin: 2em auto;
+ padding: 1em;
+ width: 500px;
+ background-color: #FFF5EE;
+ border-radius: 8px;
+}
