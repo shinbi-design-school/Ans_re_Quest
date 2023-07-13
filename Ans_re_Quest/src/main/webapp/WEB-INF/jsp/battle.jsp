@@ -18,6 +18,7 @@ int quantity5050 = (int)request.getAttribute("quantity5050");
 int quantitySkip = (int)request.getAttribute("quantitySkip");
 
 String enemyImage = (String) request.getAttribute("enemyImage");
+String collectAnswer = (String) request.getAttribute("collectAnswer");
 %>    
 <!DOCTYPE html>
 <html>
@@ -44,13 +45,59 @@ String enemyImage = (String) request.getAttribute("enemyImage");
     	<p>問題: <%= request.getAttribute("questionText") %></p>
     	<p>制限時間:<%= request.getAttribute("limitTime") %></p>
     </div>
-    <form method="post" action="battle" id="flex-questions">
-        <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice1") %>"><%= request.getAttribute("choice1") %></button><br>
-        <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice2") %>"><%= request.getAttribute("choice2") %></button><br>
-        <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>"><%= request.getAttribute("choice3") %></button><br>
-        <button type="submit" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>"><%= request.getAttribute("choice4") %></button><br>
-    <input type="hidden" name="isUsed5050" value="false">
-    </form>
+    
+<script>
+  // ボタンがクリックされた時の処理
+  function handleClick(button) {
+    // ボタンを無効化
+    var buttons = document.getElementsByTagName("button");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+    }
+    if (button.value === "<%= collectAnswer %>") {
+    	// 正解だった時の処理
+    	var playerImage = document.getElementById("player");
+    	var scale = 1;
+    	var interval = setInterval(function() {
+    	  scale += 0.1;
+    	  playerImage.style.transform = "scale(" + scale + ")";
+    	  if (scale >= 3) {
+    	    clearInterval(interval);
+    	  }
+    	}, 100);
+      } else {
+        // 不正解だった時の処理
+var enemyImage = document.getElementById("enemy");
+var scale = 1;
+var interval = setInterval(function() {
+  scale += 0.1;
+  enemyImage.style.transform = "scaleX(-1) scale(" + scale + ")";
+  if (scale >= 3) {
+    clearInterval(interval);
+  }
+}, 100);  
+        // ここに不正解だった場合の処理を記述する
+      }
+    
+    // 押されたボタンの値をフォームの隠しフィールドに設定
+    document.getElementById("selectedChoice").value = button.value;
+
+    // 1秒待機後にフォームを送信
+    setTimeout(function() {
+      document.getElementById("flex-questions").submit();
+    }, 1100);
+  }
+</script>
+    
+<form method="post" action="battle" id="flex-questions">
+  <!-- ボタンのクリック時にJavaScriptの処理を呼び出すように設定 -->
+  <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice1") %>" onclick="handleClick(this)"><%= request.getAttribute("choice1") %></button><br>
+  <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice2") %>" onclick="handleClick(this)"><%= request.getAttribute("choice2") %></button><br>
+  <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>" onclick="handleClick(this)"><%= request.getAttribute("choice3") %></button><br>
+  <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>" onclick="handleClick(this)"><%= request.getAttribute("choice4") %></button><br>
+  <input type="hidden" name="isUsed5050" value="false">
+  <input type="hidden" name="choice" id="selectedChoice" value="">
+</form>
 	
 	<!-- 修正 -->
 
@@ -93,24 +140,25 @@ String enemyImage = (String) request.getAttribute("enemyImage");
 	<p>5050使用済み<p>
 	<%} %>    
 	<% if(!(isNoHint || isUsed5050 || isNoHint || (quantity5050 <= 0))){ %>
-    <form method="post" name="form1" action="battle">
-    <input type="hidden" name="isUsed5050" value="true">
-    <a href="javascript:form1.submit()">
-    	50/50: <%= quantity5050 %>個</a>
-	</form>
+<form method="post" name="form1" action="battle">
+  <input type="hidden" name="isUsed5050" value="true">
+  <button type="submit" onclick="form1.submit()">
+    50/50: <%= quantity5050 %>個
+  </button>
+</form>
 	<%} %>
 	<!--  SKIPアイテム0なら隠す -->
 	    <% if(isUsedSkip){ %>
 	<p>Skip使用した<p>
 	<%} %>    
 	<% if(!(isNoHint || (quantitySkip <= 0) )){ %>
-    <form method="post" name="form2" action="battle" class="skip">
-	    <input type="hidden" name="isUsedSkip" value="true">
-	    <a href="javascript:form2.submit()">
-		SKIP: <%= quantitySkip %>個 </a>
+<form method="post" name="form2" action="battle" class="skip">
+  <input type="hidden" name="isUsedSkip" value="true">
+  <button type="submit" onclick="form2.submit()">
+    SKIP: <%= quantitySkip %>個
+  </button>
+</form>
 	<%} %>	
-		
-	</form>
 	</div>
 </div>
 </div>

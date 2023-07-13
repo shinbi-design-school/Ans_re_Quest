@@ -144,6 +144,7 @@ public class BattleServlet extends HttpServlet {
 			request.setAttribute("choice2", choices.get(1));
 			request.setAttribute("choice3", choices.get(2));
 			request.setAttribute("choice4", choices.get(3));
+			request.setAttribute("collectAnswer", battle.getCurrentQuestion().getCorrectAnswer());
 			request.setAttribute("isUsed5050", true);
 		//通常表示
 		} else {
@@ -152,6 +153,7 @@ public class BattleServlet extends HttpServlet {
 		request.setAttribute("choice2", battle.getCurrentQuestion().getChoice2());
 		request.setAttribute("choice3", battle.getCurrentQuestion().getChoice3());
 		request.setAttribute("choice4", battle.getCurrentQuestion().getChoice4());
+		request.setAttribute("collectAnswer", battle.getCurrentQuestion().getCorrectAnswer());
 		request.setAttribute("isUsed5050", false);
 
 		}
