@@ -32,6 +32,8 @@ public class ScenarioServlet extends HttpServlet{
 		        url = "WEB-INF/jsp/scenario2_supportMeeting.jsp";
 		    } else if ("GotoShop".equals(action)) {
 		        url = "WEB-INF/jsp/scenario3_shop.jsp";
+		    } else if ("GotoBoss".equals(action)) {
+		        url = "WEB-INF/jsp/scenario4_boss.jsp";
 		    } else {
 		        url = "WEB-INF/jsp/error.jsp";
 		    }

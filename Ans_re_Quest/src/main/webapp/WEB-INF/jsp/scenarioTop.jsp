@@ -31,6 +31,11 @@
 </div>
 <div>
 	<form action="scenario" method="post">
+		<button type="submit" name="scenarioAction" value="GotoBoss">VS BOSS</button>
+	</form>
+</div>
+<div>
+	<form action="scenario" method="post">
 		<button type="submit" name="scenarioAction" value="Goto???">？？？</button>
 	</form>
 </div>

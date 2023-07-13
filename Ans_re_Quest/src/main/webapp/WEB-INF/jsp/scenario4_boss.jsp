@@ -22,7 +22,7 @@ var bgImage = new function () {
 
   this.loadImage = function () {
     this.image = new Image();
-    this.image.src = "imgs/background.jpg";
+    this.image.src = "imgs/青203.jpg";
     this.image.onload = loader;
 
   }
@@ -37,7 +37,7 @@ var personImage = new function () {
 
   this.loadImage = function () {
     this.image = new Image();
-    this.image.src = "imgs/homeChara/face6.png";
+    this.image.src = "imgs/boss.png";
     this.image.onload = loader;
   }
 
@@ -48,7 +48,7 @@ var personImage = new function () {
     this.width = canvas.height * this.aspect ;
     this.height = canvas.height ;
 
-    this.x = (canvas.width / 2 - this.width) * 8;
+    this.x = (canvas.width / 2 - this.width) + 650;
 
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
@@ -70,7 +70,7 @@ var personImage2 = new function () {
 	    this.width = canvas.height * this.aspect ;
 	    this.height = canvas.height ;
 
-	    this.x = (canvas.width / 2 - this.width) * 1;
+	    this.x = (canvas.width / 2 - this.width) * 0.8;
 
 	    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 	  }
@@ -132,17 +132,13 @@ var myText = new function () {
 	}
 
 var sentences = [
-	{text:"「やあやあやあ、ちょっと解像度が荒い君が新たな挑戦者かい？」", speaker: "A"},
-	{text:"「なんだアンタ？」", speaker: "B"},
-	{text:"「僕たちは…そうだね、統合思念体とでも言っておこうか。取り敢えず君の敵ではないよ」", speaker: "A"},
-	{text:"「つまり味方でもないってことだな」", speaker: "B"},
-	{text:"「これは手厳しい。ま、否定はしないよ。結局此処にいる存在だからね」", speaker: "A"},
-	{text:"「オレはここの『誰も知り得ない知識』ってのを狙いに来ているワケだが、それに手を貸すのか？」", speaker: "B"},
-	{text:"「いやまあ、僕たちと似て非なるやつが上層階で出張っていてね。それがちょっと邪魔だと思っているんだよ」", speaker: "A"},
-	{text:"「ソレを倒したらアンタらが窮地（きゅうち）に陥ったりする可能性はあるんじゃないか？」", speaker: "B"},
-	{text:"「僕らは常に求知（きゅうち）であるから問題はないね」", speaker: "A"},
-	{text:"「言葉遊びだな」", speaker: "B"},
-	{text: "取り敢えず本気で敵意は持っていないようだ。使えるなら使ってやろう。", speaker: null}
+	{text:"「賢しい小僧だ。此処は知識の塔ぞ、恥を知れ」", speaker: "A"},
+	{text:"「ハッ、陰気なだけの爺さん婆さん集合体が偉そうに。だいたい知識が大事ならもうちょっと換気に気をつけな」", speaker: "B"},
+	{text:"「どこまでも驕傲な小僧よ、口の利き方というものを一から教えてやらないといけないか？」", speaker: "A"},
+	{text:"「オレだって敬える相手なら相応の態度になるさ、テメエは違うってだけ」", speaker: "B"},
+	{text:"「フン、表層で態度を変えるなどとは、外界の知性はそこまで落ちたか。やはり人類というものは愚民だらけだな」", speaker: "A"},
+	{text:"「井の中の蛙大海を知らずとは言うが、塔の中の引きこもりはそりゃ外の世界を知らねえよなあ」", speaker: "B"},
+	{text:"「もうよい、貴様も我らが知識の贄となれ！！」", speaker: "A"},
 ];
 
 var Loader = function (expectedCnt, callback) {

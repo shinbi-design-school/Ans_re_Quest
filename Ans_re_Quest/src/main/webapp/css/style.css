@@ -76,6 +76,8 @@ opacity: 0;
 	position: relative;
 	cursor: url(../imgs/pointer.cur), auto;
 }
+
+/*シナリオ再生時の枠*/
 #myCanvas{
 	color: red;
 	background-image: url(../imgs/background2.jpg);
@@ -97,6 +99,27 @@ opacity: 0;
 
 
 /*battleページ装飾*/
+.enemy{
+	float: right;
+}
+#enemy{
+	text-align: right;
+}
+img#enemy{
+	transform: scale(-1,1);
+}
+.player{
+	float: left;
+}
+/*問題文*/
+.questions{
+	width: 50%;
+	margin:auto;
+	color: snow;
+	background:rgba(81,55,67,0.5);
+}
+
+/*選択肢*/
 #flex-questions{
 	display: flex;
 	flex-wrap: wrap;
@@ -113,37 +136,77 @@ opacity: 0;
 	margin: auto;
 	font-size: large;
 }
-.enemy{
-	float: right;
-}
-#enemy{
-	text-align: right;
-}
-img#enemy{
-	transform: scale(-1,1);
-}
-.player{
-	border: khaki 10px;
-	border-radius: 50% 50% 0% 0%;
-	float: left;
-}
-.questions{
-	width: 50%;
-	margin:auto;
-	color: snow;
-	background:rgba(81,55,67,0.5);
-}
+
 .helpItems{
 	color: black;
 	background:rgba(254,244,244,0.8);
+	width:90%;
+	margin:0 auto;
+	padding:10px 0px;
 }
-/*リザルト画面の各種仮置き*/
+
+/*ミドルイベント装飾*/
+.middle_event_window {
+	
+ margin: 2em auto;
+ padding: 1em;
+ width: 500px;
+ background-color: #FFF5EE;
+ border-radius: 8px;
+}
+
+/*バトル結果画面*/
+#resultContainer {
+  text-align: center;
+}
+
+#resultContainer h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#gameOverText {
+  font-size: 100px;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 20px;
+  text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
+}
+
+#victoryText {
+  font-size: 100px;
+  font-weight: bold;
+  color: green;
+  margin-bottom: 20px;
+  text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
+}
+
+#resultMessage {
+ margin: 2em auto;
+ padding: 1em;
+ width: 400px;
+ background-color: #FFF5EE;
+}
+
+#result_next {
+margin: 2em auto;
+ padding: 1em;
+ width: 130px;
+ background-color: #FFF5EE;
+ border-radius: 8px;
+}
+
+/*クリア画面の各種仮置き*/
 .clearEvent{
 	background:rgba(254,244,244,0.8);
 	margin:0% 2%;
 	height:93%;
-
-
 }
 .accessory {
 	margin:0% 3%;
@@ -266,17 +329,6 @@ div.guestMode{
 	background-color: rgba(0,110,84,0.5);
 }
 
-.moneyHome{
-	position: absolute;
-	color: #fff;
-	text-align: center;
-	right: 5%;
-	margin: 1%;
-	padding:1%;
-	border: white 1px double;
-	border-radius:  60% 20%;
-	background-color: rgba(0,110,84,0.5);
-}
 
 .word {
   position: relative;
@@ -307,7 +359,20 @@ div.guestMode{
 		margin: 10px 0px;
 }
 
-/*scenarioTop*/
+/*所持金枠*/
+.moneyHome{
+	position: absolute;
+	color: #fff;
+	text-align: center;
+	right: 5%;
+	margin: 1%;
+	padding:1%;
+	border: white 1px double;
+	border-radius:  60% 20%;
+	background-color: rgba(0,110,84,0.5);
+}
+
+/*シナリオ一覧ページ*/
 .scenarioCharacter{
 	width:40%;
 	position:absolute;
@@ -519,6 +584,7 @@ div.guestMode{
 	color:#fff;
 	background:rgb(57 81 55 / 90%);	
 }
+
 /*guide*/
 .details_container{
     color: #fff;
@@ -541,6 +607,7 @@ div.guestMode{
     text-align: center;
     list-style: none;
 }
+
 /*エラー画面*/
 #bad{
 	color:red;
@@ -565,61 +632,4 @@ footer{
 	color: black;
 	margin-top:3px;
     background:rgb(255 255 255 / 70%);
-}
-
-/*ミドルイベント装飾*/
-.middle_event_window {
-	
- margin: 2em auto;
- padding: 1em;
- width: 500px;
- background-color: #FFF5EE;
- border-radius: 8px;
-}
-
-/*バトル結果画面*/
-#resultContainer {
-  text-align: center;
-}
-
-#resultContainer h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-#gameOverText {
-  font-size: 100px;
-  font-weight: bold;
-  color: red;
-  margin-bottom: 20px;
-  text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
-              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
-              0px 1px 0 #FFF,  0-1px 0 #FFF,
-              -1px 0 0 #FFF, 1px 0 0 #FFF;
-}
-
-#victoryText {
-  font-size: 100px;
-  font-weight: bold;
-  color: green;
-  margin-bottom: 20px;
-  text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
-              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
-              0px 1px 0 #FFF,  0-1px 0 #FFF,
-              -1px 0 0 #FFF, 1px 0 0 #FFF;
-}
-
-#resultMessage {
- margin: 2em auto;
- padding: 1em;
- width: 400px;
- background-color: #FFF5EE;
-}
-
-#result_next {
-margin: 2em auto;
- padding: 1em;
- width: 130px;
- background-color: #FFF5EE;
- border-radius: 8px;
 }
