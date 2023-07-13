@@ -10,9 +10,6 @@
 <div id="canvas_wrapper">
   <canvas id="myCanvas" width="1280" height="720"></canvas>
 <script type="text/javascript">
-/**
- * 
- */
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
@@ -143,10 +140,13 @@ function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if(sentenceIndex > sentences.length - 1) {
-    bgImage.render();
-    alert("終了です");
-    location.reload();
-  } else {
+	    bgImage.render();
+	    personImage.render();
+	    messageBox.render();
+	    setTimeout(function() {
+	    	  history.back();
+	    	}, 1000);  
+    } else {
     bgImage.render();
     personImage.render();
     messageBox.render();

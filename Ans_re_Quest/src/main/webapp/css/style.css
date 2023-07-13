@@ -281,7 +281,7 @@ div.guestMode{
 .word {
   position: relative;
   display: inline-block;
-  width: 380px;
+  width: 480px;
   top:-280px;
   margin: 1.5em 0;
   padding: 7px 10px;
@@ -307,6 +307,34 @@ div.guestMode{
 		margin: 10px 0px;
 }
 
+/*scenarioTop*/
+.scenarioCharacter{
+	width:40%;
+	position:absolute;
+	margin-left:10%;
+}
+.scenarioText{
+    position: absolute;
+	right:5%;
+	bottom:30%;
+	width: 480px;
+	min-width: 120px;
+	max-width: 100%;
+	color: #fff;
+	font-size: 16px;
+	background:rgb(2 13 12 / 73%);
+	z-index:1;
+}
+.scenarioList{
+	border:khaki 1px solid;
+	display:flex;
+	flex-wrap:wrap;
+	margin-top:3%;
+	margin-left:8%;
+	width:33%;
+	height:75%;
+	background:rgb(7 13 2 / 73%);
+}
 /*ボトムメニュー*/
 .bottom{
 	background-image: url(../imgs/black0003.png);

@@ -14,8 +14,9 @@
 
 <%--<jsp:include page="moneyFrame.jsp"/>
  	SHOPページと同じ変数を引っ張ってこれるようにしてほしいです。--%>
+
  	<%--<a href="test"><button>Test</button></a> --%>
- 	<%-- このボタンのコメントアウト・削除忘れ注意 --%>
+ 	<%-- ページビューテストボタン、このボタンの削除忘れ注意 --%>
  	
 <div class="homeChara">
 <div><img src="imgs/homeChara/face1.png" id="change_image" class="character"></div>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <jsp:include page="head.jsp"/>
-<title>ログインエラー</title>
+<title>重篤なエラー</title>
 </head>
 <body>
 <main>
@@ -15,9 +15,13 @@
 </style>
   <div id="error">
     <p id="bad" style="word-wrap: break-word;"></p>
-    <button id="badButton"><a href="top">はヤく戻レ</a></button>
+    <button id="badButton"><a href="javascript:history.back()">はヤく戻レ</a></button>
   </div>
 <script type="text/javascript">
+  history.pushState(null, null, 
+		  'YsXDWFLNRbgjwgsPQZecpzNWAgDxUSysXXBxKwbirVnJactySekyzNstRYeMgNKRfJebkZmskdUeZnXxMmHKMJXnyYhQzRTfNVYbzJyca'
+		  );
+
   var text = "エラー";
   var i = 0;
   function typeWriter() {

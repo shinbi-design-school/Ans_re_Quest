@@ -10,9 +10,6 @@
 <div id="canvas_wrapper">
   <canvas id="myCanvas" width="1280" height="720"></canvas>
 <script type="text/javascript">
-/**
- * 
- */
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
@@ -25,7 +22,7 @@ var bgImage = new function () {
 
   this.loadImage = function () {
     this.image = new Image();
-    this.image.src = "imgs/tower2.jpg";
+    this.image.src = "imgs/background.jpg";
     this.image.onload = loader;
 
   }
@@ -36,11 +33,11 @@ var bgImage = new function () {
 }
 
 var personImage = new function () {
-  this.y = 200;
+  this.y = 100;
 
   this.loadImage = function () {
     this.image = new Image();
-    this.image.src = "imgs/man.png";
+    this.image.src = "imgs/homeChara/face6.png";
     this.image.onload = loader;
   }
 
@@ -51,12 +48,33 @@ var personImage = new function () {
     this.width = canvas.height * this.aspect ;
     this.height = canvas.height ;
 
-    this.x = canvas.width / 2 - this.width;
+    this.x = (canvas.width / 2 - this.width) * 8;
 
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 }
 
+var personImage2 = new function () {
+	  this.y = 200;
+
+	  this.loadImage = function () {
+	    this.image = new Image();
+	    this.image.src = "imgs/man.png";
+	    this.image.onload = loader;
+	  }
+
+	  this.render = function () {
+
+	    this.aspect = this.image.width / this.image.height;
+
+	    this.width = canvas.height * this.aspect ;
+	    this.height = canvas.height ;
+
+	    this.x = (canvas.width / 2 - this.width) * 1;
+
+	    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+	  }
+	}
 
 var messageBox = new function () {
   this.x = 0;
@@ -114,9 +132,17 @@ var myText = new function () {
 	}
 
 var sentences = [
-"知識を重ねて真理へ至れ。それが魔術師の在り方。そうやってただひたすらに研鑽を重ねてきた。",
-"そんな折、知識の塔なるものが現れて、頂上には誰も知り得ない知識があるなんて聞いたらそりゃ登らなきゃならないってもんだ。",
-"「これが『知識の塔』ね、オレが満足できるモンだといいが」"
+"「やあやあやあ、ちょっと解像度が荒い君が新たな挑戦者かい？」",
+"「なんだアンタ？」",
+"「僕たちは…そうだね、統合思念体とでも言っておこうか。取り敢えず君の敵ではないよ」",
+"「つまり味方でもないってことだな」",
+"「これは手厳しい。ま、否定はしないよ。結局此処にいる存在だからね」",
+"「オレはここの『誰も知り得ない知識』ってのを狙いに来ているワケだが、それに手を貸すのか？」",
+"「いやまあ、僕たちと似て非なるやつが上層階で出張っていてね。それがちょっと邪魔だと思っているんだよ」",
+"「ソレを倒したらアンタらが窮地（きゅうち）に陥ったりする可能性はあるんじゃないか？」",
+"「僕らは常に求知（きゅうち）であるから問題はないね」",
+"「言葉遊びだな」",
+"取り敢えず本気で敵意は持っていないようだ。使えるなら使ってやろう。"
 ];
 
 var Loader = function (expectedCnt, callback) {
@@ -129,12 +155,13 @@ var Loader = function (expectedCnt, callback) {
   }
 }
 
-var loader = Loader(3, function () {
+var loader = Loader(4, function () {
   update();
 });
 
 bgImage.loadImage();
 personImage.loadImage();
+personImage2.loadImage();
 messageBox.loadImage();
 
 var sentenceIndex = 0;
@@ -143,16 +170,17 @@ function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if(sentenceIndex > sentences.length - 1) {
+	    bgImage.render();
+	    personImage.render();
+	    personImage2.render();
+	    messageBox.render();
+	    setTimeout(function() {
+	    	  history.back();
+	    	}, 1000);  
+    } else {
     bgImage.render();
     personImage.render();
-    messageBox.render();
-    setTimeout(function() {
-    	  history.back();
-    	}, 1000);
-
-  } else {
-    bgImage.render();
-    personImage.render();
+    personImage2.render();
     messageBox.render();
 
     myText.render(text=sentences[sentenceIndex]);
