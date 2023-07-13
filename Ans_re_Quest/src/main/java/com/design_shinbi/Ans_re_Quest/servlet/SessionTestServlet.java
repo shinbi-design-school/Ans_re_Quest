@@ -103,6 +103,9 @@ public class SessionTestServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
+		System.out.println(request.getParameter("choice"));
+		System.out.println(request.getParameter("choice"));
 		doGet(request, response);
 	}
 

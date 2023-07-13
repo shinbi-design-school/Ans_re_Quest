@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 Boolean isUsed5050 = (Boolean) request.getAttribute("isUsed5050");
 if (isUsed5050 == null) {
@@ -22,7 +19,6 @@ int quantitySkip = (int)request.getAttribute("quantitySkip");
 
 String enemyImage = (String) request.getAttribute("enemyImage");
 %>    
-
 <!DOCTYPE html>
 <html>
 <head>

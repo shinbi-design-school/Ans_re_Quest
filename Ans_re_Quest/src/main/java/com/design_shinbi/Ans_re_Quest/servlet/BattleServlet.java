@@ -179,10 +179,13 @@ public class BattleServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// フォームからの回答を取得
-		System.out.println("isusedai"+request.getParameter("isUsedAi"));
 		HttpSession session = request.getSession();
+		// フォームからの回答を取得
 		request.setCharacterEncoding("UTF-8");
+		System.out.println("isusedai"+request.getParameter("isUsedAi"));
+		System.out.println("choice:"+request.getParameter("choice"));
+		System.out.println("isUsed:"+request.getParameter("isUsed5050"));
+
 		
 		//SKIP使ったら
 		if (Boolean.parseBoolean(request.getParameter("isUsedSkip"))) {
@@ -196,6 +199,7 @@ public class BattleServlet extends HttpServlet {
 		} else {
 			System.out.println("通常選択処理");
 			String choice = request.getParameter("choice");
+			System.out.println(choice);
 			Boolean isUsedAi = Boolean.parseBoolean(request.getParameter("isUsedAi"));
 			battle.answerQuiz(choice,isUsedAi);
 
