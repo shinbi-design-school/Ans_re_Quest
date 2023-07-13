@@ -14,6 +14,7 @@ Boolean isNoHint = (Boolean) request.getAttribute("isNoHint");
 if (isNoHint == null) {
     isNoHint = false;
 }
+int limitTime = (int)request.getAttribute("limitTime");
 int quantity5050 = (int)request.getAttribute("quantity5050");
 int quantitySkip = (int)request.getAttribute("quantitySkip");
 
@@ -25,6 +26,8 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
 <head>
 	<jsp:include page="head.jsp"/>
     <title>Battle Page</title>
+    
+    
 </head>
 <body>
 <div id="totalMenu">
@@ -40,14 +43,52 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
 	    <img alt="PLface" src="imgs/face.png" id="player">
 	    <p id="player">HP:  <input type="range" id="inputSlider" min="0" max="<%=request.getAttribute("playerMaxHP") %>" value="<%= request.getAttribute("playerHP") %>" /><%= request.getAttribute("playerHP") %></p>
     </div>
+    
+<!-- 制限時間用 -->
+<script type="text/javascript">
+  let limitTime = <%= limitTime %>; // 制限時間の初期値
+
+  // 1秒ごとに呼び出される関数
+  function decreaseValue() {
+    if (limitTime > 0) {
+      limitTime--; // 制限時間を1つ減らす
+      console.log(limitTime); // 減らした値を表示する（コンソールに出力）
+      document.getElementById("limitTime").textContent = limitTime; // 制限時間を表示
+    } else {
+      clearInterval(interval); // タイマーを停止する
+      var enemyImage = document.getElementById("enemy");
+      var scale = 1;
+      var interval = setInterval(function() {
+        scale += 0.1;
+        enemyImage.style.transform = "scaleX(-1) scale(" + scale + ")";
+        if (scale >= 3) {
+          clearInterval(interval);
+        }
+      }, 100);
+      
+      // 押されたボタンの値をフォームの隠しフィールドに設定
+      document.getElementById("selectedChoice").value = "limitOver";
+
+      // 1秒待機後にフォームを送信
+      setTimeout(function() {
+        document.getElementById("flex-questions").submit();
+      }, 1100);
+    }
+  }
+
+  // 1秒ごとに関数を呼び出すタイマーをセット
+  var interval = setInterval(decreaseValue, 1000);
+</script>
+
+    
     <div class="questions">
     	<p>第<%= request.getAttribute("currentQuizNo") %>問/全<%= request.getAttribute("totalQuizCount") %>問</p>
     	<p>問題: <%= request.getAttribute("questionText") %></p>
-    	<p>制限時間:<%= request.getAttribute("limitTime") %></p>
+    	<p>制限時間:<span id="limitTime"><%=request.getAttribute("limitTime") %></span></p>
     </div>
     
 <script>
-  // ボタンがクリックされた時の処理
+  // ボタンがクリックされた時の処理仮
   function handleClick(button) {
     // ボタンを無効化
     var buttons = document.getElementsByTagName("button");
@@ -55,7 +96,7 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
       buttons[i].disabled = true;
     }
     if (button.value === "<%= collectAnswer %>") {
-    	// 正解だった時の処理
+    	// 正解だった時の処理仮
     	var playerImage = document.getElementById("player");
     	var scale = 1;
     	var interval = setInterval(function() {
@@ -66,7 +107,7 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
     	  }
     	}, 100);
       } else {
-        // 不正解だった時の処理
+        // 不正解だった時の処理仮
 var enemyImage = document.getElementById("enemy");
 var scale = 1;
 var interval = setInterval(function() {
@@ -74,9 +115,8 @@ var interval = setInterval(function() {
   enemyImage.style.transform = "scaleX(-1) scale(" + scale + ")";
   if (scale >= 3) {
     clearInterval(interval);
-  }
-}, 100);  
-        // ここに不正解だった場合の処理を記述する
+	  }
+	}, 100);  
       }
     
     // 押されたボタンの値をフォームの隠しフィールドに設定
@@ -95,15 +135,14 @@ var interval = setInterval(function() {
   <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice2") %>" onclick="handleClick(this)"><%= request.getAttribute("choice2") %></button><br>
   <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>" onclick="handleClick(this)"><%= request.getAttribute("choice3") %></button><br>
   <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>" onclick="handleClick(this)"><%= request.getAttribute("choice4") %></button><br>
+  <input type="hidden" name="choice" value="limitOver">
   <input type="hidden" name="isUsed5050" value="false">
   <input type="hidden" name="choice" id="selectedChoice" value="">
 </form>
 	
-	<!-- 修正 -->
-
     <p></p>
     <div class="helpItems">
-		<script>
+<script>
     function startTypewriter() {
         var text = "<%= request.getAttribute("aiAnswer") %>"; // 表示したいテキスト
         var speed = 100; // 文字を表示する速度（ミリ秒単位）
