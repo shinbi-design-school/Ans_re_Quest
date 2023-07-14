@@ -45,7 +45,7 @@
             <button>購入する</button>
         </div>  
         <div>
-        <div><p style="word-wrap: break-word;" class="shopText">正直どうでもいいとは思ってるけど<br>対価を払わずに手に入れようとはしない事ね。</p></div>
+        <div><p style="word-wrap: break-word;" class="shopText">……正直どうでもいいとは思ってるけど<br>対価を払わずに手に入れようとはしない事ね。</p></div>
         <img alt="" src="imgs/scenario/キレルミー_通常.png" class="shopGirl"></div>
         </div>
         <div class="buyAction">

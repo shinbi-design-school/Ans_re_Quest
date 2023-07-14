@@ -96,6 +96,25 @@ opacity: 0;
   display: flex;
   justify-content: center;
 }
+/*ビデオ再生時の枠*/
+#video{
+	color: red;
+	background-image: url(../imgs/background2.jpg);
+	background-size: cover;
+	width: 1280px;
+	height: 720px;
+	border: ridge 10px;
+	border-color:darkred; 
+	border-radius: 2ch;
+	margin: auto;
+	text-align: center;
+	position: relative;
+	cursor: url(../imgs/pointer.cur), auto;
+}
+#video_wrapper {
+  display: flex;
+  justify-content: center;
+}
 
 
 /*battleページ装飾*/
@@ -394,11 +413,32 @@ div.guestMode{
 	border:khaki 1px solid;
 	display:flex;
 	flex-wrap:wrap;
+	justify-content:center;
 	margin-top:3%;
 	margin-left:8%;
-	width:33%;
+	width:35%;
 	height:75%;
 	background:rgb(7 13 2 / 73%);
+}
+.scenarioList>div{
+	width:48%;
+	height:13%;
+	margin:5% 0;
+/*	border:solid; サイズ確認用*/
+	background-image:url(../imgs/ant1.png);
+	background-size:contain;
+	background-repeat:no-repeat;
+	padding:3%;
+	transform:2s;
+}
+.scenarioList>div:hover{
+	background-image:url(../imgs/ant2.png);
+	background-size:contain;
+	background-repeat:no-repeat;
+}
+.scenarioList>div>form>button{
+	color:#FFF;
+	background:rgb(2 13 12 / 0%);
 }
 /*ボトムメニュー*/
 .bottom{
