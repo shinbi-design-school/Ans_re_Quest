@@ -314,7 +314,7 @@ div.guestMode{
 	margin-left:5%;
 	margin-right:0;
 }
-.trickMenuList>p{
+.trickMenuList>a>p{
 	background-color: black;
 	text-align: center;
 }
@@ -672,4 +672,70 @@ footer{
 	color: black;
 	margin-top:3px;
     background:rgb(255 255 255 / 70%);
+}
+
+/*ランキング*/
+	.ranking-container {
+	margin: 20px auto;
+	padding: 20px;
+	background-color: #333;
+	color: #fff;
+	max-width: 600px;
+}
+
+.ranking-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.ranking-list {
+	list-style: none;
+	padding-left: 0;
+}
+
+.ranking-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #fff;
+}
+
+.ranking-position {
+	font-weight: bold;
+	color: #fff;
+}
+
+.ranking-username {
+	flex: 1;
+	margin-right: 10px;
+	color: #eee;
+}
+
+.ranking-score {
+	font-weight: bold;
+	color: #fff;
+}
+
+.ranking-divider {
+	width: 1px;
+	height: 80%;
+	background-color: #777;
+	margin: 0 10px;
+}
+
+.ranking-item:nth-child(1) {
+	background-color: gold;
+	color: #333; 
+}
+
+.ranking-item:nth-child(2) {
+	background-color: silver;
+	color: #333; 
+}
+
+.ranking-item:nth-child(3) {
+	background-color: #cd7f32; 
 }
