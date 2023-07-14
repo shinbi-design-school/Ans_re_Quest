@@ -29,7 +29,7 @@
 </details>
 <details>
 <summary>ショップ</summary>
-<p>ゲーム内コインを消費してアイテムを購入することができる予定です。</p>
+<p>ゲーム内コインを消費してアイテムを購入することができます。</p>
 </details>
 
         <jsp:include page="bottomMenu.jsp"></jsp:include>

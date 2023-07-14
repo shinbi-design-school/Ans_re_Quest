@@ -24,8 +24,8 @@
 </div>
 <div class="trickMenuList">
 <div>Menu</div>
-  <p class="trickMenu" >ITEM</p>
-  <p class="trickMenu">RANKING</p>
+  <a href="inventory"><p class="trickMenu" >ITEM</p></a>
+  <a href="ranking"><p class="trickMenu">RANKING</p></a>
   <p class="trickMenu">ADVERTISEMENT</p>
   <p class="trickMenu">Credit</p>
 </div>
