@@ -44,6 +44,9 @@
                 </li>
             </ul>
         </div>
+	        <div><p style="word-wrap: break-word;" class="rankingText">ぐぬぬぬ……</p></div>
+	        <img alt="" src="imgs/boss.png" class="BOSSwarai">
+        
         <jsp:include page="bottomMenu.jsp"/>
     </div>
     <jsp:include page="footer.jsp"/>
