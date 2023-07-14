@@ -26,10 +26,11 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
 <head>
 	<jsp:include page="head.jsp"/>
     <title>Battle Page</title>
-    
-    
+	<link rel="stylesheet" type="text/css" href="css/particles.css">    
 </head>
 <body>
+<div id="wrapper">
+<div id="particles-js"></div>
 <div id="totalMenu">
 <div id="bgi">
     <h1><%= request.getAttribute("towerName") %>   <%= request.getAttribute("currentFloor") %>階</h1>
@@ -198,10 +199,14 @@ var interval = setInterval(function() {
   </button>
 </form>
 	<%} %>	
-	</div>
 </div>
 </div>
-<jsp:include page="footer.jsp"/>
 
+<!--/wrapper--></div>
+<jsp:include page="footer.jsp"/>
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<!--自作のJS-->
+<script src="js/particles.js"></script>
+</body>
 </body>
 </html>

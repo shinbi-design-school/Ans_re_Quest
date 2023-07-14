@@ -163,7 +163,7 @@ public class BattleServlet extends HttpServlet {
 			//焦り状態
 			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime()-5);
 		} else {
-			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime());
+			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime()+5000);
 		}
 		//hint
 		request.setAttribute("aiAnswer", battle.getCurrentQuestion().getAi_answer());
