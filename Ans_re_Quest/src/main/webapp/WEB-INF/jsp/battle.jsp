@@ -26,10 +26,11 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
 <head>
 	<jsp:include page="head.jsp"/>
     <title>Battle Page</title>
-    
-    
+	<link rel="stylesheet" type="text/css" href="css/particles.css">    
 </head>
 <body>
+<div id="wrapper">
+<div id="particles-js"></div>
 <div id="totalMenu">
 <div id="bgi">
     <h1><%= request.getAttribute("towerName") %>   <%= request.getAttribute("currentFloor") %>階</h1>
@@ -46,38 +47,33 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
     
 <!-- 制限時間用 -->
 <script type="text/javascript">
-  let limitTime = <%= limitTime %>; // 制限時間の初期値
+let limitTime = <%= limitTime %>; // 制限時間の初期値
 
-  // 1秒ごとに呼び出される関数
-  function decreaseValue() {
-    if (limitTime > 0) {
-      limitTime--; // 制限時間を1つ減らす
-      console.log(limitTime); // 減らした値を表示する（コンソールに出力）
-      document.getElementById("limitTime").textContent = limitTime; // 制限時間を表示
-    } else {
-      clearInterval(interval); // タイマーを停止する
-      var enemyImage = document.getElementById("enemy");
-      var scale = 1;
-      var interval = setInterval(function() {
-        scale += 0.1;
-        enemyImage.style.transform = "scaleX(-1) scale(" + scale + ")";
-        if (scale >= 3) {
-          clearInterval(interval);
-        }
-      }, 100);
-      
-      // 押されたボタンの値をフォームの隠しフィールドに設定
-      document.getElementById("selectedChoice").value = "limitOver";
+//1秒ごとに呼び出される関数
+function decreaseValue() {
+if (limitTime > 0) {
+ limitTime--; // 制限時間を1つ減らす
+ console.log(limitTime); // 減らした値を表示する（コンソールに出力）
+ document.getElementById("limitTime").textContent = limitTime; // 制限時間を表示
+} else {
+ clearInterval(interval); // タイマーを停止する
+ // ボタンを無効化
+ var buttons = document.getElementsByTagName("button");
+ for (var i = 0; i < buttons.length; i++) {
+   buttons[i].disabled = true;
+ }
+ document.getElementById("selectedChoice").value = "limitOver";
 
-      // 1秒待機後にフォームを送信
-      setTimeout(function() {
-        document.getElementById("flex-questions").submit();
-      }, 1100);
-    }
-  }
+ // 1秒待機後にフォームを送信
+ setTimeout(function() {
+   document.getElementById("flex-questions").submit();
+ }, 1000);
+}
+}
 
-  // 1秒ごとに関数を呼び出すタイマーをセット
-  var interval = setInterval(decreaseValue, 1000);
+//1秒ごとに関数を呼び出すタイマーをセット
+var interval = setInterval(decreaseValue, 1000);
+
 </script>
 
     
@@ -97,30 +93,12 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
     }
     if (button.value === "<%= collectAnswer %>") {
     	// 正解だった時の処理仮
-    	var playerImage = document.getElementById("player");
-    	var scale = 1;
-    	var interval = setInterval(function() {
-    	  scale += 0.1;
-    	  playerImage.style.transform = "scale(" + scale + ")";
-    	  if (scale >= 3) {
-    	    clearInterval(interval);
-    	  }
-    	}, 100);
       } else {
         // 不正解だった時の処理仮
-var enemyImage = document.getElementById("enemy");
-var scale = 1;
-var interval = setInterval(function() {
-  scale += 0.1;
-  enemyImage.style.transform = "scaleX(-1) scale(" + scale + ")";
-  if (scale >= 3) {
-    clearInterval(interval);
-	  }
-	}, 100);  
       }
     
     // 押されたボタンの値をフォームの隠しフィールドに設定
-    document.getElementById("selectedChoice").value = button.value;
+    document.getElementById("selectedChoice").value = button.value;//
 
     // 1秒待機後にフォームを送信
     setTimeout(function() {
@@ -135,7 +113,6 @@ var interval = setInterval(function() {
   <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice2") %>" onclick="handleClick(this)"><%= request.getAttribute("choice2") %></button><br>
   <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice3") %>" onclick="handleClick(this)"><%= request.getAttribute("choice3") %></button><br>
   <button type="button" name="choice" id="box" value="<%= (String)request.getAttribute("choice4") %>" onclick="handleClick(this)"><%= request.getAttribute("choice4") %></button><br>
-  <input type="hidden" name="choice" value="limitOver">
   <input type="hidden" name="isUsed5050" value="false">
   <input type="hidden" name="choice" id="selectedChoice" value="">
 </form>
@@ -198,10 +175,19 @@ var interval = setInterval(function() {
   </button>
 </form>
 	<%} %>	
-	</div>
 </div>
 </div>
-<jsp:include page="footer.jsp"/>
 
+<!--/wrapper--></div>
+<jsp:include page="footer.jsp"/>
+<script>
+function increaseParticlesValue() {
+    particlesSettings.particles.number.value = 100;
+  }
+</script>
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<!--自作のJS-->
+<script src="js/particles.js"></script>
+</body>
 </body>
 </html>

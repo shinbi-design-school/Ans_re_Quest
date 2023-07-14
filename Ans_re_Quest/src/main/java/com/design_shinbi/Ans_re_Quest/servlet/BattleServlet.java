@@ -161,9 +161,9 @@ public class BattleServlet extends HttpServlet {
 		//制限時間
 		if (Boolean.parseBoolean(request.getParameter("isImpatient"))) {
 			//焦り状態
-			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime()-5);
+			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime()-10);
 		} else {
-			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime());
+			request.setAttribute("limitTime", battle.getCurrentQuestion().getLimitTime()-5);
 		}
 		//hint
 		request.setAttribute("aiAnswer", battle.getCurrentQuestion().getAi_answer());
@@ -264,3 +264,4 @@ public class BattleServlet extends HttpServlet {
 		}
 	}
 }
+	
