@@ -48,31 +48,24 @@ $(function() {
  });
 });
 
-
-//logoの表示
-$(window).on('load',function(){
-    $("#splash").delay(1800).fadeOut('slow');//ローディング画面を1.8秒待機してからフェードアウト
-    $("#splash_logo").delay(5000).fadeOut('slow');//ロゴを5秒待機してからフェードアウト
-  });
-  var bar = new ProgressBar.Line(containe, {
-    strokeWidth: 4,
-    easing: 'easeInOut',
-    duration: 1400,
-    color: '#FFEA82',
-    trailColor: '#eee',
-    trailWidth: 1,
-    svgStyle: {width: '100%', height: '100%'}
-  });
-  
-  bar.animate(1.0); 
-
 //ボタンにマウスオーバーした時の処理
 const scenarioArea = document.querySelector(".scenario");
-var SbuttonText = ['ここでシナリオの閲覧が出来る「予定」だよ。<br>因みに出来ても「最初から全部読める」ようになる気がしているよ。'];
+var SbuttonText = ['そこからシナリオの閲覧が出来るよ。<br>因みに「最初から全部読める」よ。'];
 scenarioArea.addEventListener('mouseover',()=>{
   $('div.comment').html(SbuttonText).show();
 });
+scenarioArea.addEventListener('mouseout', () => {
+  $('div.comment').hide();
+});
 
+const QuestArea = document.querySelector(".Quest");
+var QbuttonText = ['そこから塔に挑むことが出来るよ。<br>頑張ってね！'];
+QuestArea.addEventListener('mouseover',()=>{
+  $('div.comment').html(QbuttonText).show();
+});
+QuestArea.addEventListener('mouseout', () => {
+  $('div.comment').hide();
+});
 //音楽再生用モーダルウインドウ、処理確定が出来ていないのでコメントアウト中
 //const audio = $("#audio")[0]
 //

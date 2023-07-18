@@ -51,6 +51,11 @@
 </div>
 <div class="clickable-div">
 	<form action="scenario" method="post">
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoCredit">クレジット(仮作成)</button>
+	</form>
+</div>
+<div class="clickable-div">
+	<form action="scenario" method="post">
 		<button type="submit" id="submit-button" name="scenarioAction" value="Goto???">？？？</button>
 	</form>
 </div>

@@ -17,6 +17,9 @@ a{
 a:visited{
 	color: navy;
 }
+h2{
+	font-family: serif;
+}
 /* Loading背景画面設定　*/
 #splash {
     /*fixedで全面に固定*/
@@ -314,7 +317,7 @@ div.guestMode{
 	margin-left:5%;
 	margin-right:0;
 }
-.trickMenuList>a>p{
+.trickMenu{
 	background-color: black;
 	text-align: center;
 }
@@ -422,7 +425,7 @@ div.guestMode{
 }
 .scenarioList>div{
 	width:48%;
-	height:13%;
+	height:11%;
 	margin:5% 0;
 /*	border:solid; サイズ確認用*/
 	background-image:url(../imgs/ant1.png);
