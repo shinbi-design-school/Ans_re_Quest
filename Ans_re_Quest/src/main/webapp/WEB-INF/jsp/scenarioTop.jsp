@@ -9,7 +9,7 @@
 <body>
 <div id="totalMenu">
 <div>
-	<div><p style="word-wrap: break-word;" class="scenarioText">ここではシナリオを読んだり、OP/EDムービーが視聴出来るよ。<br>今は全部読めちゃうからネタばれ注意ってやつだね！<br>因みにシナリオ中の僕と今の僕が違うようにみえても気にしちゃダメだよ！<br>それと、ムービーはページにアクセスして一回クリックしないと基本的に始まらないよ！</p></div>
+	<div><p style="word-wrap: break-word;" class="scenarioText">ここではシナリオを読んだり、OP/EDムービーが視聴出来るよ。<br>今は全部読めちゃうからネタばれ注意ってやつだね！<br>因みにシナリオ中の僕と今の僕が違うようにみえても気にしちゃダメだよ！<br>それと、ムービーはyoutubeから読み込む形だから一回クリックしないと基本的に始まらないよ！</p></div>
 	<img src="imgs/homeChara/face6.png" class="scenarioCharacter">
 </div>
 
