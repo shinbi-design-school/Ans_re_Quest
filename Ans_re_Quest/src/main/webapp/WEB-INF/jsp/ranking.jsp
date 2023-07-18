@@ -46,11 +46,6 @@
         </div>
 	        <div><p style="word-wrap: break-word;" class="rankingText">ぐぬぬぬ……</p></div>
 	        <img alt="" src="imgs/boss.png" class="BOSSwarai">
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> branch 'master' of git@github.com:shinbi-design-school/Ans_re_Quest.git
         <jsp:include page="bottomMenu.jsp"/>
     </div>
     <jsp:include page="footer.jsp"/>
