@@ -9,34 +9,49 @@
 <body>
 <div id="totalMenu">
 <div>
-	<div><p style="word-wrap: break-word;" class="scenarioText">ここではシナリオを読むことが出来るよ。<br>今は全部読めちゃうからネタばれ注意ってやつだね！<br>因みにシナリオ中の僕と今の僕が違うようにみえても気にしちゃダメだよ！</p></div>
+	<div><p style="word-wrap: break-word;" class="scenarioText">ここではシナリオを読んだり、OP/EDムービーが視聴出来るよ。<br>今は全部読めちゃうからネタばれ注意ってやつだね！<br>因みにシナリオ中の僕と今の僕が違うようにみえても気にしちゃダメだよ！<br>それと、ムービーはページにアクセスして一回クリックしないと基本的に始まらないよ！</p></div>
 	<img src="imgs/homeChara/face6.png" class="scenarioCharacter">
 </div>
 
 <div class="scenarioList">
-<div>
+<div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" name="scenarioAction" value="GotoPrologue">プロローグ</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoOP">オープニング(仮作成)</button>
 	</form>
 </div>
-<div>
+<div class="clickable-div"">
 	<form action="scenario" method="post">
-		<button type="submit" name="scenarioAction" value="GotoSupport">初めての出会い</button>
+		<button type="submit" id="Prologue" name="scenarioAction" value="GotoPrologue">プロローグ</button>
 	</form>
 </div>
-<div>
+<div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" name="scenarioAction" value="GotoShop">愛想のないショップ店員</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoSupport">初めての出会い</button>
 	</form>
 </div>
-<div>
+<div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" name="scenarioAction" value="GotoBoss">VS BOSS</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoShop">愛想のないショップ店員</button>
 	</form>
 </div>
-<div>
+<div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" name="scenarioAction" value="Goto???">？？？</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoBoss">VS BOSS</button>
+	</form>
+</div>
+<div class="clickable-div">
+	<form action="scenario" method="post">
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEpilogue">エピローグ(未作成)</button>
+	</form>
+</div>
+<div class="clickable-div">
+	<form action="scenario" method="post">
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEnding">エンディング(未作成)</button>
+	</form>
+</div>
+<div class="clickable-div">
+	<form action="scenario" method="post">
+		<button type="submit" id="submit-button" name="scenarioAction" value="Goto???">？？？</button>
 	</form>
 </div>
 
@@ -46,5 +61,13 @@
 <jsp:include page="bottomMenu.jsp"/>
 </div>
 <jsp:include page="footer.jsp"/>
+<script>
+  const clickableDivs = document.querySelectorAll('.clickable-div');
+  clickableDivs.forEach(div => {
+    div.addEventListener('click', () => {
+      div.querySelector('button[type="submit"]').click();
+    });
+  });
+</script>
 </body>
 </html>

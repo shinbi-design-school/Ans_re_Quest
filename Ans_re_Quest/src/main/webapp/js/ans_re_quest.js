@@ -9,7 +9,8 @@ $(function() {
   
   // リストアップ
   var elements = [
-              ['サポートキャラの「名称未設定」だよ。<br>アバターとして冥鳴ひまりを使っているよ。', 'imgs/homeChara/face2.png'],
+              ['君をサポートする「ノーレッジ」だよ。<br>アバターとして冥鳴ひまりを使っているよ。', 'imgs/homeChara/face2.png'],
+              ['名前の由来？もちろんとある動かない大図書館からだよ。', 'imgs/homeChara/face6.png'],
               ['なんでこのアバターなのかって？<br>担当者が別の企画で使わなかった素材だからだよ。', 'imgs/homeChara/face3.png'],
               ['未実装の要素はすごく多いよ。<br>実装できるかは不明だよ。', 'imgs/homeChara/face4.png'],
               ['フフフフ、分からない。分からないんだよ。どうすればいいのか分からないんだよ！', 'imgs/homeChara/face5.png']

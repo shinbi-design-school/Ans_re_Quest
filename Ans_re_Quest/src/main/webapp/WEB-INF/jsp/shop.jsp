@@ -45,8 +45,8 @@
             <button>購入する</button>
         </div>  
         <div>
-        <div><p style="word-wrap: break-word;" class="shopText">正直どうでもいいとは思ってるけど<br>対価を払わずに手に入れようとはしない事ね。</p></div>
-        <img alt="" src="imgs/scenario/キレルミー_通常.png" class="shopGirl"></div>
+        <div><p style="word-wrap: break-word;" class="shopText">……正直どうでもいいとは思ってるけど<br>対価を払わずに手に入れようとはしない事ね。</p></div>
+        <img alt="SHOPchara" src="imgs/scenario/キレルミー_通常.png" class="shopGirl"></div>
         </div>
         <div class="buyAction">
         <% 
@@ -65,5 +65,9 @@
         <jsp:include page="bottomMenu.jsp"></jsp:include>
     </div>
 <jsp:include page="footer.jsp"/>
+<script type="text/javascript">
+document.getElementById("totalMenu").style.backgroundImage = "url('imgs/scenario/本屋2.jpg')";
+
+</script>
 </body>
 </html>
