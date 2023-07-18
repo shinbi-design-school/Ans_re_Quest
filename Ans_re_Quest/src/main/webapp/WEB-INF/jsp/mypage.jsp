@@ -27,7 +27,9 @@
   <a href="inventory"><p class="trickMenu" >ITEM</p></a>
   <a href="ranking"><p class="trickMenu">RANKING</p></a>
   <p class="trickMenu">ADVERTISEMENT</p>
-  <p class="trickMenu">Credit</p>
+  <form method="post" name="scenarioAction" action="scenario">
+    <input type="hidden" name="scenarioAction" value="GotoCredit">
+  <a href="javascript:scenarioAction.submit()"><p class="trickMenu">Credit</p></a>
 </div>
 </div>
 <jsp:include page="bottomMenu.jsp"/>

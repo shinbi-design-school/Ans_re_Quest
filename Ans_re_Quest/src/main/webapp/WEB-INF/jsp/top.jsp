@@ -37,5 +37,6 @@
 </div>
 
 <jsp:include page="footer.jsp"/>
+<script src="js/top.js"></script>
 </body>
 </html>
