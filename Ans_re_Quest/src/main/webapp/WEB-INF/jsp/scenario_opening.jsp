@@ -8,7 +8,26 @@
 </head>
 <body>
 <div id="video_wrapper">
-<iframe width="1250" height="700" src="https://www.youtube.com/embed/2PZv_Kl88Ug" title="Ans re Quest preOP" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<video id="video">
+  <source src="${pageContext.request.contextPath}/resource/Ans_re_Quest_preOP.mp4" type="video/mp4" autoplay>
+  <p>お使いのブラウザはビデオタグをサポートしていません。</p>
+</video>
+
+<script>
+  let played = false;
+  window.addEventListener('click', () => {
+    if (!played) {
+      document.getElementById('video').play();
+      played = true;
+    }
+  });
+  const video = document.getElementById('video');
+  video.addEventListener('ended', () => {
+	  setTimeout(function() {
+	      history.back();
+	    }, 1000);  
+	});
+</script>
 </div>
 <jsp:include page="footer.jsp"/>
 </body>

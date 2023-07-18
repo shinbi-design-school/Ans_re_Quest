@@ -1,8 +1,5 @@
 package com.design_shinbi.Ans_re_Quest.model.dao;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,7 +40,7 @@ public class EnemyDAO {
 
         return enemy;
     }
-    public List<EnemyEntity> getAllEnemies() throws SQLException, IOException {
+    public List<EnemyEntity> getAllEnemies() throws SQLException {
         List<EnemyEntity> enemies = new ArrayList<>();
 
         String query = "SELECT * FROM enemies";
@@ -57,16 +54,8 @@ public class EnemyDAO {
                 String genre = resultSet.getString("genre");
                 String difficulty = resultSet.getString("difficulty");
                 Blob imageBlob = resultSet.getBlob("image");
-                
-                InputStream imageStream = imageBlob.getBinaryStream();
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = imageStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-                byte[] enemyImage = outputStream.toByteArray();
-                
+                byte[] enemyImage = imageBlob.getBytes(1, (int) imageBlob.length());
+
                 EnemyEntity enemy = new EnemyEntity(id,name,hp,genre,difficulty,enemyImage);
                 enemies.add(enemy);
             }
