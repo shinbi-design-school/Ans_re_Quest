@@ -6,12 +6,12 @@
 <link rel="stylesheet" type="text/css" href="shop.css">
 <jsp:include page="head.jsp"/>
     
-    <title>shop</title>
+    <title>Ans re Quest</title>
 </head>
 <body>
 <div id="totalMenu">
     <jsp:include page="moneyFrame.jsp"/>
-    <h1>ショップ</h1>
+    <h2>キルレミーの道具屋</h2>
  <%--<div class="currency">所持コイン: <%= request.getAttribute("money") %></div> --%>
     
        <div class="item-container">

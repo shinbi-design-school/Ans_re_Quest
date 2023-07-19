@@ -15,11 +15,11 @@
   </div>
 <div> </div>
 <%--
-現状モーダルウインドウを機能させられていないのでコメントアウト中
+現状モーダルウインドウを機能させられていないのでコメントアウト中 
 <div id="button-wrap" class="start">
     <button id="can-play-button">当サイトは音楽が流れます<br>ご注意ください</button>
 </div>
- --%>
+--%>
 <div id="totalMenu">
 
 	<img alt="logo" src="imgs/Ans_re_Quest_logo.png" class="topimg">

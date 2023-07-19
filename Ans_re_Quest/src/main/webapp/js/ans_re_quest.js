@@ -12,7 +12,7 @@ $(function() {
               ['君をサポートする「ノーレッジ」だよ。<br>アバターとして冥鳴ひまりを使っているよ。', 'imgs/homeChara/face2.png'],
               ['名前の由来？もちろんとある動かない大図書館からだよ。', 'imgs/homeChara/face6.png'],
               ['なんでこのアバターなのかって？<br>担当者が別の企画で使わなかった素材だからだよ。', 'imgs/homeChara/face3.png'],
-              ['未実装の要素はすごく多いよ。<br>実装できるかは不明だよ。', 'imgs/homeChara/face4.png'],
+              ['形はどうにかなったところは多いよ。<br>中身が伴っているわけではないよ。', 'imgs/homeChara/face4.png'],
               ['フフフフ、分からない。分からないんだよ。どうすればいいのか分からないんだよ！', 'imgs/homeChara/face5.png']
 //              ['', 'imgs/homeChara/'],
              ];
@@ -51,7 +51,9 @@ $(function() {
 //ボタンにマウスオーバーした時の処理
 const scenarioArea = document.querySelector(".scenario");
 var SbuttonText = ['そこからシナリオの閲覧が出来るよ。<br>因みに「最初から全部読める」よ。'];
+let SbuttonImg = 'imgs/homeChara/face2.png';
 scenarioArea.addEventListener('mouseover',()=>{
+  $('div.character').attr('src',SbuttonImg);
   $('div.comment').html(SbuttonText).show();
 });
 scenarioArea.addEventListener('mouseout', () => {
@@ -66,6 +68,7 @@ QuestArea.addEventListener('mouseover',()=>{
 QuestArea.addEventListener('mouseout', () => {
   $('div.comment').hide();
 });
+
 //音楽再生用モーダルウインドウ、処理確定が出来ていないのでコメントアウト中
 //const audio = $("#audio")[0]
 //

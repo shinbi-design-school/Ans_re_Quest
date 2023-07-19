@@ -41,12 +41,12 @@
 </div>
 <div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEpilogue">エピローグ(未作成)</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEnding">エンディング(未作成)</button>
 	</form>
 </div>
 <div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEnding">エンディング(未作成)</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEpilogue">エピローグ(未作成)</button>
 	</form>
 </div>
 <div class="clickable-div">
