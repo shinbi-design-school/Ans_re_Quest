@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet" type="text/css">
     <jsp:include page="head.jsp"/>
-    <script>
+    <script>  //モーダルウィンドウ
         function openModal() {
             var modal = document.getElementById("modal");
             modal.style.display = "block";
