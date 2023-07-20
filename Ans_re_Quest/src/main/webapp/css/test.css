@@ -143,7 +143,7 @@
 .logout:active {
   transform: scale(0.95);
 }
-/*トップページ用ボタン(以前のはデザインが崩れたので変更)*/
+/*トップページ用ゲストモードボタン*/
 .btn {
   --border-color: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
   --border-width: .125em;
@@ -288,11 +288,13 @@
   height: 64px;
   line-height: 64px;
   transition: all 0.3s;
-  span {
-    transition: all 0.3s;
-    tranform: scale(1, 1);
-  }
 }
+
+.trickMenu span {
+  transition: all 0.3s;
+  transform: scale(1, 1);
+}
+
 
 .trickMenu::before, .trickMenu::after {
   content: '';

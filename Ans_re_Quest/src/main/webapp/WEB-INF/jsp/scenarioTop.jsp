@@ -16,7 +16,7 @@
 <div class="scenarioList">
 <div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" id="submit-button" name="scenarioAction" value="GotoOP">オープニング(仮作成)</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoOP">オープニング</button>
 	</form>
 </div>
 <div class="clickable-div"">
@@ -41,17 +41,17 @@
 </div>
 <div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEnding">エンディング(未作成)</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoED">エンディング</button>
 	</form>
 </div>
 <div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEpilogue">エピローグ(未作成)</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoEpilogue">エピローグ</button>
 	</form>
 </div>
 <div class="clickable-div">
 	<form action="scenario" method="post">
-		<button type="submit" id="submit-button" name="scenarioAction" value="GotoCredit">クレジット(仮作成)</button>
+		<button type="submit" id="submit-button" name="scenarioAction" value="GotoCredit">クレジット</button>
 	</form>
 </div>
 <div class="clickable-div">
