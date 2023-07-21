@@ -20,6 +20,7 @@
     <button id="can-play-button">当サイトは音楽が流れます<br>ご注意ください</button>
 </div>
 --%>
+<div class="spaceBar"></div>
 <div id="totalMenu">
 
 	<img alt="logo" src="imgs/Ans_re_Quest_logo.png" class="topimg">

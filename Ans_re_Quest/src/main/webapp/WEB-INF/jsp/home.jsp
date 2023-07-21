@@ -7,6 +7,7 @@
 <title>Ans re Quest</title>
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="totalMenu">
 <%--挑戦中、もしくは踏破した塔やプレイヤーネームを表示させたい --%>
 <div class="circle"><p style="word-wrap: break-word;">塔の名前とかレベルとか出る予定</p></div>

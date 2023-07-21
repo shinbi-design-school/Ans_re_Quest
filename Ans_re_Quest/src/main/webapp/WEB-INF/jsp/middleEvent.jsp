@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="totalMenu">
     <%
     List<Integer> patterns = (List<Integer>)request.getAttribute("patterns");

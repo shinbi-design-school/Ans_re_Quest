@@ -9,6 +9,7 @@
     <title>guide</title>
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="totalMenu">
 <h1>ガイド</h1>
 

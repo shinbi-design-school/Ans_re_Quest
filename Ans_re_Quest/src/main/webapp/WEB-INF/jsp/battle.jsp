@@ -29,6 +29,7 @@ String collectAnswer = (String) request.getAttribute("collectAnswer");
 	<link rel="stylesheet" type="text/css" href="css/particles.css">    
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="wrapper">
 <div id="particles-js"></div>
 <div id="totalMenu">

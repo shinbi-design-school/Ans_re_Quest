@@ -9,6 +9,7 @@
     <title>Ans re Quest</title>
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="totalMenu">
     <jsp:include page="moneyFrame.jsp"/>
     <h2>キルレミーの道具屋</h2>

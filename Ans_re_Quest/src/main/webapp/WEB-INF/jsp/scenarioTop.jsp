@@ -7,9 +7,10 @@
 <title>Ans re Quest</title>
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="totalMenu">
 <div>
-	<div><p style="word-wrap: break-word;" class="scenarioText">ここではシナリオを読んだり、OP/EDムービーが視聴出来るよ。<br>今は全部読めちゃうからネタばれ注意ってやつだね！<br>因みにシナリオ中の僕と今の僕が違うようにみえても気にしちゃダメだよ！<br>それと、ムービーはページにアクセスして一回クリックしないと基本的に始まらないよ！</p></div>
+	<div><p style="word-wrap: break-word;" class="scenarioText">ここではシナリオを読んだり、OP/EDムービーが視聴出来るよ。<br>全部読めちゃうからネタばれ注意ってやつだね！<br>因みにシナリオ中の僕と今の僕が違うようにみえても気にしちゃダメだよ！<br>それと、ムービーはページにアクセスして一回クリックしないと基本的に始まらないよ！</p></div>
 	<img src="imgs/homeChara/face6.png" class="scenarioCharacter">
 </div>
 

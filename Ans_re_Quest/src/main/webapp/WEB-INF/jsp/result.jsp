@@ -8,6 +8,7 @@
 <title>Result Page</title>
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="totalMenu">
 
 

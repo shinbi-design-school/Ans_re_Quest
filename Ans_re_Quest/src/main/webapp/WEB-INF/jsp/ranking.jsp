@@ -8,6 +8,7 @@
 <title>ranking</title>
 </head>
 <body>
+<div class="spaceBar"></div>
     <div id="totalMenu">
         <div class="ranking-container">
             <h1 class="ranking-title">ランキング</h1>

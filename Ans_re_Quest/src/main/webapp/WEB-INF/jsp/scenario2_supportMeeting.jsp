@@ -7,6 +7,7 @@
 <title>Ans re Quest</title>
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="canvas_wrapper">
   <canvas id="myCanvas" width="1280" height="720"></canvas>
 <script type="text/javascript">

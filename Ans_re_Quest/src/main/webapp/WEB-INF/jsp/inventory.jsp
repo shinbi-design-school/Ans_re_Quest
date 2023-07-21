@@ -7,6 +7,7 @@
     <title>アイテム所持数</title>
 </head>
 <body>
+<div class="spaceBar"></div>
     <div id="totalMenu">
         <jsp:include page="moneyFrame.jsp"/>
         <h1>アイテム所持数</h1>

@@ -25,6 +25,7 @@
     <title>Ans re Quest</title>
 </head>
 <body>
+<div class="spaceBar"></div>
 <div id="totalMenu">
     <h2>Mypage</h2>
     <div id="flexMenu">

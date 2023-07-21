@@ -9,13 +9,16 @@ body{
 	font-size:large;
 
 }
-/*リンク装飾（後に消去？）*/
+/*リンク装飾*/
 a{
 	color: navy;
 	text-decoration: none;
 }
 a:visited{
 	color: navy;
+}
+.spaceBar{
+	height: 4%;
 }
 h2{
 	font-family: serif;
@@ -246,17 +249,17 @@ margin: 2em auto;
 .clearCharacter{
 	width:400px;
 	position:absolute;
+	bottom:2%;
 }
 .clearText{
 	color:#fff;
 	position:absolute;
 	padding:10px;
 	right:18%;
-	bottom:15%;
+	bottom:17%;
 	z-index:1;
 	background:rgba(81,55,67,0.5);
 }
-
 
 /*トップ・マイページのフレックス*/
 #flexMenu{
